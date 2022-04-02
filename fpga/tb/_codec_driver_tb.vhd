@@ -1,52 +1,43 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use ieee.std_logic_textio.all;
-
 use std.textio.all;
-
-library xil_defaultlib;
-use xil_defaultlib.tb_utils_pkg.all;
-
--- library xil_defaultlib;
--- use xil_defaultlib.tb_utils_pkg.all;
+use ieee.std_logic_textio.all;
 
 entity codec_driver_tb is
 end entity codec_driver_tb;
 
 architecture tb of codec_driver_tb is
     -- testbench configuration
-    constant REG_A_WORD : std_ulogic_vector(15 downto 0) := B"1000_0000_0111_1100";
-    constant REG_C_WORD : std_ulogic_vector(15 downto 0) := B"1001_0000_0011_0101";
-    
-    constant NUM_TESTS  : integer := 48000;
+    constant REG_A_WORD : std_logic_vector(15 downto 0) := B"1000_0000_0111_1100";
+    constant REG_C_WORD : std_logic_vector(15 downto 0) := B"1001_0000_0011_0101";
 
     -- clock and reset
-    signal clk  : std_ulogic := '1';
+    signal clk  : std_logic := '1';
     constant CLK_PER_ns : time := (1000.0/12.28814) * 1ns;
 
-    signal rst_n    : std_ulogic := '0';
+    signal rst_n    : std_logic := '0';
 
     -- bfm (stimulus)
-    signal  adc_data        : std_ulogic_vector(23 downto 0);
+    signal  adc_data        : unsigned(23 downto 0);
 
     -- dut io
     -- signal  ctrl_loopback   : std_logic := '0';
     -- signal  ctrl_busy       : std_logic;
-    signal  codec_mclk      : std_ulogic;
-    signal  codec_rst_n     : std_ulogic;
-    signal  codec_dclk      : std_ulogic;
-    signal  codec_dfs       : std_ulogic;
-    signal  codec_din       : std_ulogic;
-    signal  codec_dout      : std_ulogic := 'Z';
+    signal  codec_mclk      : std_logic;
+    signal  codec_rst_n     : std_logic;
+    signal  codec_dclk      : std_logic;
+    signal  codec_dfs       : std_logic;
+    signal  codec_din       : std_logic;
+    signal  codec_dout      : std_logic := 'Z';
 
     -- response checker
-    signal  codec_mclk_expected : std_ulogic;
-    signal  codec_rst_n_expected: std_ulogic;
-    signal  codec_dclk_expected : std_ulogic;
-    signal  codec_dfs_expected  : std_ulogic;
-    signal  codec_din_expected  : std_ulogic;
-    signal  checker_en          : std_ulogic := '0';
+    signal  codec_mclk_expected : std_logic;
+    signal  codec_rst_n_expected: std_logic;
+    signal  codec_dclk_expected : std_logic;
+    signal  codec_dfs_expected  : std_logic;
+    signal  codec_din_expected  : std_logic;
+    signal  checker_en          : std_logic := '0';
 
     -- helper procedures
     procedure p_wait_clk is
@@ -56,7 +47,7 @@ architecture tb of codec_driver_tb is
     end p_wait_clk;
 
     procedure p_assert_eq(
-        actual, expected: in std_ulogic;
+        actual, expected: in std_logic;
         err_msg: in string) is
     begin
         assert actual = expected
@@ -116,7 +107,6 @@ begin
 
     -- response checker expected results
     proc_checker: process
-        variable rand_gen : t_rand_gen;
     begin
         wait until rst_n = '1';
 
@@ -146,11 +136,9 @@ begin
         end loop;
 
         -- reg a word
-        adc_data <= REG_A_WORD & X"00";
         for i in 0 to 127 loop
             -- dclk hi
             wait until falling_edge(clk);
-            report to_string(i) severity note;
             codec_dclk_expected <=  '1' when i /= 0 else '0';
             codec_dfs_expected  <=  '1' when i = 16 else '0';
             codec_din_expected  <=  REG_A_WORD(16-i)    when 1  <= i and i <= 16 else
@@ -164,7 +152,6 @@ begin
         end loop;
         
         -- reg c word
-        adc_data <= REG_C_WORD & X"00";
         for i in 0 to 127 loop
             -- dclk hi
             wait until falling_edge(clk);
@@ -183,17 +170,16 @@ begin
         end loop;
 
         -- reg data words
-        rand_gen.p_init;
-        for j in 0 to NUM_TESTS-1 loop
-            rand_gen.p_rand_sulv(adc_data);
+        for j in 0 to 2**24-1 loop
+            adc_data <= to_unsigned(j, 24);
             
             for i in 0 to 127 loop
                 -- dclk hi
                 wait until falling_edge(clk);
                 codec_dclk_expected <=  '1' ;
-                codec_dfs_expected  <=  '1' when i=0 or i=16 or i=32 or i=48 else '0';
-                codec_din_expected  <=  '0' when 1<=i and i<=32 else
-                                        adc_data(56-i) when 33<=i and i<=56 else
+                codec_dfs_expected  <=  '1' when i = 0 or i = 16 or i = 32 or i = 48 else '0';
+                codec_din_expected  <=  '0' when 1 <= i and i <= 32 else
+                                        adc_data(56-i) when 33 <= i and i <= 56 else
                                         'Z';
                 p_wait_clk;
     

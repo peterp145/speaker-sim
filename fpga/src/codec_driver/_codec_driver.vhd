@@ -9,9 +9,8 @@ entity codec_driver is
         i_rst_n     :   in  std_logic;  -- system reset
         -- controller if
         i_ctrl_dac_word :   in  std_logic_vector(23 downto 0);
-        o_ctrl_adc_word :   in  std_logic_vector(23 downto 0);
-        i_ctrl_loopback     :   in  std_logic;  -- enable to run codec in loopback mode (adc to dac)
-        o_ctrl_busy         :   out std_logic;  -- high when codec transaction in progress
+        -- i_ctrl_loopback     :   in  std_logic;  -- enable to run codec in loopback mode (adc to dac)
+        -- o_ctrl_busy         :   out std_logic;  -- high when codec transaction in progress
         -- codec hardware if
         o_codec_mclk    :   out std_logic;  -- codec master clock
         o_codec_rst_n   :   out std_logic;  -- codec reset signal
@@ -63,13 +62,12 @@ architecture rtl of codec_driver is
     signal w_dout_sreg_en   : std_logic;
 
     -- din sreg
-    constant REG_A_WORD         : std_logic_vector (15 downto 0) := B"1000_0000_0111_1100";
-    constant REG_C_WORD         : std_logic_vector (15 downto 0) := B"1001_0000_0011_0101";
-    signal r_din_sreg           : std_logic_vector (15 downto 0) := (others => '0');
-    signal w_din_sreg_en        : std_logic;
-    signal w_din_sreg_load_word : std_logic_vector (15 downto 0);
-    signal w_din_sreg_load      : std_logic;
-    signal w_din_sreg_load_sel  : integer range 0 to 4;
+    constant REG_A_WORD     : std_logic_vector (15 downto 0) := B"1000_0000_0111_1100";
+    constant REG_C_WORD     : std_logic_vector (15 downto 0) := B"1001_0000_0011_0101";
+    signal r_din_sreg       : std_logic_vector (15 downto 0) := (others => '0');
+    signal w_din_sreg_en    : std_logic;
+    signal w_din_sreg_load  : std_logic;
+    signal w_din_sreg_sel   : integer;
 
     -- din selection
     signal w_din_output_en      : std_logic;
@@ -87,7 +85,16 @@ begin
     ----------------
 
     -- FSM r_state reg
-    r_state <= sRESET when not i_rst_n else w_next_state when rising_edge(i_clk_12M);
+    proc_state: process(i_clk_12M)
+    begin
+        if rising_edge(i_clk_12M) then
+            if i_rst_n = '0' then
+                r_state <= sRESET;
+            else
+                r_state <= w_next_state;
+            end if;
+        end if;
+    end process proc_state;
 
    -- next r_state and control logic
     proc_fsm: process(all)
@@ -98,8 +105,11 @@ begin
 
         w_word_a_init_set   <= '0';
         w_word_c_init_set   <= '0';
-        w_24b_ready_set     <= '0';r
-        w_din_sreg_load_sel  <= 0;
+        w_24b_ready_set     <= '0';
+
+        w_din_sreg_en   <= '0';
+        w_din_sreg_load <= '0';
+        w_din_sreg_sel  <= 0;
 
         w_din_output_en     <= '0';
         w_din_loopback_en   <= '0';
@@ -159,15 +169,15 @@ begin
 
                 if not r_word_a_init then
                     w_word_a_init_set <= '1';
-                    w_din_sreg_load_sel <= 1;
+                    w_din_sreg_sel <= 1;
                 elsif not r_word_c_init then
                     w_word_c_init_set <= '1';
-                    w_din_sreg_load_sel <= 2;
+                    w_din_sreg_sel <= 2;
                 elsif not r_24b_ready then
                     w_24b_ready_set <= '1';
-                    w_din_sreg_load_sel <= 0;
+                    w_din_sreg_sel <= 0;
                 else 
-                    w_din_sreg_load_sel <= 0;
+                    w_din_sreg_sel <= 0;
                 end if;
 
                 w_next_state <= sXFR_SHIFT_0;
@@ -207,10 +217,10 @@ begin
                 w_din_sreg_en   <= '1';
                 w_din_output_en <= '1';
                 case r_counter is
-                    when 65     =>  w_din_sreg_load_sel <= 3;
-                    when 97     =>  w_din_sreg_load_sel <= 4;
+                    when 65     =>  w_din_sreg_sel <= 3;
+                    when 97     =>  w_din_sreg_sel <= 4;
                                     w_din_loopback_en <= '1';
-                    when others =>  w_din_sreg_load_sel <= 0;
+                    when others =>  w_din_sreg_sel <= 0;
                 end case;
                 w_next_state    <= sXFR_SHIFT_0;
 
@@ -233,37 +243,53 @@ begin
         end case;
     end process proc_fsm;
 
-    -- mclk counter
-    r_counter   <= 0 when not w_counter_en else r_counter+1
-                    when rising_edge(clk);
+    -- counters
+    proc_counter: process(i_clk_12M)
+    begin
+        if rising_edge(i_clk_12M) then
+            if w_counter_en = '1' then
+                r_counter <= r_counter + 1;
+            else
+                r_counter <= 0;
+            end if;
+        end if;
+    end process proc_counter;
 
-    -- sample counter
-    r_samp_counter  <= 0 when not w_codec_rst_n else r_samp_counter+1 when w_samp_counter_en
-                        when rising_edge(i_clk_12M);
+    --
+    proc_samp_counter: process(i_clk_12M)
+    begin
+        if rising_edge(i_clk_12M) then
+            if w_samp_counter_en = '1' then
+                r_samp_counter <= r_samp_counter + 1;               
+            end if;
+        end if;
+    end process proc_samp_counter;
 
-    -- init tracking regs
-    r_word_a_init   <= (r_word_a_init or w_word_a_init_set) and w_codec_rst_n
-                        when rising_edge(i_clk_12M);
-    r_word_c_init   <= (r_word_c_init or w_word_c_init_set) and w_codec_rst_n
-                        when rising_edge(i_clk_12M);
-    r_24b_ready     <= (r_24b_ready or w_24b_ready_set)     and w_codec_rst_n
-                        when rising_edge(i_clk_12M);
+    -- 
+    r_word_a_init   <= r_word_a_init or w_word_a_init_set   when rising_edge(i_clk_12M);
+    r_word_c_init   <= r_word_c_init or w_word_c_init_set   when rising_edge(i_clk_12M);
+    r_24b_ready     <= r_24b_ready or w_24b_ready_set       when rising_edge(i_clk_12M);
 
     --------------
     -- datapath --
     --------------
 
     -- codec dout shift register
-    r_dout_sreg <= r_dout_sreg(14 downto 0) & i_codec_dout when w_dout_sreg_en
-                    when rising_edge(i_clk_12M);
+    proc_dout_sreg: process(i_clk_12M)
+    begin
+        if rising_edge(i_clk_12M) then
+            if w_dout_sreg_en = '1' then
+                r_dout_sreg <= r_dout_sreg(14 downto 0) & i_codec_dout;
+            end if;
+        end if;
+    end process proc_dout_sreg;
 
     -- codec din shift register
-    w_
     proc_din_sreg: process(i_clk_12M)
     begin
         if rising_edge(i_clk_12M) then
             if w_din_sreg_load = '1' then
-                case w_din_sreg_load_sel is
+                case w_din_sreg_sel is
                     when 1 =>       r_din_sreg <= REG_A_WORD;
                     when 2 =>       r_din_sreg <= REG_C_WORD;
                     -- when 3 =>       r_din_sreg <= i_ctrl_dac_word(23 downto 8);

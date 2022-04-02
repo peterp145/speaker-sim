@@ -1,0 +1,20 @@
+### general
+*.zip
+# *.runs/
+
+### vivado
+# project file types
+vivado/speaker-sim-project/*.log
+vivado/speaker-sim-project/*.jou
+vivado/speaker-sim-project/*.str
+
+# project files
+vivado/speaker-sim-project/speaker-sim-project.cache/
+vivado/speaker-sim-project/speaker-sim-project.gen/
+vivado/speaker-sim-project/speaker-sim-project.hw/
+vivado/speaker-sim-project/speaker-sim-project.ip_user_files/sim_scripts/
+vivado/speaker-sim-project/speaker-sim-project.runs/
+vivado/speaker-sim-project/speaker-sim-project.srcs/
+vivado/speaker-sim-project/speaker-sim-project.sim/
+vivado/*.jou
+vivado/*.log
