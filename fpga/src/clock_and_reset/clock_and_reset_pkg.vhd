@@ -1,6 +1,6 @@
 ----------
 -- file:        clock_and_reset_pkg.vhd
--- description: clock and reset generation
+-- description: clock and reset and mmcm component definition
 -- author:      peter phelan
 -- email:       peter@peterphelan.net
 ----------
@@ -10,11 +10,11 @@ use IEEE.std_logic_1164.all;
 package clock_and_reset_pkg is
     component clock_and_reset is
         port (
-            i_clk_125M      : in  std_ulogic;
-            o_clk_100M      : out std_ulogic;
-            o_clk_12M       : out std_ulogic;
-            o_pulse_100K    : out std_ulogic;
-            o_sys_rst_n     : out std_ulogic
+            i_clk_125M      : in  std_ulogic;   -- 125MHz clock input from board
+            o_clk_100M      : out std_ulogic;   -- 100MHz system logic clock  
+            o_clk_12M       : out std_ulogic;   -- audio codec clock
+            o_pulse_100K    : out std_ulogic;   -- 100KHz pulse 
+            o_sys_rst_n     : out std_ulogic    -- system reset, active low
         );
     end component clock_and_reset;
     

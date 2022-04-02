@@ -18,30 +18,36 @@ entity clock_and_reset is
 end entity clock_and_reset;
 
 architecture rtl of clock_and_reset is
-    signal clk_100M, clk_12M, r_clk_locked : std_ulogic;
+    signal clk_100M, clk_12M, r_clk_locked : std_ulogic;    -- MMCM outputs
     constant clk_gen_rstn : std_logic := '1';
     
-    signal r_pulse  : std_ulogic;
+    signal r_pulse  : std_ulogic;   -- 100KHz pulse 1 CLK100M wide
 
-    signal r_rst_sreg_100, r_rst_sreg_12   : std_ulogic_vector(9 downto 0) := (others => '0');
-    signal r_100_rdy_100M   : std_ulogic := '0';
-    signal r_12_rdy_12M     : std_ulogic := '0';
-    signal r_12_rdy_meta_100M   : std_ulogic := '0';
-    signal r_12_rdy_100M        : std_ulogic := '0';
-    signal r_sys_rst_n  : std_ulogic := '0';
+    signal r_rst_sreg_100, r_rst_sreg_12   : std_ulogic_vector(9 downto 0) := (others => '0');  -- reset control registers
+    signal r_100_rdy_100M   : std_ulogic := '0';        -- CLK100M ready, system clock domain
+    signal r_12_rdy_12M     : std_ulogic := '0';        -- CLK12M ready, 12M clock domain
+    signal r_12_rdy_meta_100M   : std_ulogic := '0';    -- CLK12M ready CDC
+    signal r_12_rdy_100M        : std_ulogic := '0';    -- CLK12M ready, system clock domain
+    signal r_sys_rst_n  : std_ulogic := '0';            -- system reset generation
     
 begin
+    ----- clock and reset generation -----
     -- ip instantiation
     clk_gen: clk_wiz_0
     port map(
-        o_clk_100M  => clk_100M,
-        o_clk_12M   => clk_12M,
-        resetn      => clk_gen_rstn,
-        o_locked    => r_clk_locked,
-        i_clk_125M  => i_clk_125M
+        o_clk_100M  => clk_100M,        -- 100MHz clock for system
+        o_clk_12M   => clk_12M,         -- 12.288MHz clock for audio codec
+        resetn      => clk_gen_rstn,    -- MMCM reset
+        o_locked    => r_clk_locked,    -- MMCM locked
+        i_clk_125M  => i_clk_125M       -- on board 125M clock
     );
 
-    -- reset logic
+    ----- reset logic -----
+    -- reset shift register clocks in reset value, must be deasserted for set number of clock cycles
+    --    before becoming valid
+    -- ensures both clocks and reset input are stable
+
+    -- 100M reset
     proc_rst_100M : process(clk_100M)
     begin
         if rising_edge(clk_100M) then
@@ -50,6 +56,7 @@ begin
         end if;
     end process proc_rst_100M;
 
+    -- 12M reset
     proc_rst_12M : process(clk_12M)
     begin
         if rising_edge(clk_12M) then
@@ -68,7 +75,8 @@ begin
         end if;
     end process proc_sys_rst;
 
-    -- pulse pulse generator
+    ----- pulse generator -----
+    -- counter for creating 100KHz pulse
     samp_counter : counter 
     generic map (
         g_NUM_BITS => 10,
@@ -81,7 +89,7 @@ begin
         o_done => r_pulse
     );
 
-    -- output drivers
+    ----- output drivers -----
     o_clk_100M      <= clk_100M;
     o_clk_12M       <= clk_12M;
     o_pulse_100K    <= r_pulse;
