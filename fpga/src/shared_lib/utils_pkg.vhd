@@ -8,6 +8,7 @@
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use IEEE.math_real.all;
 
 package utils_pkg is
     -- types
@@ -24,10 +25,12 @@ package utils_pkg is
     function is_zeros( reg : std_ulogic_vector) return std_ulogic;
     function is_ones(  reg : std_ulogic_vector) return std_ulogic;
 
+    function num_bits(val : integer) return integer;    -- number of bits needed to store an integer
+
 end package utils_pkg;
 
 package body utils_pkg is
-
+    
     -- helper functions
     function f_sll(i_reg : std_ulogic_vector; i_bit : std_ulogic) return std_ulogic_vector is
     begin
@@ -50,10 +53,15 @@ package body utils_pkg is
     begin
         return eq(reg, 0);
     end function is_zeros;
-
+    
     function is_ones(reg : std_ulogic_vector) return std_ulogic is
     begin
         return eq(reg, (2**reg'length)-1);
     end function is_ones;
 
+    function num_bits(val : integer) return integer is
+    begin
+        return integer(ceil(log2(real(val))));
+    end function num_bits;
+    
 end package body utils_pkg;

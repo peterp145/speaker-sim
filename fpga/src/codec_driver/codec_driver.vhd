@@ -29,14 +29,14 @@ end entity codec_driver;
 
 architecture rtl of codec_driver is
 
-    -- FSM
+    ----- FSM -----
     type t_state is (
-        sRESET,
-        sCODEC_RESET_0,
-        sCODEC_RESET_1,
-        sCODEC_RESET_2,
-        sXFR_START_0,
-        sXFR_START_1,
+        sRESET,         -- power on reset state
+        sCODEC_RESET_0, -- set din for AD74111 slave mode
+        sCODEC_RESET_1, -- assert reset 
+        sCODEC_RESET_2, -- wait for codec to initialize
+        sXFR_START_0,   -- start of transfer, dclk high
+        sXFR_START_1,   -- end of transfer, dclk low
         sXFR_SHIFT_0,
         sXFR_SHIFT_1,
         sXFR_DFS_0,
@@ -44,12 +44,12 @@ architecture rtl of codec_driver is
         sXFR_IDLE_0,
         sXFR_IDLE_1
     );
-    signal r_state        : t_state := sRESET;
-    signal w_next_state   : t_state := sRESET;
+    signal r_state        : t_state := sRESET;  -- fsm state register
+    signal w_next_state   : t_state := sRESET;  -- next state
 
-    -- FSM counter
-    signal r_counter    : unsigned(7 downto 0);
-    signal w_counter_en : std_ulogic;      
+    -- FSM dclk counter
+    signal r_mclk_counter    : unsigned(7 downto 0); 
+    signal r_mclk_counter_en : std_ulogic;      
     
     signal r_samp_counter      : unsigned (3 downto 0);
     signal w_samp_counter_en   : std_ulogic;
@@ -105,7 +105,7 @@ begin
         variable samp_counter : integer range 0 to 15;
     begin
         -- default assignments
-        w_counter_en        <= '1';
+        r_mclk_counter_en        <= '1';
         w_samp_counter_en   <= '0';
 
         w_first_xfr_set     <= '0';
@@ -126,13 +126,9 @@ begin
         w_codec_rst_n   <= '1';
         w_codec_dfs     <= '0';
 
-        -- conversions
-        counter := to_integer(r_counter);
-        samp_counter := to_integer(r_counter);
-
         case r_state is
             when sRESET =>
-                w_counter_en <= '0';
+                r_mclk_counter_en <= '0';
                 w_codec_dclk    <= '0';
                 w_next_state <= sCODEC_RESET_0;
 
@@ -140,8 +136,8 @@ begin
                 w_codec_rst_n   <= '0';
                 w_codec_dclk    <= '0';
                 w_din_output_en <= '1';
-                if r_counter = 9 then
-                    w_counter_en <= '0';
+                if r_mclk_counter = 9 then
+                    r_mclk_counter_en <= '0';
                     w_next_state <= sCODEC_RESET_1;
                 else
                     w_next_state <= sCODEC_RESET_0;
@@ -150,17 +146,17 @@ begin
             when sCODEC_RESET_1 =>
                 w_codec_dclk    <= '0';
                 w_din_output_en <= '1';
-                if r_counter = 9 then
-                    w_counter_en <= '0';
+                if r_mclk_counter = 9 then
+                    r_mclk_counter_en <= '0';
                     w_next_state <= sCODEC_RESET_2;
                 else
                     w_next_state <= sCODEC_RESET_1;
                 end if;
 
             when sCODEC_RESET_2 =>
-                w_codec_dclk <= not r_counter(0);
-                if r_counter = 255 then
-                    w_counter_en <= '0';
+                w_codec_dclk <= not r_mclk_counter(0);
+                if r_mclk_counter = 255 then
+                    r_mclk_counter_en <= '0';
                     w_samp_counter_en <= '1';
                     if r_samp_counter = 12 then
                         w_next_state <= sXFR_START_0;
@@ -248,7 +244,7 @@ begin
             when sXFR_IDLE_1 =>
                 w_codec_dclk    <= '0';
                 if counter = 255 then
-                    w_counter_en    <= '0';
+                    r_mclk_counter_en    <= '0';
                     w_next_state    <= sXFR_START_0;
                 else
                     w_next_state    <= sXFR_IDLE_0;
@@ -263,12 +259,12 @@ begin
 
     -- mclk counter
     mclk_counter : counter 
-    generic map (g_NUM_BITS => r_counter'length)
+    generic map (g_NUM_BITS => r_mclk_counter'length)
     port map(
         i_clk => i_clk_12M,
-        i_rst_n => w_counter_en,
-        i_en => w_counter_en,
-        o_count => r_counter
+        i_rst_n => r_mclk_counter_en,
+        i_en => r_mclk_counter_en,
+        o_count => r_mclk_counter
     );
 
     -- sample counter
