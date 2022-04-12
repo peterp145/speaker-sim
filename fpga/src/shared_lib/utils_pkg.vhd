@@ -14,7 +14,7 @@ package utils_pkg is
     -- types
 
     -- helper functions
-    function f_sll(
+    function shift_l(
         i_reg   : std_ulogic_vector;
         i_bit   : std_ulogic
     ) return std_ulogic_vector;
@@ -27,15 +27,16 @@ package utils_pkg is
 
     function num_bits(val : integer) return integer;    -- number of bits needed to store an integer
 
+
 end package utils_pkg;
 
 package body utils_pkg is
     
     -- helper functions
-    function f_sll(i_reg : std_ulogic_vector; i_bit : std_ulogic) return std_ulogic_vector is
+    function shift_l(i_reg : std_ulogic_vector; i_bit : std_ulogic) return std_ulogic_vector is
     begin
         return std_ulogic_vector(i_reg(i_reg'LENGTH-2 downto 0) & i_bit);
-    end function f_sll;
+    end function shift_l;
 
     function eq(reg : unsigned; val : integer) return std_ulogic is
         variable is_eq : std_ulogic;

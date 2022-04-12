@@ -11,7 +11,6 @@ use IEEE.numeric_std.all;
 package counter_pkg is
     -- io records
     type t_counter_i_rec is record
-        clk     : std_ulogic;   -- counter logic clock
         rst_n   : std_ulogic;   -- counter reset, active low
         en      : std_ulogic;   -- count enable, increase count by one on rising edge
     end record t_counter_i_rec;
@@ -20,6 +19,11 @@ package counter_pkg is
         count   : unsigned;     -- count register value
         done    : std_ulogic;   -- end of count flag, count rolls over to zero next
     end record t_counter_o_rec;
+
+    type t_counter_rec is record
+        i : t_counter_i_rec; -- input record
+        o : t_counter_o_rec; -- output record
+    end record t_counter_rec;
     
     -- counter component
     component counter
@@ -28,7 +32,8 @@ package counter_pkg is
         --     g_NUM_BITS    : integer     -- bit width of counter
         );
         port (
-            i_rec : in t_counter_i_rec;    -- input port record
+            clk   : in  std_ulogic;         -- clock input
+            i_rec : in  t_counter_i_rec;    -- input port record
             o_rec : out t_counter_o_rec     -- output port record
         );
     end component counter;

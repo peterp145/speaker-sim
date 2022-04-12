@@ -3,589 +3,187 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="speaker_sim_tb_behav.wdb" id="1">
+      <db_ref path="codec_driver_tb_behav.wdb" id="1">
          <top_modules>
-            <top_module name="clock_and_reset_pkg" />
-            <top_module name="codec_driver_cdc_pkg" />
             <top_module name="codec_driver_pkg" />
-            <top_module name="counters_pkg" />
+            <top_module name="codec_driver_tb" />
+            <top_module name="counter_pkg" />
             <top_module name="flip_flops_pkg" />
             <top_module name="glbl" />
-            <top_module name="speaker_sim_pkg" />
-            <top_module name="speaker_sim_tb" />
+            <top_module name="registers_pkg" />
+            <top_module name="tb_utils_pkg" />
             <top_module name="utils_pkg" />
          </top_modules>
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="266.567010 us"></ZoomStartTime>
-      <ZoomEndTime time="296.118557 us"></ZoomEndTime>
-      <Cursor1Time time="351.000000 us"></Cursor1Time>
+      <ZoomStartTime time="82.378 ns"></ZoomStartTime>
+      <ZoomEndTime time="576.646 ns"></ZoomEndTime>
+      <Cursor1Time time="494.268 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="274"></NameColumnWidth>
-      <ValueColumnWidth column_width="129"></ValueColumnWidth>
+      <ValueColumnWidth column_width="125"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="5" />
-   <wave_markers>
-      <marker label="" time="15071103" />
-      <marker label="" time="25071103" />
-   </wave_markers>
-   <wvobject fp_name="divider227" type="divider">
-      <obj_property name="label">testbench</obj_property>
-      <obj_property name="DisplayName">label</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/speaker_sim_tb/clk_125M">
-      <obj_property name="ElementShortName">clk_125M</obj_property>
-      <obj_property name="ObjectShortName">clk_125M</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group237">
-      <obj_property name="label">codec io</obj_property>
+   <WVObjectSize size="2" />
+   <wvobject type="group" fp_name="group640">
+      <obj_property name="label">codec_driver_tb</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_mclk">
-         <obj_property name="ElementShortName">codec_mclk</obj_property>
-         <obj_property name="ObjectShortName">codec_mclk</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_rst_n">
-         <obj_property name="ElementShortName">codec_rst_n</obj_property>
-         <obj_property name="ObjectShortName">codec_rst_n</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/rst_n">
+         <obj_property name="ElementShortName">rst_n</obj_property>
+         <obj_property name="ObjectShortName">rst_n</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_dclk">
-         <obj_property name="ElementShortName">codec_dclk</obj_property>
-         <obj_property name="ObjectShortName">codec_dclk</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/adc_data">
+         <obj_property name="ElementShortName">adc_data[23:0]</obj_property>
+         <obj_property name="ObjectShortName">adc_data[23:0]</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_dfs">
-         <obj_property name="ElementShortName">codec_dfs</obj_property>
-         <obj_property name="ObjectShortName">codec_dfs</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut_rec">
+         <obj_property name="ElementShortName">dut_rec</obj_property>
+         <obj_property name="ObjectShortName">dut_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/codec_driver_tb/dut_rec.i">
+            <obj_property name="ElementShortName">.i</obj_property>
+            <obj_property name="ObjectShortName">.i</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/codec_driver_tb/dut_rec.o">
+            <obj_property name="ElementShortName">.o</obj_property>
+            <obj_property name="ObjectShortName">.o</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+         </wvobject>
       </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_din">
-         <obj_property name="ElementShortName">codec_din</obj_property>
-         <obj_property name="ObjectShortName">codec_din</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut_expected_rec">
+         <obj_property name="ElementShortName">dut_expected_rec</obj_property>
+         <obj_property name="ObjectShortName">dut_expected_rec</obj_property>
       </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_dout">
-         <obj_property name="ElementShortName">codec_dout</obj_property>
-         <obj_property name="ObjectShortName">codec_dout</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/checker_en">
+         <obj_property name="ElementShortName">checker_en</obj_property>
+         <obj_property name="ObjectShortName">checker_en</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/COMB_DLY">
+         <obj_property name="ElementShortName">COMB_DLY</obj_property>
+         <obj_property name="ObjectShortName">COMB_DLY</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/NUM_TESTS">
+         <obj_property name="ElementShortName">NUM_TESTS</obj_property>
+         <obj_property name="ObjectShortName">NUM_TESTS</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/CLK_PER_ns">
+         <obj_property name="ElementShortName">CLK_PER_ns</obj_property>
+         <obj_property name="ObjectShortName">CLK_PER_ns</obj_property>
       </wvobject>
    </wvobject>
-   <wvobject type="array" fp_name="/speaker_sim_tb/leds">
-      <obj_property name="ElementShortName">leds[3:0]</obj_property>
-      <obj_property name="ObjectShortName">leds[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="group" fp_name="group271">
+   <wvobject type="group" fp_name="group641">
       <obj_property name="label">dut</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject type="group" fp_name="group290">
-         <obj_property name="label">io</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/i_clk_125M">
-            <obj_property name="ElementShortName">i_clk_125M</obj_property>
-            <obj_property name="ObjectShortName">i_clk_125M</obj_property>
-         </wvobject>
-         <wvobject type="group" fp_name="group238">
-            <obj_property name="label">codec io</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_mclk">
-               <obj_property name="ElementShortName">o_codec_mclk</obj_property>
-               <obj_property name="ObjectShortName">o_codec_mclk</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_rst_n">
-               <obj_property name="ElementShortName">o_codec_rst_n</obj_property>
-               <obj_property name="ObjectShortName">o_codec_rst_n</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_dclk">
-               <obj_property name="ElementShortName">o_codec_dclk</obj_property>
-               <obj_property name="ObjectShortName">o_codec_dclk</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_dfs">
-               <obj_property name="ElementShortName">o_codec_dfs</obj_property>
-               <obj_property name="ObjectShortName">o_codec_dfs</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_din">
-               <obj_property name="ElementShortName">o_codec_din</obj_property>
-               <obj_property name="ObjectShortName">o_codec_din</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/i_codec_dout">
-               <obj_property name="ElementShortName">i_codec_dout</obj_property>
-               <obj_property name="ObjectShortName">i_codec_dout</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="array" fp_name="/speaker_sim_tb/dut/o_leds">
-            <obj_property name="ElementShortName">o_leds[3:0]</obj_property>
-            <obj_property name="ObjectShortName">o_leds[3:0]</obj_property>
-         </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/i_clk_12M">
+         <obj_property name="ElementShortName">i_clk_12M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_12M</obj_property>
       </wvobject>
-      <wvobject type="group" fp_name="group244">
-         <obj_property name="label">clocks</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clk_100M">
-            <obj_property name="ElementShortName">clk_100M</obj_property>
-            <obj_property name="ObjectShortName">clk_100M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clk_12M">
-            <obj_property name="ElementShortName">clk_12M</obj_property>
-            <obj_property name="ObjectShortName">clk_12M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/r_pulse_100k">
-            <obj_property name="ElementShortName">r_pulse_100k</obj_property>
-            <obj_property name="ObjectShortName">r_pulse_100k</obj_property>
-         </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
       </wvobject>
-      <wvobject type="group" fp_name="group269">
-         <obj_property name="label">system resets</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/r_sys_rst_n">
-            <obj_property name="ElementShortName">r_sys_rst_n</obj_property>
-            <obj_property name="ObjectShortName">r_sys_rst_n</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/r_sys_rst_n_12M">
-            <obj_property name="ElementShortName">r_sys_rst_n_12M</obj_property>
-            <obj_property name="ObjectShortName">r_sys_rst_n_12M</obj_property>
-         </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
       </wvobject>
-      <wvobject type="group" fp_name="group289">
-         <obj_property name="label">u_clock_and_reset</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="group" fp_name="group295">
-            <obj_property name="label">io</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/i_clk_125M">
-               <obj_property name="ElementShortName">i_clk_125M</obj_property>
-               <obj_property name="ObjectShortName">i_clk_125M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/o_clk_100M">
-               <obj_property name="ElementShortName">o_clk_100M</obj_property>
-               <obj_property name="ObjectShortName">o_clk_100M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/o_clk_12M">
-               <obj_property name="ElementShortName">o_clk_12M</obj_property>
-               <obj_property name="ObjectShortName">o_clk_12M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/o_pulse_100K">
-               <obj_property name="ElementShortName">o_pulse_100K</obj_property>
-               <obj_property name="ObjectShortName">o_pulse_100K</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/o_sys_rst_n">
-               <obj_property name="ElementShortName">o_sys_rst_n</obj_property>
-               <obj_property name="ObjectShortName">o_sys_rst_n</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="group" fp_name="group296">
-            <obj_property name="label">clk_gen</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/clk_100M">
-               <obj_property name="ElementShortName">clk_100M</obj_property>
-               <obj_property name="ObjectShortName">clk_100M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/clk_12M">
-               <obj_property name="ElementShortName">clk_12M</obj_property>
-               <obj_property name="ObjectShortName">clk_12M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_clk_locked">
-               <obj_property name="ElementShortName">r_clk_locked</obj_property>
-               <obj_property name="ObjectShortName">r_clk_locked</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="group" fp_name="group308">
-            <obj_property name="label">pulse logic</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-            <wvobject type="group" fp_name="group307">
-               <obj_property name="label">counter</obj_property>
-               <obj_property name="DisplayName">label</obj_property>
-               <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/g_COUNT_MAX">
-                  <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
-                  <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/i_clk">
-                  <obj_property name="ElementShortName">i_clk</obj_property>
-                  <obj_property name="ObjectShortName">i_clk</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/i_rst_n">
-                  <obj_property name="ElementShortName">i_rst_n</obj_property>
-                  <obj_property name="ObjectShortName">i_rst_n</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/i_en">
-                  <obj_property name="ElementShortName">i_en</obj_property>
-                  <obj_property name="ObjectShortName">i_en</obj_property>
-               </wvobject>
-               <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/o_count">
-                  <obj_property name="ElementShortName">o_count[9:0]</obj_property>
-                  <obj_property name="ObjectShortName">o_count[9:0]</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/samp_counter/o_done">
-                  <obj_property name="ElementShortName">o_done</obj_property>
-                  <obj_property name="ObjectShortName">o_done</obj_property>
-               </wvobject>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_pulse">
-               <obj_property name="ElementShortName">r_pulse</obj_property>
-               <obj_property name="ObjectShortName">r_pulse</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="group" fp_name="group297">
-            <obj_property name="label">reset logic</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_rst_sreg_100">
-               <obj_property name="ElementShortName">r_rst_sreg_100[9:0]</obj_property>
-               <obj_property name="ObjectShortName">r_rst_sreg_100[9:0]</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_100_rdy_100M">
-               <obj_property name="ElementShortName">r_100_rdy_100M</obj_property>
-               <obj_property name="ObjectShortName">r_100_rdy_100M</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_rst_sreg_12">
-               <obj_property name="ElementShortName">r_rst_sreg_12[9:0]</obj_property>
-               <obj_property name="ObjectShortName">r_rst_sreg_12[9:0]</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_12_rdy_12M">
-               <obj_property name="ElementShortName">r_12_rdy_12M</obj_property>
-               <obj_property name="ObjectShortName">r_12_rdy_12M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_12_rdy_meta_100M">
-               <obj_property name="ElementShortName">r_12_rdy_meta_100M</obj_property>
-               <obj_property name="ObjectShortName">r_12_rdy_meta_100M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_12_rdy_100M">
-               <obj_property name="ElementShortName">r_12_rdy_100M</obj_property>
-               <obj_property name="ObjectShortName">r_12_rdy_100M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_sys_rst_n">
-               <obj_property name="ElementShortName">r_sys_rst_n</obj_property>
-               <obj_property name="ObjectShortName">r_sys_rst_n</obj_property>
-            </wvobject>
-         </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/r_state">
+         <obj_property name="ElementShortName">r_state</obj_property>
+         <obj_property name="ObjectShortName">r_state</obj_property>
       </wvobject>
-      <wvobject type="group" fp_name="group270">
-         <obj_property name="label">status leds</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="group" fp_name="group318">
-            <obj_property name="label">u_led_counter</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_led_counter/i_clk">
-               <obj_property name="ElementShortName">i_clk</obj_property>
-               <obj_property name="ObjectShortName">i_clk</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_led_counter/i_rst_n">
-               <obj_property name="ElementShortName">i_rst_n</obj_property>
-               <obj_property name="ObjectShortName">i_rst_n</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_led_counter/i_en">
-               <obj_property name="ElementShortName">i_en</obj_property>
-               <obj_property name="ObjectShortName">i_en</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_led_counter/o_count">
-               <obj_property name="ElementShortName">o_count[15:0]</obj_property>
-               <obj_property name="ObjectShortName">o_count[15:0]</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_led_counter/o_done">
-               <obj_property name="ElementShortName">o_done</obj_property>
-               <obj_property name="ObjectShortName">o_done</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_led_counter/r_count">
-               <obj_property name="ElementShortName">r_count[15:0]</obj_property>
-               <obj_property name="ObjectShortName">r_count[15:0]</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_led_counter/r_done">
-               <obj_property name="ElementShortName">r_done</obj_property>
-               <obj_property name="ObjectShortName">r_done</obj_property>
-            </wvobject>
-            <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_led_counter/g_NUM_BITS">
-               <obj_property name="ElementShortName">g_NUM_BITS</obj_property>
-               <obj_property name="ObjectShortName">g_NUM_BITS</obj_property>
-            </wvobject>
-            <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_led_counter/g_COUNT_MAX">
-               <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
-               <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/r_count_done">
-            <obj_property name="ElementShortName">r_count_done</obj_property>
-            <obj_property name="ObjectShortName">r_count_done</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/r_led">
-            <obj_property name="ElementShortName">r_led</obj_property>
-            <obj_property name="ObjectShortName">r_led</obj_property>
-         </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/w_next_state">
+         <obj_property name="ElementShortName">w_next_state</obj_property>
+         <obj_property name="ObjectShortName">w_next_state</obj_property>
       </wvobject>
-      <wvobject type="group" fp_name="group325">
-         <obj_property name="label">u_codec_driver_cdc</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/i_clk_100M">
-            <obj_property name="ElementShortName">i_clk_100M</obj_property>
-            <obj_property name="ObjectShortName">i_clk_100M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/i_clk_12M">
-            <obj_property name="ElementShortName">i_clk_12M</obj_property>
-            <obj_property name="ObjectShortName">i_clk_12M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/i_rst_n">
-            <obj_property name="ElementShortName">i_rst_n</obj_property>
-            <obj_property name="ObjectShortName">i_rst_n</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/o_rst_n_12M">
-            <obj_property name="ElementShortName">o_rst_n_12M</obj_property>
-            <obj_property name="ObjectShortName">o_rst_n_12M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/r_rst_n_meta_12M">
-            <obj_property name="ElementShortName">r_rst_n_meta_12M</obj_property>
-            <obj_property name="ObjectShortName">r_rst_n_meta_12M</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver_cdc/r_rst_n_12M">
-            <obj_property name="ElementShortName">r_rst_n_12M</obj_property>
-            <obj_property name="ObjectShortName">r_rst_n_12M</obj_property>
-         </wvobject>
-      </wvobject>
-      <wvobject type="group" fp_name="group362">
-         <obj_property name="label">u_codec_driver</obj_property>
-         <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk">
+         <obj_property name="ElementShortName">counter_mclk</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk</obj_property>
          <obj_property name="isExpanded"></obj_property>
-         <wvobject type="group" fp_name="group363">
-            <obj_property name="label">io</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_clk_12M">
-               <obj_property name="ElementShortName">i_clk_12M</obj_property>
-               <obj_property name="ObjectShortName">i_clk_12M</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_rst_n">
-               <obj_property name="ElementShortName">i_rst_n</obj_property>
-               <obj_property name="ObjectShortName">i_rst_n</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_ctrl_dac_word">
-               <obj_property name="ElementShortName">i_ctrl_dac_word[23:0]</obj_property>
-               <obj_property name="ObjectShortName">i_ctrl_dac_word[23:0]</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_codec_mclk">
-               <obj_property name="ElementShortName">o_codec_mclk</obj_property>
-               <obj_property name="ObjectShortName">o_codec_mclk</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_codec_rst_n">
-               <obj_property name="ElementShortName">o_codec_rst_n</obj_property>
-               <obj_property name="ObjectShortName">o_codec_rst_n</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_codec_dclk">
-               <obj_property name="ElementShortName">o_codec_dclk</obj_property>
-               <obj_property name="ObjectShortName">o_codec_dclk</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_codec_dfs">
-               <obj_property name="ElementShortName">o_codec_dfs</obj_property>
-               <obj_property name="ObjectShortName">o_codec_dfs</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_codec_din">
-               <obj_property name="ElementShortName">o_codec_din</obj_property>
-               <obj_property name="ObjectShortName">o_codec_din</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_codec_dout">
-               <obj_property name="ElementShortName">i_codec_dout</obj_property>
-               <obj_property name="ObjectShortName">i_codec_dout</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="group" fp_name="group367">
-            <obj_property name="label">fsm</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
+         <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk.i">
+            <obj_property name="ElementShortName">.i</obj_property>
+            <obj_property name="ObjectShortName">.i</obj_property>
             <obj_property name="isExpanded"></obj_property>
-            <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_state">
-               <obj_property name="ElementShortName">r_state</obj_property>
-               <obj_property name="ObjectShortName">r_state</obj_property>
-            </wvobject>
-            <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_next_state">
-               <obj_property name="ElementShortName">w_next_state</obj_property>
-               <obj_property name="ObjectShortName">w_next_state</obj_property>
-            </wvobject>
-            <wvobject type="group" fp_name="group378">
-               <obj_property name="label">mclk counter</obj_property>
-               <obj_property name="DisplayName">label</obj_property>
-               <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_counter">
-                  <obj_property name="ElementShortName">r_counter[7:0]</obj_property>
-                  <obj_property name="ObjectShortName">r_counter[7:0]</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_counter_en">
-                  <obj_property name="ElementShortName">w_counter_en</obj_property>
-                  <obj_property name="ObjectShortName">w_counter_en</obj_property>
-               </wvobject>
-               <wvobject type="group" fp_name="group377">
-                  <obj_property name="label">mclk_counter</obj_property>
-                  <obj_property name="DisplayName">label</obj_property>
-                  <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/i_clk">
-                     <obj_property name="ElementShortName">i_clk</obj_property>
-                     <obj_property name="ObjectShortName">i_clk</obj_property>
-                  </wvobject>
-                  <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/i_rst_n">
-                     <obj_property name="ElementShortName">i_rst_n</obj_property>
-                     <obj_property name="ObjectShortName">i_rst_n</obj_property>
-                  </wvobject>
-                  <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/i_en">
-                     <obj_property name="ElementShortName">i_en</obj_property>
-                     <obj_property name="ObjectShortName">i_en</obj_property>
-                  </wvobject>
-                  <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/o_count">
-                     <obj_property name="ElementShortName">o_count[7:0]</obj_property>
-                     <obj_property name="ObjectShortName">o_count[7:0]</obj_property>
-                  </wvobject>
-                  <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/o_done">
-                     <obj_property name="ElementShortName">o_done</obj_property>
-                     <obj_property name="ObjectShortName">o_done</obj_property>
-                  </wvobject>
-                  <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/r_count">
-                     <obj_property name="ElementShortName">r_count[7:0]</obj_property>
-                     <obj_property name="ObjectShortName">r_count[7:0]</obj_property>
-                  </wvobject>
-                  <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/r_done">
-                     <obj_property name="ElementShortName">r_done</obj_property>
-                     <obj_property name="ObjectShortName">r_done</obj_property>
-                  </wvobject>
-                  <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/g_NUM_BITS">
-                     <obj_property name="ElementShortName">g_NUM_BITS</obj_property>
-                     <obj_property name="ObjectShortName">g_NUM_BITS</obj_property>
-                  </wvobject>
-                  <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/mclk_counter/g_COUNT_MAX">
-                     <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
-                     <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
-                  </wvobject>
-               </wvobject>
-            </wvobject>
-            <wvobject type="group" fp_name="group388">
-               <obj_property name="label">samp_counter</obj_property>
-               <obj_property name="DisplayName">label</obj_property>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/i_clk">
-                  <obj_property name="ElementShortName">i_clk</obj_property>
-                  <obj_property name="ObjectShortName">i_clk</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/i_rst_n">
-                  <obj_property name="ElementShortName">i_rst_n</obj_property>
-                  <obj_property name="ObjectShortName">i_rst_n</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/i_en">
-                  <obj_property name="ElementShortName">i_en</obj_property>
-                  <obj_property name="ObjectShortName">i_en</obj_property>
-               </wvobject>
-               <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/o_count">
-                  <obj_property name="ElementShortName">o_count[3:0]</obj_property>
-                  <obj_property name="ObjectShortName">o_count[3:0]</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/o_done">
-                  <obj_property name="ElementShortName">o_done</obj_property>
-                  <obj_property name="ObjectShortName">o_done</obj_property>
-               </wvobject>
-               <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/r_count">
-                  <obj_property name="ElementShortName">r_count[3:0]</obj_property>
-                  <obj_property name="ObjectShortName">r_count[3:0]</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/r_done">
-                  <obj_property name="ElementShortName">r_done</obj_property>
-                  <obj_property name="ObjectShortName">r_done</obj_property>
-               </wvobject>
-               <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/g_NUM_BITS">
-                  <obj_property name="ElementShortName">g_NUM_BITS</obj_property>
-                  <obj_property name="ObjectShortName">g_NUM_BITS</obj_property>
-               </wvobject>
-               <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/samp_counter/g_COUNT_MAX">
-                  <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
-                  <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
-               </wvobject>
-            </wvobject>
-            <wvobject type="group" fp_name="group366">
-               <obj_property name="label">codec init logic</obj_property>
-               <obj_property name="DisplayName">label</obj_property>
-               <obj_property name="isExpanded"></obj_property>
-               <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_samp_counter">
-                  <obj_property name="ElementShortName">r_samp_counter[3:0]</obj_property>
-                  <obj_property name="ObjectShortName">r_samp_counter[3:0]</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_samp_counter_en">
-                  <obj_property name="ElementShortName">w_samp_counter_en</obj_property>
-                  <obj_property name="ObjectShortName">w_samp_counter_en</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_first_xfr">
-                  <obj_property name="ElementShortName">r_first_xfr</obj_property>
-                  <obj_property name="ObjectShortName">r_first_xfr</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_word_a_init">
-                  <obj_property name="ElementShortName">r_word_a_init</obj_property>
-                  <obj_property name="ObjectShortName">r_word_a_init</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_word_a_init">
-                  <obj_property name="ElementShortName">r_word_a_init</obj_property>
-                  <obj_property name="ObjectShortName">r_word_a_init</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_word_a_init_set">
-                  <obj_property name="ElementShortName">w_word_a_init_set</obj_property>
-                  <obj_property name="ObjectShortName">w_word_a_init_set</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_word_c_init">
-                  <obj_property name="ElementShortName">r_word_c_init</obj_property>
-                  <obj_property name="ObjectShortName">r_word_c_init</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_word_c_init_set">
-                  <obj_property name="ElementShortName">w_word_c_init_set</obj_property>
-                  <obj_property name="ObjectShortName">w_word_c_init_set</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_24b_ready">
-                  <obj_property name="ElementShortName">r_24b_ready</obj_property>
-                  <obj_property name="ObjectShortName">r_24b_ready</obj_property>
-               </wvobject>
-               <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_24b_ready_set">
-                  <obj_property name="ElementShortName">w_24b_ready_set</obj_property>
-                  <obj_property name="ObjectShortName">w_24b_ready_set</obj_property>
-               </wvobject>
-            </wvobject>
          </wvobject>
-         <wvobject type="group" fp_name="group365">
-            <obj_property name="label">dout sreg</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_dout_sreg_shift_en">
-               <obj_property name="ElementShortName">w_dout_sreg_shift_en</obj_property>
-               <obj_property name="ObjectShortName">w_dout_sreg_shift_en</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_dout_sreg">
-               <obj_property name="ElementShortName">r_dout_sreg[15:0]</obj_property>
-               <obj_property name="ObjectShortName">r_dout_sreg[15:0]</obj_property>
-            </wvobject>
+         <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk.o">
+            <obj_property name="ElementShortName">.o</obj_property>
+            <obj_property name="ObjectShortName">.o</obj_property>
+            <obj_property name="isExpanded"></obj_property>
          </wvobject>
-         <wvobject type="group" fp_name="group364">
-            <obj_property name="label">din sreg</obj_property>
-            <obj_property name="DisplayName">label</obj_property>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/REG_A_WORD">
-               <obj_property name="ElementShortName">REG_A_WORD[15:0]</obj_property>
-               <obj_property name="ObjectShortName">REG_A_WORD[15:0]</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/REG_C_WORD">
-               <obj_property name="ElementShortName">REG_C_WORD[15:0]</obj_property>
-               <obj_property name="ObjectShortName">REG_C_WORD[15:0]</obj_property>
-            </wvobject>
-            <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_sreg_load_sel">
-               <obj_property name="ElementShortName">w_din_sreg_load_sel</obj_property>
-               <obj_property name="ObjectShortName">w_din_sreg_load_sel</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_sreg_load_en">
-               <obj_property name="ElementShortName">w_din_sreg_load_en</obj_property>
-               <obj_property name="ObjectShortName">w_din_sreg_load_en</obj_property>
-            </wvobject>
-            <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_sreg_shift_en">
-               <obj_property name="ElementShortName">w_din_sreg_shift_en</obj_property>
-               <obj_property name="ObjectShortName">w_din_sreg_shift_en</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_sreg_in">
-               <obj_property name="ElementShortName">w_din_sreg_in[15:0]</obj_property>
-               <obj_property name="ObjectShortName">w_din_sreg_in[15:0]</obj_property>
-            </wvobject>
-            <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_din_sreg">
-               <obj_property name="ElementShortName">r_din_sreg[15:0]</obj_property>
-               <obj_property name="ObjectShortName">r_din_sreg[15:0]</obj_property>
-            </wvobject>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_output_en">
-            <obj_property name="ElementShortName">w_din_output_en</obj_property>
-            <obj_property name="ObjectShortName">w_din_output_en</obj_property>
-         </wvobject>
-         <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_din_loopback_en">
-            <obj_property name="ElementShortName">w_din_loopback_en</obj_property>
-            <obj_property name="ObjectShortName">w_din_loopback_en</obj_property>
-         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_fs">
+         <obj_property name="ElementShortName">counter_fs</obj_property>
+         <obj_property name="ObjectShortName">counter_fs</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/srff_first_xfr">
+         <obj_property name="ElementShortName">srff_first_xfr</obj_property>
+         <obj_property name="ObjectShortName">srff_first_xfr</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/srff_word_a_init">
+         <obj_property name="ElementShortName">srff_word_a_init</obj_property>
+         <obj_property name="ObjectShortName">srff_word_a_init</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/srff_word_c_init">
+         <obj_property name="ElementShortName">srff_word_c_init</obj_property>
+         <obj_property name="ObjectShortName">srff_word_c_init</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/srff_mode_24b">
+         <obj_property name="ElementShortName">srff_mode_24b</obj_property>
+         <obj_property name="ObjectShortName">srff_mode_24b</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/sreg_dout">
+         <obj_property name="ElementShortName">sreg_dout</obj_property>
+         <obj_property name="ObjectShortName">sreg_dout</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/w_din_sreg_load_sel">
+         <obj_property name="ElementShortName">w_din_sreg_load_sel</obj_property>
+         <obj_property name="ObjectShortName">w_din_sreg_load_sel</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/sreg_din">
+         <obj_property name="ElementShortName">sreg_din</obj_property>
+         <obj_property name="ObjectShortName">sreg_din</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_din_output_en">
+         <obj_property name="ElementShortName">w_din_output_en</obj_property>
+         <obj_property name="ObjectShortName">w_din_output_en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_din_loopback_en">
+         <obj_property name="ElementShortName">w_din_loopback_en</obj_property>
+         <obj_property name="ObjectShortName">w_din_loopback_en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_codec_rst_n">
+         <obj_property name="ElementShortName">w_codec_rst_n</obj_property>
+         <obj_property name="ObjectShortName">w_codec_rst_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_codec_dclk">
+         <obj_property name="ElementShortName">w_codec_dclk</obj_property>
+         <obj_property name="ObjectShortName">w_codec_dclk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_codec_dfs">
+         <obj_property name="ElementShortName">w_codec_dfs</obj_property>
+         <obj_property name="ObjectShortName">w_codec_dfs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_codec_din">
+         <obj_property name="ElementShortName">w_codec_din</obj_property>
+         <obj_property name="ObjectShortName">w_codec_din</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/MCLK_COUNTER_MAX">
+         <obj_property name="ElementShortName">MCLK_COUNTER_MAX</obj_property>
+         <obj_property name="ObjectShortName">MCLK_COUNTER_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/FS_COUNTER_MAX">
+         <obj_property name="ElementShortName">FS_COUNTER_MAX</obj_property>
+         <obj_property name="ObjectShortName">FS_COUNTER_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/SREG_NUM_BITS">
+         <obj_property name="ElementShortName">SREG_NUM_BITS</obj_property>
+         <obj_property name="ObjectShortName">SREG_NUM_BITS</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

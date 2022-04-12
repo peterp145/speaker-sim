@@ -2,13 +2,13 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library xil_defaultlib;
+library shared_lib;
+use shared_lib.utils_pkg.all;
+use shared_lib.counter_pkg.all;
 
-use xil_defaultlib.counters_pkg.all;
-use xil_defaultlib.clock_and_reset_pkg.all;
-use xil_defaultlib.codec_driver_pkg.all;
-use xil_defaultlib.codec_driver_cdc_pkg.all;
--- use xil_defaultlib.speaker_sim_pkg.all;
+library speaker_sim_lib;
+use speaker_sim_lib.clock_and_reset_pkg.all;
+use speaker_sim_lib.codec_driver_pkg.all;
 
 entity speaker_sim is
     port (
@@ -29,94 +29,68 @@ entity speaker_sim is
 end entity speaker_sim;
 
 architecture rtl of speaker_sim is
-    -- signal definitions
+    ----- clock and reset -----
+    signal clock_and_reset_o : t_clock_and_reset_o_rec;
+
     -- clocks
     signal clk_100M :   std_ulogic;
     signal clk_12M  :   std_ulogic;
-    signal r_pulse_100k : std_ulogic;
+    signal pulse_100k : std_ulogic;
 
     -- reset
-    signal r_sys_rst_n  :   std_logic;
+    signal sys_rst_n_100M : std_logic;
+    signal sys_rst_n_12M  : std_ulogic;
 
     -- leds
+    constant COUNT_MAX : integer := 49999;
     signal r_led        :   std_logic := '0';
-    signal r_count_done :   std_logic;
-    constant COUNT_WIDTH : integer := 16;
+    signal counter_led : t_counter_rec(o(count(num_bits(COUNT_MAX)-1 downto 0)));
 
     -- audio codec
     constant DAC_ZEROS : std_ulogic_vector(23 downto 0) := (others => '0');
-    signal r_sys_rst_n_12M  : std_ulogic;
-    signal r_codec_mclk     : std_ulogic;
-    signal r_codec_rst_n    : std_ulogic;
-    signal r_codec_dclk     : std_ulogic;
-    signal r_codec_dfs      : std_ulogic;
-    signal r_codec_din      : std_ulogic;
+    signal codec_driver_rec : t_codec_driver_rec;
     
 begin
 
-    -- led drivers
-    o_leds <= (0 => r_led, others => '0');
+    ----- clock and reset -----
+    u_clock_and_reset : clock_and_reset
+        port map(i_clk_125M, clock_and_reset_o);
+
+    clk_100M       <= clock_and_reset_o.clk_100M;
+    clk_12M        <= clock_and_reset_o.clk_12M;
+    pulse_100K     <= clock_and_reset_o.pulse_100K;
+    sys_rst_n_100M <= clock_and_reset_o.sys_rst_n_100M;
+    sys_rst_n_12M  <= clock_and_reset_o.sys_rst_n_12M;
+
+    ----- status leds -----
+    counter_led.i.en    <= pulse_100K;
+    counter_led.i.rst_n <= '1';
+    u_led_counter: counter
+        generic map(COUNT_MAX)
+        port map(clk_100M, counter_led.i, counter_led.o);
 
     process(clk_100M)
     begin
         if rising_edge(clk_100M) then
-            if not r_sys_rst_n then
+            if not sys_rst_n_100M  then
                 r_led <= '0';
-            elsif r_count_done then
+            elsif counter_led.o.done then
                 r_led <= not r_led;
             end if;
         end if;
     end process;
 
-    -- component instances
-    u_clock_and_reset : clock_and_reset
-        port map(
-            i_clk_125M      => i_clk_125M,
-            o_clk_100M      => clk_100M,
-            o_clk_12M       => clk_12M,
-            o_pulse_100K    => r_pulse_100k,
-            o_sys_rst_n     => r_sys_rst_n
-        );
-
-    u_led_counter: counter
-        generic map(
-            g_NUM_BITS  => COUNT_WIDTH,
-            g_COUNT_MAX => 50000
-        )
-        port map(
-            i_clk       => clk_100M,
-            i_rst_n     => r_sys_rst_n,
-            i_en        => r_pulse_100k,
-            o_count     => open,
-            o_done      => r_count_done
-        );
-
-    u_codec_driver_cdc : codec_driver_cdc
-        port map (
-            i_clk_100M  => clk_100M,
-            i_clk_12M   => clk_12M,
-            i_rst_n     => r_sys_rst_n,
-            o_rst_n_12M => r_sys_rst_n_12M
-        );
-
+    codec_driver_rec.i.rst_n <= sys_rst_n_12M;
+    codec_driver_rec.i.codec_dout <= i_codec_dout;
     u_codec_driver : codec_driver
-        port map(
-            i_clk_12M => clk_12M,
-            i_rst_n => r_sys_rst_n_12M,
-            i_ctrl_dac_word => DAC_ZEROS,
-            o_codec_mclk    => r_codec_mclk,
-            o_codec_rst_n   => r_codec_rst_n,
-            o_codec_dclk    => r_codec_dclk,
-            o_codec_dfs     => r_codec_dfs,
-            o_codec_din     => r_codec_din,
-            i_codec_dout    => i_codec_dout
-        );
+        port map(clk_12M, codec_driver_rec.i, codec_driver_rec.o);
 
     -- output buffers
-    o_codec_mclk  <= r_codec_mclk;
-    o_codec_rst_n <= r_codec_rst_n;
-    o_codec_dclk  <= r_codec_dclk;
-    o_codec_dfs   <= r_codec_dfs;
-    o_codec_din   <= r_codec_din;
+    o_codec_mclk    <= codec_driver_rec.o.codec_mclk;
+    o_codec_rst_n   <= codec_driver_rec.o.codec_rst_n;
+    o_codec_dclk    <= codec_driver_rec.o.codec_dclk;
+    o_codec_dfs     <= codec_driver_rec.o.codec_dfs;
+    o_codec_din     <= codec_driver_rec.o.codec_din;
+    o_leds          <= (0 => r_led, others => '0');
     
 end architecture rtl;

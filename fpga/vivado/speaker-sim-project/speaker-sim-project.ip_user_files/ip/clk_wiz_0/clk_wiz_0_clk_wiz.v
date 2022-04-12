@@ -239,7 +239,7 @@ wire clk_in2_clk_wiz_0;
 	  seq_reg2 <= 8'h00;
     end
     else begin
-        seq_reg2 <= {seq_reg2[6:0],o_locked_int};
+        seq_reg2 <= {seq_reg2[6:0],seq_reg1[7]};
   
     end
   end

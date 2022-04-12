@@ -12,6 +12,7 @@ entity counter is
     --     g_NUM_BITS    : integer := num_bits(g_COUNT_MAX)    -- bit width of counter
     );
     port (
+        clk     : in  std_ulogic;         -- clock input
         i_rec   : in  t_counter_i_rec;
         o_rec   : out t_counter_o_rec
     );
@@ -22,10 +23,10 @@ architecture rtl of counter is
     signal r_done  : std_ulogic := '0';
 begin
     -- count
-    proc_count: process(i_rec.clk)
+    proc_count: process(clk)
         variable v_done : std_ulogic;
     begin
-        if rising_edge(i_rec.clk) then
+        if rising_edge(clk) then
             if not i_rec.rst_n then
                 r_count <= (others => '0');
                 r_done  <= '0';

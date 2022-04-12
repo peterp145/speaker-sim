@@ -1,5 +1,5 @@
 ----------
--- file:        registers_pkg.vhd
+-- file:        registers_pkg.vhds
 -- description: package containinging registers for reuse
 -- author:      peter phelan
 -- email:       peter@peterphelan.net
@@ -12,64 +12,55 @@ use IEEE.std_logic_1164.all;
 -- use xil_defaultlib.utils_pkg.all;
 
 package registers_pkg is
-    -- io types
-    type trec_reg_in is record
-        clk         : std_ulogic;
-        load_word   : std_ulogic_vector;
-        load_en     : std_ulogic;
-        rst_n       : std_ulogic;
-        rst_val     : std_ulogic_vector;
-    end record trec_reg_in;
+    -------- reg --------
+    type t_reg_i_rec is record
+        load_word   : std_ulogic_vector; -- word to load into reg
+        load_en     : std_ulogic;        -- load enable
+        rst_n       : std_ulogic;        -- reset
+    end record t_reg_i_rec;
 
-    type trec_sreg_in is record
-        clk         : std_ulogic;
+    type t_reg_o_rec is record
+        word : std_ulogic_vector; -- register
+    end record t_reg_o_rec;
+    
+    type t_reg_rec is record
+        i : t_reg_i_rec;
+        o : t_reg_o_rec;
+    end record t_reg_rec;
+
+    component reg is
+        port (
+            clk   : in  std_ulogic;  -- logic clock
+            i_rec : in  t_reg_i_rec; -- input record
+            o_rec : out t_reg_o_rec  -- output record
+        );
+    end component reg;
+        
+    -------- sreg --------
+    type t_sreg_i_rec is record
         load_word   : std_ulogic_vector;
         load_en     : std_ulogic;
         shift_bit   : std_ulogic;
         shift_en    : std_ulogic;
         rst_n       : std_ulogic;
-        rst_val     : std_ulogic_vector;
-    end record trec_sreg_in;
+    end record t_sreg_i_rec;
 
-    subtype t_reg is std_ulogic_vector;
+    type t_sreg_o_rec is record
+        word : std_ulogic_vector;
+    end record t_sreg_o_rec;
 
-    procedure reg (
-        signal i_reg_in : in    trec_reg_in;
-        signal io_reg   : inout t_reg
-    );
+    type t_sreg_rec is record
+        i : t_sreg_i_rec;
+        o : t_sreg_o_rec;
+    end record t_sreg_rec;
 
-    procedure sreg_left (
-        signal i_sreg_in    : in    trec_sreg_in;
-        signal io_reg       : inout t_reg
-    );
+    component sreg is
+        generic (g_RESET_BIT : std_ulogic := '0');
+        port (
+            clk   : in  std_ulogic;
+            i_rec : in  t_sreg_i_rec;
+            o_rec : out t_sreg_o_rec
+        );
+    end component sreg;
     
 end package registers_pkg;
-
-package body registers_pkg is
-    -- register with load enable and active low reset
-    procedure reg (
-        signal i_reg_in : in    trec_reg_in;
-        signal io_reg   : inout t_reg
-    ) is
-    begin
-        -- wait until rising_edge(i_reg_in.clk);
-        -- io_reg <=
-        --     i_reg_in.rst_val    when not i_reg_in.rst_n else
-        --     i_reg_in.load_word  when i_reg_in.load_en;
-    end procedure reg;
-
-    -- shift register, leftward shift
-    procedure sreg_left (
-        signal i_sreg_in    : in    trec_sreg_in;
-        signal io_reg       : inout t_reg
-    ) is
-    begin
-        -- wait until rising_edge(i_sreg_in.clk);
-        -- io_reg <=
-        --     i_sreg_in.rst_val                  when not i_sreg_in.rst_n else
-        --     i_sreg_in.load_word                when i_sreg_in.load_en else
-        --     io_reg(io_reg'length-2 downto 0) & i_sreg_in.shift_bit when i_sreg_in.shift_en;
-    end procedure sreg_left;
-    
-
-end package body registers_pkg;

@@ -2,97 +2,149 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-library xil_defaultlib;
-use xil_defaultlib.utils_pkg.all;
-use xil_defaultlib.counters_pkg.all;
-use xil_defaultlib.clock_and_reset_pkg.all;
+library shared_lib;
+use shared_lib.utils_pkg.all;
+use shared_lib.flip_flops_pkg.all;
+use shared_lib.registers_pkg.all;
+use shared_lib.counter_pkg.all;
+
+library speaker_sim_lib;
+use speaker_sim_lib.clock_and_reset_pkg.all;
+-- use speaker_sim_lib.clock_and_reset_pkg.t_clock_and_reset_i_rec;
+-- use speaker_sim_lib.clock_and_reset_pkg.t_clock_and_reset_o_rec;
+
+-- library xil_defaultlib;
+-- use xil_defaultlib.clk_wiz_0;
 
 entity clock_and_reset is
     port (
-        i_clk_125M      : in  std_ulogic;   -- 125MHz clock input from board
-        o_clk_100M      : out std_ulogic;   -- 100MHz system logic clock
-        o_clk_12M       : out std_ulogic;   -- audio codec clock
-        o_pulse_100K    : out std_ulogic;   -- 100KHz pulse 
-        o_sys_rst_n     : out std_ulogic    -- system reset, active low
+        i_clk_125M : in  std_ulogic; -- input record
+        o_rec      : out t_clock_and_reset_o_rec  -- output record
     );
 end entity clock_and_reset;
 
 architecture rtl of clock_and_reset is
-    signal clk_100M, clk_12M, r_clk_locked : std_ulogic;    -- MMCM outputs
-    constant clk_gen_rstn : std_logic := '1';
-    
-    signal r_pulse  : std_ulogic;   -- 100KHz pulse 1 CLK100M wide
+    ----- clock generation -----
+    component clk_wiz_0 is
+        port (
+            -- Clock in ports
+            i_clk_125M    : in     std_logic;
+            -- Clock out ports
+            o_clk_100M    : out    std_logic;
+            o_clk_12M     : out    std_logic;
+            -- Status and control signals
+            resetn        : in     std_logic;
+            o_locked      : out    std_logic
+        );
+    end component clk_wiz_0;
 
-    signal r_rst_sreg_100, r_rst_sreg_12   : std_ulogic_vector(9 downto 0) := (others => '0');  -- reset control registers
-    signal r_100_rdy_100M   : std_ulogic := '0';        -- CLK100M ready, system clock domain
-    signal r_12_rdy_12M     : std_ulogic := '0';        -- CLK12M ready, 12M clock domain
-    signal r_12_rdy_meta_100M   : std_ulogic := '0';    -- CLK12M ready CDC
-    signal r_12_rdy_100M        : std_ulogic := '0';    -- CLK12M ready, system clock domain
-    signal r_sys_rst_n  : std_ulogic := '0';            -- system reset generation
+    -- constant clk_gen_rstn : std_logic := '1';
+    signal clk_100M, clk_12M, r_clk_locked : std_ulogic;    -- MMCM outputs
+    
+    -- pulse counter
+    constant PULSE_COUNTER_MAX : integer := 999;
+    signal counter_pulse: t_counter_rec(o(count(num_bits(PULSE_COUNTER_MAX)-1 downto 0)));
+
+    ----- clock ready -----
+    constant READY_SREG_NUM_BITS : integer := 10;
+
+    -- 100MHz ready
+    signal sreg_clk_100_rdy  : t_sreg_rec(              -- CLK100M reset sreg
+        i(load_word(READY_SREG_NUM_BITS-1 downto 0)), 
+        o(word(READY_SREG_NUM_BITS-1 downto 0)));        
+        
+    signal dff_clk_100_rdy_100M : std_ulogic;    -- CLK100M ready, system clock domain
+        
+    -- 12MHz ready
+    signal sreg_clk_12_rdy  : t_sreg_rec(              -- CLK12M reset sreg
+        i(load_word(READY_SREG_NUM_BITS-1 downto 0)), 
+        o(word(READY_SREG_NUM_BITS-1 downto 0)));        
+    signal dff_clk_12_rdy_12M   : std_ulogic;    -- CLK12M ready, system clock domain
+    
+    ----- system reset generation -----
+    -- CLK100M domain
+    signal cdcff_clk_12_rdy_100M    : std_ulogic; -- 12M ready signal clock domain crossing
+    signal dff_sys_rst_n_100M : std_ulogic;    -- system reset generation, 100M
+    
+    -- CLK12M domain
+    signal cdcff_clk_100_rdy_12M  : std_ulogic; -- 12M ready signal clock domain crossing
+    signal dff_sys_rst_n_12M    : std_ulogic;    -- system reset generation, 100M
     
 begin
     ----- clock and reset generation -----
     -- ip instantiation
-    clk_gen: clk_wiz_0
+    u_clk_gen : clk_wiz_0
     port map(
         o_clk_100M  => clk_100M,        -- 100MHz clock for system
         o_clk_12M   => clk_12M,         -- 12.288MHz clock for audio codec
-        resetn      => clk_gen_rstn,    -- MMCM reset
+        resetn      => '1',    -- MMCM reset
         o_locked    => r_clk_locked,    -- MMCM locked
-        i_clk_125M  => i_clk_125M       -- on board 125M clock
+        i_clk_125M  => i_clk_125M -- on board 125M clock
     );
 
     ----- reset logic -----
     -- reset shift register clocks in reset value, must be deasserted for set number of clock cycles
     --    before becoming valid
     -- ensures both clocks and reset input are stable
-
+    
+    -- 100M clock ready
+    sreg_clk_100_rdy.i.load_word    <= (others => '0');
+    sreg_clk_100_rdy.i.load_en      <= '0';
+    sreg_clk_100_rdy.i.shift_en     <= '1';
+    sreg_clk_100_rdy.i.rst_n        <= '1';
+    sreg_clk_100_rdy.i.shift_bit    <= r_clk_locked;
+    
+    u_sreg_clk_100_rdy : sreg
+    port map (clk_100M, sreg_clk_100_rdy.i, sreg_clk_100_rdy.o);
+    
+    u_dff_clk_100_rdy_100M : dff
+        port map (clk_100M, is_ones(sreg_clk_100_rdy.o.word), dff_clk_100_rdy_100M);
+        
+    -- 12M clock ready
+    sreg_clk_12_rdy.i.load_word     <= (others => '0');
+    sreg_clk_12_rdy.i.load_en       <= '0';
+    sreg_clk_12_rdy.i.shift_en      <= '1';
+    sreg_clk_12_rdy.i.rst_n         <= '1';
+    sreg_clk_12_rdy.i.shift_bit     <= r_clk_locked;
+    
+    u_sreg_clk_12_rdy : sreg
+    port map (clk_12M, sreg_clk_12_rdy.i, sreg_clk_12_rdy.o);
+    
+    u_dff_clk_12_rdy_12M : dff
+        port map (clk_12M, is_ones(sreg_clk_12_rdy.o.word), dff_clk_12_rdy_12M);
+        
     -- 100M reset
-    proc_rst_100M : process(clk_100M)
-    begin
-        if rising_edge(clk_100M) then
-            r_rst_sreg_100 <= r_rst_sreg_100(r_rst_sreg_100'length-2 downto 0) & r_clk_locked;
-            r_100_rdy_100M <= is_ones(r_rst_sreg_100);
-        end if;
-    end process proc_rst_100M;
+    u_cdcffs_clk_12_rdy_12to100M : cdcffs
+        port map (clk_100M, dff_clk_12_rdy_12M, cdcff_clk_12_rdy_100M);
+
+    u_dff_sys_rst_n_100M : dff
+        port map (
+            clk_100M,
+            dff_clk_100_rdy_100M and cdcff_clk_12_rdy_100M,
+            dff_sys_rst_n_100M);
 
     -- 12M reset
-    proc_rst_12M : process(clk_12M)
-    begin
-        if rising_edge(clk_12M) then
-            r_rst_sreg_12 <= r_rst_sreg_12(r_rst_sreg_12'length-2 downto 0) & r_clk_locked;
-            r_12_rdy_12M <= is_ones(r_rst_sreg_12);
-        end if;
-    end process proc_rst_12M;
+    u_cdcffs_clk_100_rdy_100to12M : cdcffs
+        port map (clk_12M, dff_clk_100_rdy_100M, cdcff_clk_100_rdy_12M);
 
-    -- clock domain crossing for detecting both clocks have locked
-    proc_sys_rst : process(clk_100M) 
-    begin
-        if rising_edge(clk_100M) then
-            r_12_rdy_meta_100M  <= r_12_rdy_12M;
-            r_12_rdy_100M       <= r_12_rdy_meta_100M;
-            r_sys_rst_n         <= r_100_rdy_100M and r_12_rdy_100M;
-        end if;
-    end process proc_sys_rst;
+    u_dff_sys_rst_n_12M : dff
+        port map (
+            clk_12M,
+            dff_clk_12_rdy_12M and cdcff_clk_100_rdy_12M,
+            dff_sys_rst_n_12M);
 
     ----- pulse generator -----
     -- counter for creating 100KHz pulse
-    samp_counter : counter 
-    generic map (
-        g_NUM_BITS => 10,
-        g_COUNT_MAX => 999
-    )
-    port map(
-        i_clk => clk_100M,
-        i_rst_n => r_sys_rst_n,
-        i_en => '1',
-        o_done => r_pulse
-    );
+    counter_pulse.i <= (dff_sys_rst_n_100M, '1');
+    pulse_counter : counter 
+        generic map (PULSE_COUNTER_MAX)
+        port map(clk_100M, counter_pulse.i, counter_pulse.o);
 
-    ----- output drivers -----
-    o_clk_100M      <= clk_100M;
-    o_clk_12M       <= clk_12M;
-    o_pulse_100K    <= r_pulse;
-    o_sys_rst_n     <= r_sys_rst_n;
+    -- ----- output drivers -----
+    o_rec.clk_100M          <= clk_100M;
+    o_rec.clk_12M           <= clk_12M;
+    o_rec.pulse_100K        <= counter_pulse.o.done;
+    o_rec.sys_rst_n_100M    <= dff_sys_rst_n_100M;
+    o_rec.sys_rst_n_12M     <= dff_sys_rst_n_12M;
     
 end architecture rtl;

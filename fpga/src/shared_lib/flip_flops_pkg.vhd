@@ -9,50 +9,60 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 package flip_flops_pkg is
-    procedure d_ff (
-        signal clk  : in  std_logic;
-        signal q    : out std_logic;
-        signal d    : in  std_logic
+    ----- dff -----
+    component dff is
+    port (
+        i_clk : in  std_ulogic; -- clock
+        i_d   : in  std_ulogic; -- input
+        o_q   : out std_ulogic  -- output
     );
-
-    procedure sr_ff (
-        signal q            : inout std_logic;
-        signal s, r_n, clk  : in    std_logic
-    );
-
-end package flip_flops_pkg;
-
-package body flip_flops_pkg is
-    -- d flip flop clocked on rising edge
-    procedure d_ff (
-        signal clk  : in  std_logic;
-        signal q    : out std_logic;
-        signal d    : in  std_logic
-    ) is
-    begin
-        q <= d when rising_edge(clk);
-    end procedure d_ff;
-
+    end component dff;
+    
+    ----- sr_ff -----
     -- set/reset flip flop clocked on rising edge
     -- reset active low and has precedence
-    procedure sr_ff (
-        signal q            : inout std_logic;
-        signal s, r_n, clk  : in    std_logic
-    ) is
-    begin
-        q <= (q or s) and r_n when rising_edge(clk);
-    end procedure sr_ff;
+    type t_srff_i_rec is record
+        s   : std_ulogic; -- set input
+        r_n : std_ulogic; -- reset input, active low
+    end record t_srff_i_rec;
 
-    -- flip flop for clock domain crossings with edge detection
-    -- procedure sync_ffs (
-    --     signal clk  : in    std_logic;
-    --     signal q    : inout std_logic_vector(2 downto 0);
-    --     signal d    : in    std_logic;
-    --     signal r_n  : in    std_logic
-    -- ) is
-    -- begin
-    --     wait until rising_edge(i_clk_100M);
-    --     q <= (others => '0') when not r_n else
-    --         q(1 downto 0) & d;
-    -- end procedure sync_ffs;
-end package body flip_flops_pkg;
+    type t_srff_o_rec is record
+        q : std_ulogic; -- output
+    end record t_srff_o_rec;
+
+    type t_srff_rec is record
+        i : t_srff_i_rec;
+        o : t_srff_o_rec;
+    end record;
+    
+    component srff is
+    port (
+        clk   : in  std_ulogic;   -- clock
+        i_rec : in  t_srff_i_rec; -- input record
+        o_rec : out t_srff_o_rec  -- output record
+    );
+    end component srff;
+        
+    ----- cdc -----
+    type t_cdcffs_i_rec is record
+        d   : std_ulogic; -- set input
+    end record t_cdcffs_i_rec;
+
+    type t_cdcffs_o_rec is record
+        q : std_ulogic; -- output
+    end record t_cdcffs_o_rec;
+
+    type t_cdcffs_rec is record
+        i : t_cdcffs_i_rec;
+        o : t_cdcffs_o_rec;
+    end record t_cdcffs_rec;
+
+    component cdcffs is
+    port (
+        i_clk : in  std_ulogic; -- clock
+        i_d   : in  std_ulogic; -- input
+        o_q   : out std_ulogic  -- output
+    );
+    end component cdcffs;
+
+end package flip_flops_pkg;

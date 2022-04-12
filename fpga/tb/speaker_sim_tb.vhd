@@ -5,10 +5,9 @@ use ieee.std_logic_textio.all;
 
 use std.textio.all;
 
-library xil_defaultlib;
-use xil_defaultlib.speaker_sim_pkg.all;
--- use xil_defaultlib.tb_utils_pkg.all;
--- use xil_defaultlib.speaker_sim_tb_pkg.all;
+library speaker_sim_lib;
+use speaker_sim_lib.speaker_sim_pkg.all;
+use speaker_sim_lib.clock_and_reset_pkg.all;
 
 entity speaker_sim_tb is
 end entity speaker_sim_tb;

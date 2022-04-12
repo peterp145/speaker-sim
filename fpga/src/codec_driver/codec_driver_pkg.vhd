@@ -9,22 +9,32 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 
 package codec_driver_pkg is
+    type t_codec_driver_i_rec is record
+        rst_n       : std_ulogic; -- system reset
+        codec_dout  : std_ulogic; -- codec adc data from codec
+    end record t_codec_driver_i_rec;
+
+    type t_codec_driver_o_rec is record
+        codec_mclk  : std_ulogic; -- codec master clock
+        codec_rst_n : std_ulogic; -- codec reset
+        codec_dclk  : std_ulogic; -- codec serial port clock
+        codec_dfs   : std_ulogic; -- codec serial port sync
+        codec_din   : std_ulogic; -- dac data to codec
+    end record t_codec_driver_o_rec;
+
+    type t_codec_driver_rec is record
+        i : t_codec_driver_i_rec;
+        o : t_codec_driver_o_rec;
+    end record t_codec_driver_rec;
+    
     constant REG_A_WORD     : std_ulogic_vector (15 downto 0) := B"1000_0000_0111_1100";
     constant REG_C_WORD     : std_ulogic_vector (15 downto 0) := B"1001_0000_0011_0101";
     
     component codec_driver is
         port (
-            -- clock and reset
-            i_clk_12M   :   in  std_ulogic;  -- 12.288MHz clock for logic and codec mclk
-            i_rst_n     :   in  std_ulogic;  -- system reset
-            -- controller if
-            i_ctrl_dac_word :   in  std_ulogic_vector(23 downto 0);
-            o_codec_mclk    :   out std_ulogic;  -- codec master clock
-            o_codec_rst_n   :   out std_ulogic;  -- codec reset signal
-            o_codec_dclk    :   out std_ulogic;  -- codec serial clock
-            o_codec_dfs     :   out std_ulogic;  -- codec dfs
-            o_codec_din     :   out std_ulogic;  -- serial data to codec
-            i_codec_dout    :   in  std_ulogic   -- serial data from codec
+            i_clk_12M : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
+            i_rec     : in  t_codec_driver_i_rec; -- input record
+            o_rec     : out t_codec_driver_o_rec  -- output record
         );
     end component codec_driver;
 end package codec_driver_pkg;

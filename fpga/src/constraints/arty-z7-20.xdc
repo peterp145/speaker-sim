@@ -184,25 +184,21 @@ set_property -dict {PACKAGE_PIN W13 IOSTANDARD LVCMOS33} [get_ports o_codec_rst_
 #set_property PACKAGE_PIN T9 [get_ports {netic20_t9}]; #IO_L12P_T1_MRCC_13
 #set_property PACKAGE_PIN U9 [get_ports {netic20_u9}]; #IO_L17P_T2_13
 
-
-create_generated_clock -name clk_100M -source [get_pins u_clock_and_reset/o_clk_100M] -multiply_by 1 [get_pins u_clock_and_reset/clk_gen/inst/o_clk_100M]
-create_generated_clock -name clk_12M -source [get_pins u_clock_and_reset/o_clk_12M] -multiply_by 1 [get_pins u_clock_and_reset/clk_gen/inst/o_clk_12M]
-set_output_delay -clock [get_clocks clk_12M] 0.000 [get_ports o_codec_mclk]
-set_output_delay -clock [get_clocks clk_100M] 0.000 [get_ports {{o_leds[0]} {o_leds[1]} {o_leds[2]} {o_leds[3]}}]
-
-create_clock -period 81.379 -name VIRTUAL_clk_12M -waveform {0.000 40.690}
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -min -add_delay 0.000 [get_ports o_codec_dclk]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -max -add_delay 0.000 [get_ports o_codec_dclk]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -min -add_delay 0.000 [get_ports o_codec_dfs]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -max -add_delay 0.000 [get_ports o_codec_dfs]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -min -add_delay 0.000 [get_ports o_codec_din]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -max -add_delay 0.000 [get_ports o_codec_din]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -min -add_delay 0.000 [get_ports o_codec_rst_n]
-set_output_delay -clock [get_clocks VIRTUAL_clk_12M] -max -add_delay 0.000 [get_ports o_codec_rst_n]
+create_clock -period 10.000 -name VIRTUAL_o_clk_100M_clk_wiz_0 -waveform {0.000 5.000}
+create_clock -period 81.379 -name VIRTUAL_o_clk_12M_clk_wiz_0 -waveform {0.000 40.690}
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_100M_clk_wiz_0] -min -add_delay 0.000 [get_ports {o_leds[*]}]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_100M_clk_wiz_0] -max -add_delay 0.000 [get_ports {o_leds[*]}]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_dclk]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_dclk]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_dfs]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_dfs]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_din]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_din]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_rst_n]
+set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_rst_n]
 set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks i_clk_125M] -group [get_clocks -include_generated_clocks sys_clk_pin]
 set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks clkfbout_clk_wiz_0] -group [get_clocks -include_generated_clocks clkfbout_clk_wiz_0_1]
 set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks o_clk_100M_clk_wiz_0] -group [get_clocks -include_generated_clocks o_clk_100M_clk_wiz_0_1]
 set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks o_clk_12M_clk_wiz_0] -group [get_clocks -include_generated_clocks o_clk_12M_clk_wiz_0_1]
-
-set_false_path -from [get_pins u_clock_and_reset/r_sys_rst_n_reg/C] -to [get_pins u_codec_driver_cdc/r_rst_n_meta_12M_reg/D]
-set_false_path -from [get_pins u_clock_and_reset/r_12_rdy_12M_reg/C] -to [get_pins u_clock_and_reset/r_12_rdy_meta_100M_reg/D]
+set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_12_rdy_12M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_12_rdy_12to100M/q_meta_reg/D]
+set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_100_rdy_100M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_meta_reg/D]
