@@ -3,6 +3,7 @@
 -- description: wrapper for matlab generated impulse response fir filter
 -- author:      peter phelan
 -- email:       peter@peterphelan.net
+-- version:     0.2
 ----------
 library IEEE;
 use IEEE.std_logic_1164.all;
