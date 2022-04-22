@@ -47,7 +47,7 @@ architecture tb of codec_driver_tb is
     end wait_clk_100M;
 
 begin
-    -- clock generationQuick Access
+    -- clock generation
     clk <= not clk after CLK_PER_ns/2;
     rst_n <= '1' after CLK_PER_ns * 5.5;
 

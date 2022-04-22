@@ -43,7 +43,7 @@ ARCHITECTURE rtl OF SimpleDualPortRAM_generic IS
   SIGNAL data_int                         : std_logic_vector(DataWidth - 1 DOWNTO 0) := (OTHERS => '0');
 
 BEGIN
-  Delay Line Memory_Wrapper_generic_process: PROCESS (i_clk_dsp_122M88)
+  Delay_Line_Memory_Wrapper_generic_process: PROCESS (i_clk_dsp_122M88)
   BEGIN
     IF i_clk_dsp_122M88'event AND i_clk_dsp_122M88 = '1' THEN
       IF wr_en = '1' THEN
@@ -51,7 +51,7 @@ BEGIN
       END IF;
       data_int <= ram(to_integer(rd_addr));
     END IF;
-  END PROCESS Delay Line Memory_Wrapper_generic_process;
+  END PROCESS Delay_Line_Memory_Wrapper_generic_process;
 
   rd_dout <= signed(data_int);
 

@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ir_filter_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="ir_filter_tb" />
+            <top_module name="ir_filter_wrapper_pkg" />
+            <top_module name="speaker_sim_pkg" />
+            <top_module name="tb_utils_pkg" />
+            <top_module name="utils_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="2.834107972 ms"></ZoomStartTime>
+      <ZoomEndTime time="13.838755805 ms"></ZoomEndTime>
+      <Cursor1Time time="12.004647832 ms"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="274"></NameColumnWidth>
+      <ValueColumnWidth column_width="117"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject type="group" fp_name="group72">
+      <obj_property name="label">tb</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/ir_filter_tb/clk_122M88">
+         <obj_property name="ElementShortName">clk_122M88</obj_property>
+         <obj_property name="ObjectShortName">clk_122M88</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/rst_n">
+         <obj_property name="ElementShortName">rst_n</obj_property>
+         <obj_property name="ObjectShortName">rst_n</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/dut_i_rec">
+         <obj_property name="ElementShortName">dut_i_rec</obj_property>
+         <obj_property name="ObjectShortName">dut_i_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="logic" fp_name="/ir_filter_tb/dut_i_rec.rst_n">
+            <obj_property name="ElementShortName">.rst_n</obj_property>
+            <obj_property name="ObjectShortName">.rst_n</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/ir_filter_tb/dut_i_rec.data_in">
+            <obj_property name="ElementShortName">.data_in[23:0]</obj_property>
+            <obj_property name="ObjectShortName">.data_in[23:0]</obj_property>
+            <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+            <obj_property name="CustomSignalColor">#FFA500</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/ir_filter_tb/dut_i_rec.data_in_valid">
+            <obj_property name="ElementShortName">.data_in_valid</obj_property>
+            <obj_property name="ObjectShortName">.data_in_valid</obj_property>
+            <obj_property name="CustomSignalColor">#FFA500</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/dut_o_rec">
+         <obj_property name="ElementShortName">dut_o_rec</obj_property>
+         <obj_property name="ObjectShortName">dut_o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/ir_filter_tb/dut_o_rec.data_out">
+            <obj_property name="ElementShortName">.data_out[23:0]</obj_property>
+            <obj_property name="ObjectShortName">.data_out[23:0]</obj_property>
+            <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+         <wvobject type="logic" fp_name="/ir_filter_tb/dut_o_rec.data_out_valid">
+            <obj_property name="ElementShortName">.data_out_valid</obj_property>
+            <obj_property name="ObjectShortName">.data_out_valid</obj_property>
+            <obj_property name="CustomSignalColor">#00FFFF</obj_property>
+            <obj_property name="UseCustomSignalColor">true</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider148" type="divider">
+   </wvobject>
+   <wvobject type="group" fp_name="group174">
+      <obj_property name="label">u_ir_filter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/i_clk_dsp_122M88">
+         <obj_property name="ElementShortName">i_clk_dsp_122M88</obj_property>
+         <obj_property name="ObjectShortName">i_clk_dsp_122M88</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/clk_enable">
+         <obj_property name="ElementShortName">clk_enable</obj_property>
+         <obj_property name="ObjectShortName">clk_enable</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/i_rst_n">
+         <obj_property name="ElementShortName">i_rst_n</obj_property>
+         <obj_property name="ObjectShortName">i_rst_n</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/i_data_in">
+         <obj_property name="ElementShortName">i_data_in[23:0]</obj_property>
+         <obj_property name="ObjectShortName">i_data_in[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/i_data_in_valid">
+         <obj_property name="ElementShortName">i_data_in_valid</obj_property>
+         <obj_property name="ObjectShortName">i_data_in_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/ce_out">
+         <obj_property name="ElementShortName">ce_out</obj_property>
+         <obj_property name="ObjectShortName">ce_out</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/o_data_out">
+         <obj_property name="ElementShortName">o_data_out[23:0]</obj_property>
+         <obj_property name="ObjectShortName">o_data_out[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/o_data_out_valid">
+         <obj_property name="ElementShortName">o_data_out_valid</obj_property>
+         <obj_property name="ObjectShortName">o_data_out_valid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/o_data_in_ready">
+         <obj_property name="ElementShortName">o_data_in_ready</obj_property>
+         <obj_property name="ObjectShortName">o_data_in_ready</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Delay2_out1">
+         <obj_property name="ElementShortName">Delay2_out1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">Delay2_out1[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Delay2_out1_1">
+         <obj_property name="ElementShortName">Delay2_out1_1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">Delay2_out1_1[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Delay1_out1">
+         <obj_property name="ElementShortName">Delay1_out1</obj_property>
+         <obj_property name="ObjectShortName">Delay1_out1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Delay1_out1_1">
+         <obj_property name="ElementShortName">Delay1_out1_1</obj_property>
+         <obj_property name="ObjectShortName">Delay1_out1_1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Delay_out1">
+         <obj_property name="ElementShortName">Delay_out1</obj_property>
+         <obj_property name="ObjectShortName">Delay_out1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Logical_Operator_out1">
+         <obj_property name="ElementShortName">Logical_Operator_out1</obj_property>
+         <obj_property name="ObjectShortName">Logical_Operator_out1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Logical_Operator_out1_1">
+         <obj_property name="ElementShortName">Logical_Operator_out1_1</obj_property>
+         <obj_property name="ObjectShortName">Logical_Operator_out1_1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out1">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out1[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out2">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out2</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out3">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out3</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out3</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out1_1">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out1_1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out1_1[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out2_1">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out2_1</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out2_1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/s_and_h_out1">
+         <obj_property name="ElementShortName">s_and_h_out1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">s_and_h_out1[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/Discrete_FIR_Filter_HDL_Optimized_out3_1">
+         <obj_property name="ElementShortName">Discrete_FIR_Filter_HDL_Optimized_out3_1</obj_property>
+         <obj_property name="ObjectShortName">Discrete_FIR_Filter_HDL_Optimized_out3_1</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group239">
+      <obj_property name="label">u_Discrete_FIR_Filter_HDR</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/i_clk_dsp_122M88">
+         <obj_property name="ElementShortName">i_clk_dsp_122M88</obj_property>
+         <obj_property name="ObjectShortName">i_clk_dsp_122M88</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/en_1_1_1">
+         <obj_property name="ElementShortName">en_1_1_1</obj_property>
+         <obj_property name="ObjectShortName">en_1_1_1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dataIn">
+         <obj_property name="ElementShortName">dataIn[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dataIn[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/validIn">
+         <obj_property name="ElementShortName">validIn</obj_property>
+         <obj_property name="ObjectShortName">validIn</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/syncReset">
+         <obj_property name="ElementShortName">syncReset</obj_property>
+         <obj_property name="ObjectShortName">syncReset</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dataOut">
+         <obj_property name="ElementShortName">dataOut[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dataOut[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/validOut">
+         <obj_property name="ElementShortName">validOut</obj_property>
+         <obj_property name="ObjectShortName">validOut</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/ready">
+         <obj_property name="ElementShortName">ready</obj_property>
+         <obj_property name="ObjectShortName">ready</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dinSwitch">
+         <obj_property name="ElementShortName">dinSwitch[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dinSwitch[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dinVldSwitch">
+         <obj_property name="ElementShortName">dinVldSwitch</obj_property>
+         <obj_property name="ObjectShortName">dinVldSwitch</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/readyS">
+         <obj_property name="ElementShortName">readyS</obj_property>
+         <obj_property name="ObjectShortName">readyS</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dinSM">
+         <obj_property name="ElementShortName">dinSM[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dinSM[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dinVldSM">
+         <obj_property name="ElementShortName">dinVldSM</obj_property>
+         <obj_property name="ObjectShortName">dinVldSM</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/nextDelayLineRdAddrReverse">
+         <obj_property name="ElementShortName">nextDelayLineRdAddrReverse[11:0]</obj_property>
+         <obj_property name="ObjectShortName">nextDelayLineRdAddrReverse[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/rdCountReverse_1">
+         <obj_property name="ElementShortName">rdCountReverse_1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">rdCountReverse_1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/nextDelayLineWrAddr">
+         <obj_property name="ElementShortName">nextDelayLineWrAddr[11:0]</obj_property>
+         <obj_property name="ObjectShortName">nextDelayLineWrAddr[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/wrCount_1">
+         <obj_property name="ElementShortName">wrCount_1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">wrCount_1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/nextDelayLineRdAddr">
+         <obj_property name="ElementShortName">nextDelayLineRdAddr[11:0]</obj_property>
+         <obj_property name="ObjectShortName">nextDelayLineRdAddr[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/rdCount_1">
+         <obj_property name="ElementShortName">rdCount_1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">rdCount_1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/nextSharingCount">
+         <obj_property name="ElementShortName">nextSharingCount[11:0]</obj_property>
+         <obj_property name="ObjectShortName">nextSharingCount[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/sharingCount_1">
+         <obj_property name="ElementShortName">sharingCount_1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">sharingCount_1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/delayLineValidInP">
+         <obj_property name="ElementShortName">delayLineValidInP</obj_property>
+         <obj_property name="ObjectShortName">delayLineValidInP</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/lastPhaseStrobe">
+         <obj_property name="ElementShortName">lastPhaseStrobe</obj_property>
+         <obj_property name="ObjectShortName">lastPhaseStrobe</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/delayLineShiftEnP">
+         <obj_property name="ElementShortName">delayLineShiftEnP</obj_property>
+         <obj_property name="ObjectShortName">delayLineShiftEnP</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/delayLineShiftEn0_1">
+         <obj_property name="ElementShortName">delayLineShiftEn0_1</obj_property>
+         <obj_property name="ObjectShortName">delayLineShiftEn0_1</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/validOutLookahead_reg">
+         <obj_property name="ElementShortName">validOutLookahead_reg[0:4]</obj_property>
+         <obj_property name="ObjectShortName">validOutLookahead_reg[0:4]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/validOutLookahead_1">
+         <obj_property name="ElementShortName">validOutLookahead_1</obj_property>
+         <obj_property name="ObjectShortName">validOutLookahead_1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/vldOut_1">
+         <obj_property name="ElementShortName">vldOut_1</obj_property>
+         <obj_property name="ObjectShortName">vldOut_1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/notValid">
+         <obj_property name="ElementShortName">notValid</obj_property>
+         <obj_property name="ObjectShortName">notValid</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/syncResetREG_1">
+         <obj_property name="ElementShortName">syncResetREG_1</obj_property>
+         <obj_property name="ObjectShortName">syncResetREG_1</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/syncResetN">
+         <obj_property name="ElementShortName">syncResetN</obj_property>
+         <obj_property name="ObjectShortName">syncResetN</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/syncResetRst">
+         <obj_property name="ElementShortName">syncResetRst</obj_property>
+         <obj_property name="ObjectShortName">syncResetRst</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetCount">
+         <obj_property name="ElementShortName">resetCount[13:0]</obj_property>
+         <obj_property name="ObjectShortName">resetCount[13:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/RAMNotFull">
+         <obj_property name="ElementShortName">RAMNotFull</obj_property>
+         <obj_property name="ObjectShortName">RAMNotFull</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetEn2">
+         <obj_property name="ElementShortName">resetEn2</obj_property>
+         <obj_property name="ObjectShortName">resetEn2</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/transientPad">
+         <obj_property name="ElementShortName">transientPad</obj_property>
+         <obj_property name="ObjectShortName">transientPad</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/transientNotClearEn">
+         <obj_property name="ElementShortName">transientNotClearEn</obj_property>
+         <obj_property name="ObjectShortName">transientNotClearEn</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetEn">
+         <obj_property name="ElementShortName">resetEn</obj_property>
+         <obj_property name="ObjectShortName">resetEn</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/transientNotClear">
+         <obj_property name="ElementShortName">transientNotClear</obj_property>
+         <obj_property name="ObjectShortName">transientNotClear</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/transientClear">
+         <obj_property name="ElementShortName">transientClear</obj_property>
+         <obj_property name="ObjectShortName">transientClear</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetRst">
+         <obj_property name="ElementShortName">resetRst</obj_property>
+         <obj_property name="ObjectShortName">resetRst</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetCountOverOne">
+         <obj_property name="ElementShortName">resetCountOverOne</obj_property>
+         <obj_property name="ObjectShortName">resetCountOverOne</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/transientEn">
+         <obj_property name="ElementShortName">transientEn</obj_property>
+         <obj_property name="ObjectShortName">transientEn</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/zeroOutput">
+         <obj_property name="ElementShortName">zeroOutput</obj_property>
+         <obj_property name="ObjectShortName">zeroOutput</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/delayLineValidIn0">
+         <obj_property name="ElementShortName">delayLineValidIn0</obj_property>
+         <obj_property name="ObjectShortName">delayLineValidIn0</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/wrAddrP">
+         <obj_property name="ElementShortName">wrAddrP[11:0]</obj_property>
+         <obj_property name="ObjectShortName">wrAddrP[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/resetCount_dtc">
+         <obj_property name="ElementShortName">resetCount_dtc[11:0]</obj_property>
+         <obj_property name="ObjectShortName">resetCount_dtc[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/wrAddr0">
+         <obj_property name="ElementShortName">wrAddr0[11:0]</obj_property>
+         <obj_property name="ObjectShortName">wrAddr0[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/rdAddrDelayLine0">
+         <obj_property name="ElementShortName">rdAddrDelayLine0[11:0]</obj_property>
+         <obj_property name="ObjectShortName">rdAddrDelayLine0[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/delayLineDataOut0">
+         <obj_property name="ElementShortName">delayLineDataOut0[23:0]</obj_property>
+         <obj_property name="ObjectShortName">delayLineDataOut0[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/rdAddr0_1">
+         <obj_property name="ElementShortName">rdAddr0_1[11:0]</obj_property>
+         <obj_property name="ObjectShortName">rdAddr0_1[11:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/coeffTableOut0">
+         <obj_property name="ElementShortName">coeffTableOut0[15:0]</obj_property>
+         <obj_property name="ObjectShortName">coeffTableOut0[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/coeffTableRegP0_1">
+         <obj_property name="ElementShortName">coeffTableRegP0_1[15:0]</obj_property>
+         <obj_property name="ObjectShortName">coeffTableRegP0_1[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/rdAddrEndNonZero">
+         <obj_property name="ElementShortName">rdAddrEndNonZero</obj_property>
+         <obj_property name="ObjectShortName">rdAddrEndNonZero</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/finalSumValidPipe_reg">
+         <obj_property name="ElementShortName">finalSumValidPipe_reg[0:3]</obj_property>
+         <obj_property name="ObjectShortName">finalSumValidPipe_reg[0:3]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/accumulate">
+         <obj_property name="ElementShortName">accumulate</obj_property>
+         <obj_property name="ObjectShortName">accumulate</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/sumOut">
+         <obj_property name="ElementShortName">sumOut[43:0]</obj_property>
+         <obj_property name="ObjectShortName">sumOut[43:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/accSwitchOut">
+         <obj_property name="ElementShortName">accSwitchOut[43:0]</obj_property>
+         <obj_property name="ObjectShortName">accSwitchOut[43:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/converterOut">
+         <obj_property name="ElementShortName">converterOut[23:0]</obj_property>
+         <obj_property name="ObjectShortName">converterOut[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_Discrete_FIR_Filter_HDL_Optimized/dout_re_1">
+         <obj_property name="ElementShortName">dout_re_1[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dout_re_1[23:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group251">
+      <obj_property name="label">u_s_and_h</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/i_clk_dsp_122M88">
+         <obj_property name="ElementShortName">i_clk_dsp_122M88</obj_property>
+         <obj_property name="ObjectShortName">i_clk_dsp_122M88</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/reset">
+         <obj_property name="ElementShortName">reset</obj_property>
+         <obj_property name="ObjectShortName">reset</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/en">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/In_rsvd">
+         <obj_property name="ElementShortName">In_rsvd[23:0]</obj_property>
+         <obj_property name="ObjectShortName">In_rsvd[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/Trigger">
+         <obj_property name="ElementShortName">Trigger</obj_property>
+         <obj_property name="ObjectShortName">Trigger</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/alpha">
+         <obj_property name="ElementShortName">alpha[23:0]</obj_property>
+         <obj_property name="ObjectShortName">alpha[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/en_gated">
+         <obj_property name="ElementShortName">en_gated</obj_property>
+         <obj_property name="ObjectShortName">en_gated</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/Trigger_delayed">
+         <obj_property name="ElementShortName">Trigger_delayed</obj_property>
+         <obj_property name="ObjectShortName">Trigger_delayed</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/Trigger_emulated">
+         <obj_property name="ElementShortName">Trigger_emulated</obj_property>
+         <obj_property name="ObjectShortName">Trigger_emulated</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/In_bypass">
+         <obj_property name="ElementShortName">In_bypass[23:0]</obj_property>
+         <obj_property name="ObjectShortName">In_bypass[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/ir_filter_tb/u_dut/u_ir_filter/u_s_and_h/In_last_value">
+         <obj_property name="ElementShortName">In_last_value[23:0]</obj_property>
+         <obj_property name="ObjectShortName">In_last_value[23:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

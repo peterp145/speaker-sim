@@ -11,8 +11,6 @@ use IEEE.numeric_std.all;
 use IEEE.math_real.all;
 
 package utils_pkg is
-    -- types
-
     -- helper functions
     function shift_l(
         i_reg   : std_ulogic_vector;

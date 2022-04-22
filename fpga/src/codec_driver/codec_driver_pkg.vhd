@@ -10,16 +10,20 @@ use IEEE.std_logic_1164.all;
 
 package codec_driver_pkg is
     type t_codec_driver_i_rec is record
-        rst_n       : std_ulogic; -- system reset
-        codec_dout  : std_ulogic; -- codec adc data from codec
+        rst_n               : std_ulogic;   -- system reset
+        codec_dout          : std_ulogic;   -- codec adc data from codec
+        dsp_dac_word        : t_codec_word; -- word to write to codec dac
+        dsp_dac_word_valid  : std_ulogic;   -- new codec dac word valid flag
     end record t_codec_driver_i_rec;
 
     type t_codec_driver_o_rec is record
-        codec_mclk  : std_ulogic; -- codec master clock
-        codec_rst_n : std_ulogic; -- codec reset
-        codec_dclk  : std_ulogic; -- codec serial port clock
-        codec_dfs   : std_ulogic; -- codec serial port sync
-        codec_din   : std_ulogic; -- dac data to codec
+        codec_mclk          : std_ulogic;   -- codec master clock
+        codec_rst_n         : std_ulogic;   -- codec reset
+        codec_dclk          : std_ulogic;   -- codec serial port clock
+        codec_dfs           : std_ulogic;   -- codec serial port sync
+        codec_din           : std_ulogic;   -- dac data to codec
+        dsp_adc_word        : t_codec_word; -- word read from adc
+        dsp_adc_word_valid  : std_ulogic;   -- adc word is ready
     end record t_codec_driver_o_rec;
 
     type t_codec_driver_rec is record
@@ -32,9 +36,9 @@ package codec_driver_pkg is
     
     component codec_driver is
         port (
-            i_clk_12M : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
-            i_rec     : in  t_codec_driver_i_rec; -- input record
-            o_rec     : out t_codec_driver_o_rec  -- output record
+            i_clk_122M88 : in  std_ulogic; -- 122.88MHz clock for logic and codec mclk
+            i_rec        : in  t_codec_driver_i_rec; -- input record
+            o_rec        : out t_codec_driver_o_rec  -- output record
         );
     end component codec_driver;
 end package codec_driver_pkg;

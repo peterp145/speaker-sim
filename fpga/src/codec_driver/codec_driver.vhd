@@ -13,7 +13,7 @@ use speaker_sim_lib.codec_driver_pkg.all;
 
 entity codec_driver is
     port (
-        i_clk_12M : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
+        i_clk_122M88 : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
         i_rec     : in  t_codec_driver_i_rec; -- input record
         o_rec     : out t_codec_driver_o_rec  -- output record
     );
