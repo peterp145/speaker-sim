@@ -20,10 +20,12 @@ begin
     proc_name: process(clk)
     begin
         if rising_edge(clk) then
-            if not i_rec.rst_n then
-                r_reg <= (others => '0');
-            elsif i_rec.load_en then
-                r_reg <= i_rec.load_word;
+            if i_rec.clken then 
+                if not i_rec.rst_n then
+                    r_reg <= (others => '0');
+                elsif i_rec.load_en then
+                    r_reg <= i_rec.load_word;
+                end if;
             end if;
         end if;
     end process proc_name;
@@ -55,12 +57,14 @@ begin
     proc_name: process(clk)
     begin
         if rising_edge(clk) then
-            if not i_rec.rst_n then
-                reg <= (others => g_RESET_BIT);
-            elsif i_rec.load_en then
-                reg <= i_rec.load_word;
-            elsif i_rec.shift_en then
-                reg <= reg(reg'length-2 downto 0) & i_rec.shift_bit;
+            if i_rec.clken then
+                if not i_rec.rst_n then
+                    reg <= (others => g_RESET_BIT);
+                elsif i_rec.load_en then
+                    reg <= i_rec.load_word;
+                elsif i_rec.shift_en then
+                    reg <= reg(reg'length-2 downto 0) & i_rec.shift_bit;
+                end if;
             end if;
         end if;
     end process proc_name;

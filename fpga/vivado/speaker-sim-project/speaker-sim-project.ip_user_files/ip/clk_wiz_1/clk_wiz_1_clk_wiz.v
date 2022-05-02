@@ -56,7 +56,7 @@
 //  Output     Output      Phase    Duty Cycle   Pk-to-Pk     Phase
 //   Clock     Freq (MHz)  (degrees)    (%)     Jitter (ps)  Error (ps)
 //----------------------------------------------------------------------------
-// clk_122M88__122.88584______0.000______50.0______509.210____704.890
+// o_clk_122M88__122.88584______0.000______50.0______509.210____704.890
 //
 //----------------------------------------------------------------------------
 // Input Clock   Freq (MHz)    Input Jitter (UI)
@@ -69,19 +69,17 @@ module clk_wiz_1_clk_wiz
 
  (// Clock in ports
   // Clock out ports
-  output        clk_122M88,
+  output        o_clk_122M88,
   // Status and control signals
   input         resetn,
-  output        locked,
-  input         clk_125M
+  output        o_locked,
+  input         i_clk_125M
  );
   // Input buffering
   //------------------------------------
-wire clk_125M_clk_wiz_1;
+wire i_clk_125M_clk_wiz_1;
 wire clk_in2_clk_wiz_1;
-  IBUF clkin1_ibufg
-   (.O (clk_125M_clk_wiz_1),
-    .I (clk_125M));
+  assign i_clk_125M_clk_wiz_1 = i_clk_125M;
 
 
 
@@ -93,7 +91,7 @@ wire clk_in2_clk_wiz_1;
   //    * Unused inputs are tied off
   //    * Unused outputs are labeled unused
 
-  wire        clk_122M88_clk_wiz_1;
+  wire        o_clk_122M88_clk_wiz_1;
   wire        clk_out2_clk_wiz_1;
   wire        clk_out3_clk_wiz_1;
   wire        clk_out4_clk_wiz_1;
@@ -104,7 +102,7 @@ wire clk_in2_clk_wiz_1;
   wire [15:0] do_unused;
   wire        drdy_unused;
   wire        psdone_unused;
-  wire        locked_int;
+  wire        o_locked_int;
   wire        clkfbout_clk_wiz_1;
   wire        clkfbout_buf_clk_wiz_1;
   wire        clkfboutb_unused;
@@ -144,7 +142,7 @@ wire clk_in2_clk_wiz_1;
    (
     .CLKFBOUT            (clkfbout_clk_wiz_1),
     .CLKFBOUTB           (clkfboutb_unused),
-    .CLKOUT0             (clk_122M88_clk_wiz_1),
+    .CLKOUT0             (o_clk_122M88_clk_wiz_1),
     .CLKOUT0B            (clkout0b_unused),
     .CLKOUT1             (clkout1_unused),
     .CLKOUT1B            (clkout1b_unused),
@@ -157,7 +155,7 @@ wire clk_in2_clk_wiz_1;
     .CLKOUT6             (clkout6_unused),
      // Input clock control
     .CLKFBIN             (clkfbout_buf_clk_wiz_1),
-    .CLKIN1              (clk_125M_clk_wiz_1),
+    .CLKIN1              (i_clk_125M_clk_wiz_1),
     .CLKIN2              (1'b0),
      // Tied to always select the primary input clock
     .CLKINSEL            (1'b1),
@@ -175,14 +173,14 @@ wire clk_in2_clk_wiz_1;
     .PSINCDEC            (1'b0),
     .PSDONE              (psdone_unused),
     // Other control and status signals
-    .LOCKED              (locked_int),
+    .LOCKED              (o_locked_int),
     .CLKINSTOPPED        (clkinstopped_unused),
     .CLKFBSTOPPED        (clkfbstopped_unused),
     .PWRDWN              (1'b0),
     .RST                 (reset_high));
   assign reset_high = ~resetn; 
 
-  assign locked = locked_int;
+  assign o_locked = o_locked_int;
 // Clock Monitor clock assigning
 //--------------------------------------
  // Output buffering
@@ -199,19 +197,19 @@ wire clk_in2_clk_wiz_1;
 
 
   BUFGCE clkout1_buf
-   (.O   (clk_122M88),
+   (.O   (o_clk_122M88),
     .CE  (seq_reg1[7]),
-    .I   (clk_122M88_clk_wiz_1));
+    .I   (o_clk_122M88_clk_wiz_1));
 
   BUFH clkout1_buf_en
-   (.O   (clk_122M88_clk_wiz_1_en_clk),
-    .I   (clk_122M88_clk_wiz_1));
-  always @(posedge clk_122M88_clk_wiz_1_en_clk or posedge reset_high) begin
+   (.O   (o_clk_122M88_clk_wiz_1_en_clk),
+    .I   (o_clk_122M88_clk_wiz_1));
+  always @(posedge o_clk_122M88_clk_wiz_1_en_clk or posedge reset_high) begin
     if(reset_high == 1'b1) begin
 	    seq_reg1 <= 8'h00;
     end
     else begin
-        seq_reg1 <= {seq_reg1[6:0],locked_int};
+        seq_reg1 <= {seq_reg1[6:0],o_locked_int};
   
     end
   end

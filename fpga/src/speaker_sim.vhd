@@ -9,6 +9,7 @@ use shared_lib.counter_pkg.all;
 library speaker_sim_lib;
 use speaker_sim_lib.clock_and_reset_pkg.all;
 use speaker_sim_lib.codec_driver_pkg.all;
+use speaker_sim_lib.codec_driver;
 
 entity speaker_sim is
     port (
@@ -33,13 +34,12 @@ architecture rtl of speaker_sim is
     signal clock_and_reset_o : t_clock_and_reset_o_rec;
 
     -- clocks
-    signal clk_100M :   std_ulogic;
-    signal clk_12M  :   std_ulogic;
-    signal pulse_100k : std_ulogic;
+    signal clk_100M, clken_100M_100k : std_ulogic;
+    signal clk_122M, clken_122M_12M  : std_ulogic;
 
     -- reset
     signal sys_rst_n_100M : std_logic;
-    signal sys_rst_n_12M  : std_ulogic;
+    signal sys_rst_n_122M  : std_ulogic;
 
     -- leds
     constant COUNT_MAX : integer := 49999;
@@ -54,36 +54,40 @@ begin
 
     ----- clock and reset -----
     u_clock_and_reset : clock_and_reset
-        port map(i_clk_125M, clock_and_reset_o);
+    port map(i_clk_125M, clock_and_reset_o);
 
-    clk_100M       <= clock_and_reset_o.clk_100M;
-    clk_12M        <= clock_and_reset_o.clk_12M;
-    pulse_100K     <= clock_and_reset_o.pulse_100K;
-    sys_rst_n_100M <= clock_and_reset_o.sys_rst_n_100M;
-    sys_rst_n_12M  <= clock_and_reset_o.sys_rst_n_12M;
+    clk_100M        <= clock_and_reset_o.clk_100M;
+    clk_122M        <= clock_and_reset_o.clk_122M;
+    clken_100M_100k <= clock_and_reset_o.clken_100M_100k;
+    clken_122M_12M  <= clock_and_reset_o.clken_122M_12M;
+    sys_rst_n_100M  <= clock_and_reset_o.sys_rst_n_100M;
+    sys_rst_n_122M  <= clock_and_reset_o.sys_rst_n_122M;
 
     ----- status leds -----
-    counter_led.i.en    <= pulse_100K;
+    counter_led.i.clken <= clken_100M_100k;
+    counter_led.i.en    <= '1';
     counter_led.i.rst_n <= '1';
-    u_led_counter: counter
+    u_led_counter: entity shared_lib.counter
         generic map(COUNT_MAX)
         port map(clk_100M, counter_led.i, counter_led.o);
 
     process(clk_100M)
     begin
-        if rising_edge(clk_100M) then
+        if rising_edge(clk_100M)  then
             if not sys_rst_n_100M  then
                 r_led <= '0';
-            elsif counter_led.o.done then
+            elsif counter_led.o.done and clken_100M_100k then
                 r_led <= not r_led;
             end if;
         end if;
     end process;
 
-    codec_driver_rec.i.rst_n <= sys_rst_n_12M;
+    ----- audio codec driver -----
+    codec_driver_rec.i.rst_n <= sys_rst_n_122M;
+    codec_driver_rec.i.clken_12M <= clken_122M_12M;
     codec_driver_rec.i.codec_dout <= i_codec_dout;
-    u_codec_driver : codec_driver
-        port map(clk_12M, codec_driver_rec.i, codec_driver_rec.o);
+    u_codec_driver : entity codec_driver
+    port map(clk_122M, codec_driver_rec.i, codec_driver_rec.o);
 
     -- output buffers
     o_codec_mclk    <= codec_driver_rec.o.codec_mclk;

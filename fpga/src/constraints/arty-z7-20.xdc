@@ -184,21 +184,14 @@ set_property -dict {PACKAGE_PIN W13 IOSTANDARD LVCMOS33} [get_ports o_codec_rst_
 #set_property PACKAGE_PIN T9 [get_ports {netic20_t9}]; #IO_L12P_T1_MRCC_13
 #set_property PACKAGE_PIN U9 [get_ports {netic20_u9}]; #IO_L17P_T2_13
 
-create_clock -period 10.000 -name VIRTUAL_o_clk_100M_clk_wiz_0 -waveform {0.000 5.000}
-create_clock -period 81.379 -name VIRTUAL_o_clk_12M_clk_wiz_0 -waveform {0.000 40.690}
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_100M_clk_wiz_0] -min -add_delay 0.000 [get_ports {o_leds[*]}]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_100M_clk_wiz_0] -max -add_delay 0.000 [get_ports {o_leds[*]}]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_dclk]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_dclk]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_dfs]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_dfs]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_din]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_din]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -min -add_delay 0.000 [get_ports o_codec_rst_n]
-set_output_delay -clock [get_clocks VIRTUAL_o_clk_12M_clk_wiz_0] -max -add_delay 0.000 [get_ports o_codec_rst_n]
-set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks i_clk_125M] -group [get_clocks -include_generated_clocks sys_clk_pin]
-set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks clkfbout_clk_wiz_0] -group [get_clocks -include_generated_clocks clkfbout_clk_wiz_0_1]
-set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks o_clk_100M_clk_wiz_0] -group [get_clocks -include_generated_clocks o_clk_100M_clk_wiz_0_1]
-set_clock_groups -physically_exclusive -group [get_clocks -include_generated_clocks o_clk_12M_clk_wiz_0] -group [get_clocks -include_generated_clocks o_clk_12M_clk_wiz_0_1]
-set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_12_rdy_12M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_12_rdy_12to100M/q_meta_reg/D]
-set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_100_rdy_100M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_meta_reg/D]
+set_property ASYNC_REG false [get_cells u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_meta_reg]
+set_property ASYNC_REG false [get_cells u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_reg]
+
+set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_100M_rdy_100M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_meta_reg/D]
+
+set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_dclk]/C}] -to [get_ports o_codec_dclk]
+set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_din]/C}] -to [get_ports o_codec_din]
+set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_dfs]/C}] -to [get_ports o_codec_dfs]
+set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_rst_n]/C}] -to [get_ports o_codec_rst_n]
+
+set_false_path -from [get_clocks -of_objects [get_pins u_clock_and_reset/u_clk_wiz_1/inst/mmcm_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins u_clock_and_reset/u_clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0]]

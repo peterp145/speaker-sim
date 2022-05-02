@@ -1,11 +1,11 @@
 // Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2021.2.1 (lin64) Build 3414424 Sun Dec 19 10:57:14 MST 2021
-// Date        : Sun May  1 19:10:39 2022
+// Date        : Sun May  1 19:09:52 2022
 // Host        : peter-ubuntu-20 running 64-bit Ubuntu 20.04.4 LTS
 // Command     : write_verilog -force -mode funcsim
-//               /home/peter/speaker-sim/fpga/vivado/speaker-sim-project/speaker-sim-project.runs/clk_wiz_1_synth_1/clk_wiz_1_sim_netlist.v
-// Design      : clk_wiz_1
+//               /home/peter/speaker-sim/fpga/vivado/speaker-sim-project/speaker-sim-project.runs/clk_wiz_0_synth_1/clk_wiz_0_sim_netlist.v
+// Design      : clk_wiz_0
 // Purpose     : This verilog netlist is a functional simulation representation of the design and should not be modified
 //               or synthesized. This netlist cannot be used for SDF annotated simulation.
 // Device      : xc7z020clg400-1
@@ -13,44 +13,44 @@
 `timescale 1 ps / 1 ps
 
 (* NotValidForBitStream *)
-module clk_wiz_1
-   (o_clk_122M88,
+module clk_wiz_0
+   (o_clk_100M,
     resetn,
     o_locked,
     i_clk_125M);
-  output o_clk_122M88;
+  output o_clk_100M;
   input resetn;
   output o_locked;
   input i_clk_125M;
 
   wire i_clk_125M;
-  wire o_clk_122M88;
+  wire o_clk_100M;
   wire o_locked;
   wire resetn;
 
-  clk_wiz_1_clk_wiz inst
+  clk_wiz_0_clk_wiz inst
        (.i_clk_125M(i_clk_125M),
-        .o_clk_122M88(o_clk_122M88),
+        .o_clk_100M(o_clk_100M),
         .o_locked(o_locked),
         .resetn(resetn));
 endmodule
 
-module clk_wiz_1_clk_wiz
-   (o_clk_122M88,
+module clk_wiz_0_clk_wiz
+   (o_clk_100M,
     resetn,
     o_locked,
     i_clk_125M);
-  output o_clk_122M88;
+  output o_clk_100M;
   input resetn;
   output o_locked;
   input i_clk_125M;
 
-  wire clkfbout_buf_clk_wiz_1;
-  wire clkfbout_clk_wiz_1;
+  wire clkfbout_buf_clk_wiz_0;
+  wire clkfbout_clk_wiz_0;
   wire i_clk_125M;
-  wire o_clk_122M88;
-  wire o_clk_122M88_clk_wiz_1;
-  wire o_clk_122M88_clk_wiz_1_en_clk;
+  wire o_clk_100M;
+  wire o_clk_100M_clk_wiz_0;
+  wire o_clk_100M_clk_wiz_0_en_clk;
   wire o_locked;
   wire reset_high;
   wire resetn;
@@ -74,8 +74,8 @@ module clk_wiz_1_clk_wiz
 
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFG clkf_buf
-       (.I(clkfbout_clk_wiz_1),
-        .O(clkfbout_buf_clk_wiz_1));
+       (.I(clkfbout_clk_wiz_0),
+        .O(clkfbout_buf_clk_wiz_0));
   (* BOX_TYPE = "PRIMITIVE" *) 
   (* XILINX_LEGACY_PRIM = "BUFGCE" *) 
   (* XILINX_TRANSFORM_PINMAP = "CE:CE0 I:I0 GND:S1,IGNORE0,CE1 VCC:S0,IGNORE1,I1" *) 
@@ -87,26 +87,26 @@ module clk_wiz_1_clk_wiz
     clkout1_buf
        (.CE0(seq_reg1[7]),
         .CE1(1'b0),
-        .I0(o_clk_122M88_clk_wiz_1),
+        .I0(o_clk_100M_clk_wiz_0),
         .I1(1'b1),
         .IGNORE0(1'b0),
         .IGNORE1(1'b1),
-        .O(o_clk_122M88),
+        .O(o_clk_100M),
         .S0(1'b1),
         .S1(1'b0));
   (* BOX_TYPE = "PRIMITIVE" *) 
   BUFH clkout1_buf_en
-       (.I(o_clk_122M88_clk_wiz_1),
-        .O(o_clk_122M88_clk_wiz_1_en_clk));
+       (.I(o_clk_100M_clk_wiz_0),
+        .O(o_clk_100M_clk_wiz_0_en_clk));
   (* BOX_TYPE = "PRIMITIVE" *) 
   MMCME2_ADV #(
     .BANDWIDTH("OPTIMIZED"),
-    .CLKFBOUT_MULT_F(58.125000),
+    .CLKFBOUT_MULT_F(8.000000),
     .CLKFBOUT_PHASE(0.000000),
     .CLKFBOUT_USE_FINE_PS("FALSE"),
     .CLKIN1_PERIOD(8.000000),
     .CLKIN2_PERIOD(0.000000),
-    .CLKOUT0_DIVIDE_F(5.375000),
+    .CLKOUT0_DIVIDE_F(10.000000),
     .CLKOUT0_DUTY_CYCLE(0.500000),
     .CLKOUT0_PHASE(0.000000),
     .CLKOUT0_USE_FINE_PS("FALSE"),
@@ -136,7 +136,7 @@ module clk_wiz_1_clk_wiz
     .CLKOUT6_PHASE(0.000000),
     .CLKOUT6_USE_FINE_PS("FALSE"),
     .COMPENSATION("ZHOLD"),
-    .DIVCLK_DIVIDE(11),
+    .DIVCLK_DIVIDE(1),
     .IS_CLKINSEL_INVERTED(1'b0),
     .IS_PSEN_INVERTED(1'b0),
     .IS_PSINCDEC_INVERTED(1'b0),
@@ -149,15 +149,15 @@ module clk_wiz_1_clk_wiz
     .SS_MOD_PERIOD(10000),
     .STARTUP_WAIT("FALSE")) 
     mmcm_adv_inst
-       (.CLKFBIN(clkfbout_buf_clk_wiz_1),
-        .CLKFBOUT(clkfbout_clk_wiz_1),
+       (.CLKFBIN(clkfbout_buf_clk_wiz_0),
+        .CLKFBOUT(clkfbout_clk_wiz_0),
         .CLKFBOUTB(NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED),
         .CLKFBSTOPPED(NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED),
         .CLKIN1(i_clk_125M),
         .CLKIN2(1'b0),
         .CLKINSEL(1'b1),
         .CLKINSTOPPED(NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED),
-        .CLKOUT0(o_clk_122M88_clk_wiz_1),
+        .CLKOUT0(o_clk_100M_clk_wiz_0),
         .CLKOUT0B(NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED),
         .CLKOUT1(NLW_mmcm_adv_inst_CLKOUT1_UNCONNECTED),
         .CLKOUT1B(NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED),
@@ -192,7 +192,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[0] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(o_locked),
@@ -202,7 +202,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[1] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[0]),
@@ -212,7 +212,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[2] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[1]),
@@ -222,7 +222,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[3] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[2]),
@@ -232,7 +232,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[4] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[3]),
@@ -242,7 +242,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[5] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[4]),
@@ -252,7 +252,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[6] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[5]),
@@ -262,7 +262,7 @@ module clk_wiz_1_clk_wiz
   FDCE #(
     .INIT(1'b0)) 
     \seq_reg1_reg[7] 
-       (.C(o_clk_122M88_clk_wiz_1_en_clk),
+       (.C(o_clk_100M_clk_wiz_0_en_clk),
         .CE(1'b1),
         .CLR(reset_high),
         .D(seq_reg1[6]),

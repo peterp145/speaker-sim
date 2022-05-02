@@ -17,7 +17,6 @@ architecture tb of clock_and_reset_tb is
     signal clk_125M : std_ulogic := '1';
 
     -- dut signals
-    signal dut_i_rec : t_clock_and_reset_i_rec;
     signal dut_o_rec : t_clock_and_reset_o_rec;
 
 begin
@@ -25,8 +24,7 @@ begin
     clk_125M <= not clk_125M after CLK_125M_PER_ns/2;
 
     -- dut
-    dut_i_rec.clk_125M <= clk_125M;
     dut : clock_and_reset 
-        port map (dut_i_rec, dut_o_rec);
+    port map (clk_125M, dut_o_rec);
     
 end architecture tb;

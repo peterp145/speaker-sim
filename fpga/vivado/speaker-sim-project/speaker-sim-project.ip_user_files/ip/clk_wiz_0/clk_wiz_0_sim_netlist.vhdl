@@ -1,11 +1,11 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.2.1 (lin64) Build 3414424 Sun Dec 19 10:57:14 MST 2021
--- Date        : Sun May  1 19:10:39 2022
+-- Date        : Sun May  1 19:09:52 2022
 -- Host        : peter-ubuntu-20 running 64-bit Ubuntu 20.04.4 LTS
 -- Command     : write_vhdl -force -mode funcsim
---               /home/peter/speaker-sim/fpga/vivado/speaker-sim-project/speaker-sim-project.runs/clk_wiz_1_synth_1/clk_wiz_1_sim_netlist.vhdl
--- Design      : clk_wiz_1
+--               /home/peter/speaker-sim/fpga/vivado/speaker-sim-project/speaker-sim-project.runs/clk_wiz_0_synth_1/clk_wiz_0_sim_netlist.vhdl
+-- Design      : clk_wiz_0
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
 -- Device      : xc7z020clg400-1
@@ -14,20 +14,20 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity clk_wiz_1_clk_wiz is
+entity clk_wiz_0_clk_wiz is
   port (
-    o_clk_122M88 : out STD_LOGIC;
+    o_clk_100M : out STD_LOGIC;
     resetn : in STD_LOGIC;
     o_locked : out STD_LOGIC;
     i_clk_125M : in STD_LOGIC
   );
-end clk_wiz_1_clk_wiz;
+end clk_wiz_0_clk_wiz;
 
-architecture STRUCTURE of clk_wiz_1_clk_wiz is
-  signal clkfbout_buf_clk_wiz_1 : STD_LOGIC;
-  signal clkfbout_clk_wiz_1 : STD_LOGIC;
-  signal o_clk_122M88_clk_wiz_1 : STD_LOGIC;
-  signal o_clk_122M88_clk_wiz_1_en_clk : STD_LOGIC;
+architecture STRUCTURE of clk_wiz_0_clk_wiz is
+  signal clkfbout_buf_clk_wiz_0 : STD_LOGIC;
+  signal clkfbout_clk_wiz_0 : STD_LOGIC;
+  signal o_clk_100M_clk_wiz_0 : STD_LOGIC;
+  signal o_clk_100M_clk_wiz_0_en_clk : STD_LOGIC;
   signal \^o_locked\ : STD_LOGIC;
   signal reset_high : STD_LOGIC;
   signal seq_reg1 : STD_LOGIC_VECTOR ( 7 downto 0 );
@@ -82,8 +82,8 @@ begin
   o_locked <= \^o_locked\;
 clkf_buf: unisim.vcomponents.BUFG
      port map (
-      I => clkfbout_clk_wiz_1,
-      O => clkfbout_buf_clk_wiz_1
+      I => clkfbout_clk_wiz_0,
+      O => clkfbout_buf_clk_wiz_0
     );
 clkout1_buf: unisim.vcomponents.BUFGCTRL
     generic map(
@@ -95,28 +95,28 @@ clkout1_buf: unisim.vcomponents.BUFGCTRL
         port map (
       CE0 => seq_reg1(7),
       CE1 => '0',
-      I0 => o_clk_122M88_clk_wiz_1,
+      I0 => o_clk_100M_clk_wiz_0,
       I1 => '1',
       IGNORE0 => '0',
       IGNORE1 => '1',
-      O => o_clk_122M88,
+      O => o_clk_100M,
       S0 => '1',
       S1 => '0'
     );
 clkout1_buf_en: unisim.vcomponents.BUFH
      port map (
-      I => o_clk_122M88_clk_wiz_1,
-      O => o_clk_122M88_clk_wiz_1_en_clk
+      I => o_clk_100M_clk_wiz_0,
+      O => o_clk_100M_clk_wiz_0_en_clk
     );
 mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
     generic map(
       BANDWIDTH => "OPTIMIZED",
-      CLKFBOUT_MULT_F => 58.125000,
+      CLKFBOUT_MULT_F => 8.000000,
       CLKFBOUT_PHASE => 0.000000,
       CLKFBOUT_USE_FINE_PS => false,
       CLKIN1_PERIOD => 8.000000,
       CLKIN2_PERIOD => 0.000000,
-      CLKOUT0_DIVIDE_F => 5.375000,
+      CLKOUT0_DIVIDE_F => 10.000000,
       CLKOUT0_DUTY_CYCLE => 0.500000,
       CLKOUT0_PHASE => 0.000000,
       CLKOUT0_USE_FINE_PS => false,
@@ -146,7 +146,7 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       CLKOUT6_PHASE => 0.000000,
       CLKOUT6_USE_FINE_PS => false,
       COMPENSATION => "ZHOLD",
-      DIVCLK_DIVIDE => 11,
+      DIVCLK_DIVIDE => 1,
       IS_CLKINSEL_INVERTED => '0',
       IS_PSEN_INVERTED => '0',
       IS_PSINCDEC_INVERTED => '0',
@@ -160,15 +160,15 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       STARTUP_WAIT => false
     )
         port map (
-      CLKFBIN => clkfbout_buf_clk_wiz_1,
-      CLKFBOUT => clkfbout_clk_wiz_1,
+      CLKFBIN => clkfbout_buf_clk_wiz_0,
+      CLKFBOUT => clkfbout_clk_wiz_0,
       CLKFBOUTB => NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED,
       CLKFBSTOPPED => NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED,
       CLKIN1 => i_clk_125M,
       CLKIN2 => '0',
       CLKINSEL => '1',
       CLKINSTOPPED => NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED,
-      CLKOUT0 => o_clk_122M88_clk_wiz_1,
+      CLKOUT0 => o_clk_100M_clk_wiz_0,
       CLKOUT0B => NLW_mmcm_adv_inst_CLKOUT0B_UNCONNECTED,
       CLKOUT1 => NLW_mmcm_adv_inst_CLKOUT1_UNCONNECTED,
       CLKOUT1B => NLW_mmcm_adv_inst_CLKOUT1B_UNCONNECTED,
@@ -207,7 +207,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => \^o_locked\,
@@ -218,7 +218,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(0),
@@ -229,7 +229,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(1),
@@ -240,7 +240,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(2),
@@ -251,7 +251,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(3),
@@ -262,7 +262,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(4),
@@ -273,7 +273,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(5),
@@ -284,7 +284,7 @@ mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
       INIT => '0'
     )
         port map (
-      C => o_clk_122M88_clk_wiz_1_en_clk,
+      C => o_clk_100M_clk_wiz_0_en_clk,
       CE => '1',
       CLR => reset_high,
       D => seq_reg1(6),
@@ -295,23 +295,23 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity clk_wiz_1 is
+entity clk_wiz_0 is
   port (
-    o_clk_122M88 : out STD_LOGIC;
+    o_clk_100M : out STD_LOGIC;
     resetn : in STD_LOGIC;
     o_locked : out STD_LOGIC;
     i_clk_125M : in STD_LOGIC
   );
   attribute NotValidForBitStream : boolean;
-  attribute NotValidForBitStream of clk_wiz_1 : entity is true;
-end clk_wiz_1;
+  attribute NotValidForBitStream of clk_wiz_0 : entity is true;
+end clk_wiz_0;
 
-architecture STRUCTURE of clk_wiz_1 is
+architecture STRUCTURE of clk_wiz_0 is
 begin
-inst: entity work.clk_wiz_1_clk_wiz
+inst: entity work.clk_wiz_0_clk_wiz
      port map (
       i_clk_125M => i_clk_125M,
-      o_clk_122M88 => o_clk_122M88,
+      o_clk_100M => o_clk_100M,
       o_locked => o_locked,
       resetn => resetn
     );

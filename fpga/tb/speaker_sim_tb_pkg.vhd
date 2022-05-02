@@ -1,59 +1,80 @@
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
+-------------------------------------------------------------------------------
+-- file:        speaker_sim_tb_pkg.vhd
+-- description: configuration, types, and imports for top level speaker_sim.vhd simulation
+-- author:      peter phelan
+-- email:       peter@peterphelan.net
+-------------------------------------------------------------------------------
 
-library xil_defaultlib;
--- use xil_defaultlib.tb_utils_pkg.all;
-use xil_defaultlib.codec_driver_pkg.all;
+-------- imports --------------------------------
+------ standard libraray ------
+library ieee;
+-- standard types
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+-- use ieee.std_logic_textio.all;
+-- file io
+-- use std.textio.all;
 
+------ shared tb library ------
+library tb_library;
+use tb_library.tb_utils_pkg.real_array;
+
+------ project design library ------
+-- library speaker_sim_lib;
+
+
+-------- pkg declaration ----------------------------------------------------------------
 package speaker_sim_tb_pkg is
-    type t_adc_word_gen is protected
-        procedure p_init;
-        impure function f_get_adc_word return std_ulogic_vector;
-    end protected t_adc_word_gen;
+    ----- testbench configuration -----
+    -- simulation settings
+    constant COMB_DLY : time := 1ns;
+
+    -- clock and reset
+    constant CLK_125M_PER_ns : time := (1000.0/125.0) * 1ns;
+    constant T_RESET_ns : time := 5.5 * CLK_125M_PER_ns;
+
+    ------ func gen bfm ------
+    -- timing
+    constant FUNC_GEN_FS  : integer := 48000;
+    constant FUNC_GEN_PER : time    := 1e9 ns / FUNC_GEN_FS; 
+
+    -- sample file name and config
+    constant RAMP_FNAME : string := "ess_1s_48khz.txt";
+    constant FUNC_GEN_N_SAMPLES : integer := 48000;
+    constant SAMP_V_MAX : real :=  1.0;
+    constant SAMP_V_MIN : real := -1.0;
+
+    ------ data recorder ------
+    constant REC_FNAME : string := "recorder_48khz.txt";
+    constant RECORDER_N_SAMPLES : integer := 5000;
+    constant RECORDER_START_DLY : time := 350 us;
+
+
+    -- sample file types
+    subtype T_SAMPLE is real range SAMP_V_MIN to SAMP_V_MAX;
+    type T_SAMPLE_ARR is array (integer range 0 to FUNC_GEN_N_SAMPLES-1) of T_SAMPLE;
+    function to_T_SAMPLE_ARR(real_vals : real_array) return T_SAMPLE_ARR;
+
+    ------ package imports ------
+    -- declarations
+
+    -- usages
 
 end package speaker_sim_tb_pkg;
 
+-------- pkg body ----------------------------------------------------------------
 package body speaker_sim_tb_pkg is
-    type t_adc_word_gen is protected body
-        -- variable a_init : std_ulogic;
-        -- variable c_init : std_ulogic;
-        -- variable rand_gen : t_rand_gen;
-
-        procedure p_init is
-        begin
-            -- rand_gen.p_init;
-            a_init := '0';
-            c_init := '0';
-            p_print("adc word gen init");
-        end procedure p_init;
-
-        impure function f_get_adc_word return std_ulogic_vector is
-            variable adc_word : std_ulogic_vector(127 downto 0);
-        begin
-            if not a_init then
-                adc_word := (
-                    127 downto 112 => REG_A_WORD,
-                    111 downto 96 => X"0000",
-                    others => 'Z'
-                );
-                a_init := '1';
-            elsif not c_init then
-                adc_word := (
-                    127 downto 112 => REG_C_WORD,
-                    111 downto 96 => X"0000",
-                    others => 'Z'
-                );
-                c_init := '1';
-            else
-                adc_word := (
-                    127 downto 96 => X"0000_0000",
-                    95  downto 72 => rand_gen.f_rand_sulv(24),
-                    others => 'Z'
-                );                    
-                end if;
-            return adc_word;
-        end function f_get_adc_word;
     
-    end protected body t_adc_word_gen;
+    -------- function definitions --------
+    function to_T_SAMPLE_ARR(
+        real_vals : real_array
+    ) return T_SAMPLE_ARR is
+        variable sample_array : T_SAMPLE_ARR := (others => 0.0);
+    begin
+        for i in sample_array'range loop
+            sample_array(i) := T_SAMPLE(real_vals(i));
+        end loop;
+        return sample_array;
+    end function to_T_SAMPLE_ARR;
+    
 end package body speaker_sim_tb_pkg;

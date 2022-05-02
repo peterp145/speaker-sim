@@ -27,13 +27,15 @@ begin
         variable v_done : std_ulogic;
     begin
         if rising_edge(clk) then
-            if not i_rec.rst_n then
-                r_count <= (others => '0');
-                r_done  <= '0';
-            elsif i_rec.en then
-                v_done  := eq(r_count, g_COUNT_MAX);
-                r_count <= (others => '0') when v_done else r_count + 1;
-                r_done <= v_done;
+            if i_rec.clken then
+                if not i_rec.rst_n then
+                    r_count <= (others => '0');
+                    r_done  <= '0';
+                elsif i_rec.en then
+                    v_done  := eq(r_count, g_COUNT_MAX);
+                    r_count <= (others => '0') when v_done else r_count + 1;
+                    r_done <= v_done;
+                end if;
             end if;
         end if;
     end process proc_count;

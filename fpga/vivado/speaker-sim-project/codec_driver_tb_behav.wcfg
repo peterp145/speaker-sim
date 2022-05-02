@@ -17,22 +17,25 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="82.378 ns"></ZoomStartTime>
-      <ZoomEndTime time="576.646 ns"></ZoomEndTime>
-      <Cursor1Time time="494.268 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000 us"></ZoomStartTime>
+      <ZoomEndTime time="253.447537 us"></ZoomEndTime>
+      <Cursor1Time time="253.447536 us"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="274"></NameColumnWidth>
-      <ValueColumnWidth column_width="125"></ValueColumnWidth>
+      <ValueColumnWidth column_width="113"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="2" />
-   <wvobject type="group" fp_name="group640">
+   <WVObjectSize size="6" />
+   <wvobject type="group" fp_name="group46">
       <obj_property name="label">codec_driver_tb</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject type="logic" fp_name="/codec_driver_tb/clk">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/clken">
+         <obj_property name="ElementShortName">clken</obj_property>
+         <obj_property name="ObjectShortName">clken</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/codec_driver_tb/rst_n">
          <obj_property name="ElementShortName">rst_n</obj_property>
@@ -45,17 +48,6 @@
       <wvobject type="array" fp_name="/codec_driver_tb/dut_rec">
          <obj_property name="ElementShortName">dut_rec</obj_property>
          <obj_property name="ObjectShortName">dut_rec</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject type="array" fp_name="/codec_driver_tb/dut_rec.i">
-            <obj_property name="ElementShortName">.i</obj_property>
-            <obj_property name="ObjectShortName">.i</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/codec_driver_tb/dut_rec.o">
-            <obj_property name="ElementShortName">.o</obj_property>
-            <obj_property name="ObjectShortName">.o</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-         </wvobject>
       </wvobject>
       <wvobject type="array" fp_name="/codec_driver_tb/dut_expected_rec">
          <obj_property name="ElementShortName">dut_expected_rec</obj_property>
@@ -65,26 +57,13 @@
          <obj_property name="ElementShortName">checker_en</obj_property>
          <obj_property name="ObjectShortName">checker_en</obj_property>
       </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/COMB_DLY">
-         <obj_property name="ElementShortName">COMB_DLY</obj_property>
-         <obj_property name="ObjectShortName">COMB_DLY</obj_property>
-      </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/NUM_TESTS">
-         <obj_property name="ElementShortName">NUM_TESTS</obj_property>
-         <obj_property name="ObjectShortName">NUM_TESTS</obj_property>
-      </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/CLK_PER_ns">
-         <obj_property name="ElementShortName">CLK_PER_ns</obj_property>
-         <obj_property name="ObjectShortName">CLK_PER_ns</obj_property>
-      </wvobject>
    </wvobject>
-   <wvobject type="group" fp_name="group641">
+   <wvobject type="group" fp_name="group72">
       <obj_property name="label">dut</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject type="logic" fp_name="/codec_driver_tb/dut/i_clk_12M">
-         <obj_property name="ElementShortName">i_clk_12M</obj_property>
-         <obj_property name="ObjectShortName">i_clk_12M</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/i_clk_122M">
+         <obj_property name="ElementShortName">i_clk_122M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_122M</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/codec_driver_tb/dut/i_rec">
          <obj_property name="ElementShortName">i_rec</obj_property>
@@ -102,24 +81,25 @@
          <obj_property name="ElementShortName">w_next_state</obj_property>
          <obj_property name="ObjectShortName">w_next_state</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk">
-         <obj_property name="ElementShortName">counter_mclk</obj_property>
-         <obj_property name="ObjectShortName">counter_mclk</obj_property>
-         <obj_property name="isExpanded"></obj_property>
-         <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk.i">
-            <obj_property name="ElementShortName">.i</obj_property>
-            <obj_property name="ObjectShortName">.i</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-         </wvobject>
-         <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk.o">
-            <obj_property name="ElementShortName">.o</obj_property>
-            <obj_property name="ObjectShortName">.o</obj_property>
-            <obj_property name="isExpanded"></obj_property>
-         </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/fsm_io">
+         <obj_property name="ElementShortName">fsm_io</obj_property>
+         <obj_property name="ObjectShortName">fsm_io</obj_property>
       </wvobject>
-      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_fs">
-         <obj_property name="ElementShortName">counter_fs</obj_property>
-         <obj_property name="ObjectShortName">counter_fs</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk_i">
+         <obj_property name="ElementShortName">counter_mclk_i</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_mclk_o">
+         <obj_property name="ElementShortName">counter_mclk_o</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_fs_i">
+         <obj_property name="ElementShortName">counter_fs_i</obj_property>
+         <obj_property name="ObjectShortName">counter_fs_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/counter_fs_o">
+         <obj_property name="ElementShortName">counter_fs_o</obj_property>
+         <obj_property name="ObjectShortName">counter_fs_o</obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/codec_driver_tb/dut/srff_first_xfr">
          <obj_property name="ElementShortName">srff_first_xfr</obj_property>
@@ -141,21 +121,9 @@
          <obj_property name="ElementShortName">sreg_dout</obj_property>
          <obj_property name="ObjectShortName">sreg_dout</obj_property>
       </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/dut/w_din_sreg_load_sel">
-         <obj_property name="ElementShortName">w_din_sreg_load_sel</obj_property>
-         <obj_property name="ObjectShortName">w_din_sreg_load_sel</obj_property>
-      </wvobject>
       <wvobject type="array" fp_name="/codec_driver_tb/dut/sreg_din">
          <obj_property name="ElementShortName">sreg_din</obj_property>
          <obj_property name="ObjectShortName">sreg_din</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_din_output_en">
-         <obj_property name="ElementShortName">w_din_output_en</obj_property>
-         <obj_property name="ObjectShortName">w_din_output_en</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_din_loopback_en">
-         <obj_property name="ElementShortName">w_din_loopback_en</obj_property>
-         <obj_property name="ObjectShortName">w_din_loopback_en</obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/codec_driver_tb/dut/w_codec_rst_n">
          <obj_property name="ElementShortName">w_codec_rst_n</obj_property>
@@ -173,17 +141,109 @@
          <obj_property name="ElementShortName">w_codec_din</obj_property>
          <obj_property name="ObjectShortName">w_codec_din</obj_property>
       </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/dut/MCLK_COUNTER_MAX">
-         <obj_property name="ElementShortName">MCLK_COUNTER_MAX</obj_property>
-         <obj_property name="ObjectShortName">MCLK_COUNTER_MAX</obj_property>
+   </wvobject>
+   <wvobject type="group" fp_name="group79">
+      <obj_property name="label">u_mclk_counter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_mclk_counter/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
       </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/dut/FS_COUNTER_MAX">
-         <obj_property name="ElementShortName">FS_COUNTER_MAX</obj_property>
-         <obj_property name="ObjectShortName">FS_COUNTER_MAX</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_mclk_counter/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
       </wvobject>
-      <wvobject type="other" fp_name="/codec_driver_tb/dut/SREG_NUM_BITS">
-         <obj_property name="ElementShortName">SREG_NUM_BITS</obj_property>
-         <obj_property name="ObjectShortName">SREG_NUM_BITS</obj_property>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_mclk_counter/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_mclk_counter/r_count">
+         <obj_property name="ElementShortName">r_count[7:0]</obj_property>
+         <obj_property name="ObjectShortName">r_count[7:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_mclk_counter/r_done">
+         <obj_property name="ElementShortName">r_done</obj_property>
+         <obj_property name="ObjectShortName">r_done</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/u_mclk_counter/g_COUNT_MAX">
+         <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group86">
+      <obj_property name="label">u_fs_counter</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_fs_counter/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_fs_counter/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_fs_counter/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_fs_counter/r_count">
+         <obj_property name="ElementShortName">r_count[3:0]</obj_property>
+         <obj_property name="ObjectShortName">r_count[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_fs_counter/r_done">
+         <obj_property name="ElementShortName">r_done</obj_property>
+         <obj_property name="ObjectShortName">r_done</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/codec_driver_tb/dut/u_fs_counter/g_COUNT_MAX">
+         <obj_property name="ElementShortName">g_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">g_COUNT_MAX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group92">
+      <obj_property name="label">u_sreg_dout</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_sreg_dout/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_dout/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_dout/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_dout/reg">
+         <obj_property name="ElementShortName">reg[15:0]</obj_property>
+         <obj_property name="ObjectShortName">reg[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_sreg_dout/g_RESET_BIT">
+         <obj_property name="ElementShortName">g_RESET_BIT</obj_property>
+         <obj_property name="ObjectShortName">g_RESET_BIT</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group98">
+      <obj_property name="label">u_sreg_din</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_sreg_din/clk">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_din/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_din/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/codec_driver_tb/dut/u_sreg_din/reg">
+         <obj_property name="ElementShortName">reg[15:0]</obj_property>
+         <obj_property name="ObjectShortName">reg[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/codec_driver_tb/dut/u_sreg_din/g_RESET_BIT">
+         <obj_property name="ElementShortName">g_RESET_BIT</obj_property>
+         <obj_property name="ObjectShortName">g_RESET_BIT</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

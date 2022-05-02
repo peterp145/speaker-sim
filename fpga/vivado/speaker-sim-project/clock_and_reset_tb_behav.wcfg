@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="clock_and_reset_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="clock_and_reset_pkg" />
+            <top_module name="clock_and_reset_tb" />
+            <top_module name="counter_pkg" />
+            <top_module name="flip_flops_pkg" />
+            <top_module name="glbl" />
+            <top_module name="registers_pkg" />
+            <top_module name="utils_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="999,994 ps"></ZoomStartTime>
+      <ZoomEndTime time="1,000,007 ps"></ZoomEndTime>
+      <Cursor1Time time="999,999 ps"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="274"></NameColumnWidth>
+      <ValueColumnWidth column_width="105"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="3" />
+   <wvobject type="group" fp_name="group172">
+      <obj_property name="label">clock_and_reset_tb</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/clk_125M">
+         <obj_property name="ElementShortName">clk_125M</obj_property>
+         <obj_property name="ObjectShortName">clk_125M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut_o_rec">
+         <obj_property name="ElementShortName">dut_o_rec</obj_property>
+         <obj_property name="ObjectShortName">dut_o_rec</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/clock_and_reset_tb/CLK_125M_PER_ns">
+         <obj_property name="ElementShortName">CLK_125M_PER_ns</obj_property>
+         <obj_property name="ObjectShortName">CLK_125M_PER_ns</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="divider213" type="divider">
+   </wvobject>
+   <wvobject type="group" fp_name="group234">
+      <obj_property name="label">dut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/i_clk_125M">
+         <obj_property name="ElementShortName">i_clk_125M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_125M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/clk_gen_rst_n">
+         <obj_property name="ElementShortName">clk_gen_rst_n</obj_property>
+         <obj_property name="ObjectShortName">clk_gen_rst_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/clk_100M">
+         <obj_property name="ElementShortName">clk_100M</obj_property>
+         <obj_property name="ObjectShortName">clk_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/r_clk_100M_locked">
+         <obj_property name="ElementShortName">r_clk_100M_locked</obj_property>
+         <obj_property name="ObjectShortName">r_clk_100M_locked</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/clk_122M">
+         <obj_property name="ElementShortName">clk_122M</obj_property>
+         <obj_property name="ObjectShortName">clk_122M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/r_clk_122M_locked">
+         <obj_property name="ElementShortName">r_clk_122M_locked</obj_property>
+         <obj_property name="ObjectShortName">r_clk_122M_locked</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut/clken_100k_counter">
+         <obj_property name="ElementShortName">clken_100k_counter</obj_property>
+         <obj_property name="ObjectShortName">clken_100k_counter</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut/clken_12M_counter">
+         <obj_property name="ElementShortName">clken_12M_counter</obj_property>
+         <obj_property name="ObjectShortName">clken_12M_counter</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut/sreg_clk_100M_rdy">
+         <obj_property name="ElementShortName">sreg_clk_100M_rdy</obj_property>
+         <obj_property name="ObjectShortName">sreg_clk_100M_rdy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/dff_clk_100M_rdy_100M">
+         <obj_property name="ElementShortName">dff_clk_100M_rdy_100M</obj_property>
+         <obj_property name="ObjectShortName">dff_clk_100M_rdy_100M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/clock_and_reset_tb/dut/sreg_clk_122M_rdy">
+         <obj_property name="ElementShortName">sreg_clk_122M_rdy</obj_property>
+         <obj_property name="ObjectShortName">sreg_clk_122M_rdy</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/dff_clk_122M_rdy_122M">
+         <obj_property name="ElementShortName">dff_clk_122M_rdy_122M</obj_property>
+         <obj_property name="ObjectShortName">dff_clk_122M_rdy_122M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/cdcff_clk_122M_rdy_100M">
+         <obj_property name="ElementShortName">cdcff_clk_122M_rdy_100M</obj_property>
+         <obj_property name="ObjectShortName">cdcff_clk_122M_rdy_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/dff_sys_rst_n_100M">
+         <obj_property name="ElementShortName">dff_sys_rst_n_100M</obj_property>
+         <obj_property name="ObjectShortName">dff_sys_rst_n_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/cdcff_clk_100M_rdy_122M">
+         <obj_property name="ElementShortName">cdcff_clk_100M_rdy_122M</obj_property>
+         <obj_property name="ObjectShortName">cdcff_clk_100M_rdy_122M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/clock_and_reset_tb/dut/dff_sys_rst_n_122M">
+         <obj_property name="ElementShortName">dff_sys_rst_n_122M</obj_property>
+         <obj_property name="ObjectShortName">dff_sys_rst_n_122M</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/clock_and_reset_tb/dut/CLKEN_100K_COUNT_MAX">
+         <obj_property name="ElementShortName">CLKEN_100K_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">CLKEN_100K_COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/clock_and_reset_tb/dut/CLKEN_12M_COUNT_MAX">
+         <obj_property name="ElementShortName">CLKEN_12M_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">CLKEN_12M_COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/clock_and_reset_tb/dut/READY_SREG_NUM_BITS">
+         <obj_property name="ElementShortName">READY_SREG_NUM_BITS</obj_property>
+         <obj_property name="ObjectShortName">READY_SREG_NUM_BITS</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

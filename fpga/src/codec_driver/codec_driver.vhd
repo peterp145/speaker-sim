@@ -13,13 +13,18 @@ use speaker_sim_lib.codec_driver_pkg.all;
 
 entity codec_driver is
     port (
-        i_clk_122M88 : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
-        i_rec     : in  t_codec_driver_i_rec; -- input record
-        o_rec     : out t_codec_driver_o_rec  -- output record
+        i_clk_122M : in  std_ulogic; -- 12.288MHz clock for logic and codec mclk
+        i_rec      : in  t_codec_driver_i_rec; -- input record
+        o_rec      : out t_codec_driver_o_rec  -- output record
     );
 end entity codec_driver;
 
 architecture rtl of codec_driver is
+
+    ------ mclk ------
+    constant MCLK_GEN_COUNT_MAX : integer := 9;
+    signal counter_mclk_gen_i : t_counter_i_rec;
+    signal counter_mclk_gen_o : t_counter_o_rec(count(num_bits(MCLK_GEN_COUNT_MAX)-1 downto 0));
 
     ----- FSM -----
     type t_state is (
@@ -51,19 +56,15 @@ architecture rtl of codec_driver is
     signal counter_mclk_i : t_counter_i_rec;
     signal counter_mclk_o : t_counter_o_rec(count(num_bits(MCLK_COUNTER_MAX)-1 downto 0));
     
-    constant FS_COUNTER_MAX : integer := 11;
+    constant FS_COUNTER_MAX : integer := 12;
     signal counter_fs_i : t_counter_i_rec;
     signal counter_fs_o : t_counter_o_rec(count(num_bits(FS_COUNTER_MAX)-1 downto 0));
 
     -- fsm init regs
     signal srff_first_xfr   : t_srff_rec;
-    -- signal srff_first_xfr   : t_srff_rec_o;
     signal srff_word_a_init : t_srff_rec;
-    -- signal srff_word_a_init : t_srff_rec_o;
     signal srff_word_c_init : t_srff_rec;
-    -- signal srff_word_c_init : t_srff_rec_o;
     signal srff_mode_24b    : t_srff_rec;
-    -- signal srff_mode_24b    : t_srff_rec_o;
 
     -- dout sreg
     constant SREG_NUM_BITS : integer := 16;
@@ -79,7 +80,7 @@ architecture rtl of codec_driver is
     signal sreg_din : t_sreg16_rec;
 
     -- codec outputs
-    signal w_codec_rst_n    : std_ulogic;
+    signal w_codec_rst_n    : std_ulogic := '0';
     signal w_codec_dclk     : std_ulogic;
     signal w_codec_dfs      : std_ulogic;
     signal w_codec_din      : std_ulogic;
@@ -88,9 +89,22 @@ begin
     ----------------
     -- controller --
     ----------------
+    counter_mclk_gen_i.rst_n <= '1';
+    counter_mclk_gen_i.clken <= '1';
+    counter_mclk_gen_i.en <= '1';
+    u_mclk_gen_counter :  entity shared_lib.counter 
+        generic map (MCLK_GEN_COUNT_MAX)
+        port map(i_clk_122M, counter_mclk_gen_i, counter_mclk_gen_o);
 
     -- FSM r_state reg
-    r_state <= sRESET when not i_rec.rst_n else w_next_state when rising_edge(i_clk_12M);
+    proc_state : process(i_clk_122M)
+    begin
+        if rising_edge(i_clk_122M) then
+            if i_rec.clken_12M then
+                r_state <= sRESET when not i_rec.rst_n else w_next_state;
+            end if;
+        end if;
+    end process proc_state;
 
    -- next r_state and control logic
     proc_fsm: process(all)
@@ -121,13 +135,14 @@ begin
             when sRESET =>
                 counter_mclk_i.en <= '0';
                 w_codec_dclk    <= '0';
+                w_codec_rst_n   <= '0';
                 w_next_state <= sCODEC_RESET_0;
 
             when sCODEC_RESET_0 =>
                 w_codec_rst_n   <= '0';
                 w_codec_dclk    <= '0';
                 fsm_io.din_output_en <= '1';
-                if counter_mclk_o.count = 8 then
+                if counter_mclk_o.count = 9 then
                     counter_mclk_i.en <= '0';
                     w_next_state <= sCODEC_RESET_1;
                 else
@@ -149,7 +164,7 @@ begin
                 if counter_mclk_o.count = 255 then
                     counter_mclk_i.en <= '0';
                     counter_fs_i.en <= '1';
-                    if counter_fs_o.count = 11 then
+                    if counter_fs_o.count = 12 then
                         w_next_state <= sXFR_START_0;
                     else
                         w_next_state <= sCODEC_RESET_2;
@@ -250,43 +265,45 @@ begin
 
     -- mclk counter
     counter_mclk_i.rst_n <= counter_mclk_i.en;
-    u_mclk_counter : counter 
+    counter_mclk_i.clken <= i_rec.clken_12M;
+    u_mclk_counter :  entity shared_lib.counter 
         generic map (MCLK_COUNTER_MAX)
-        port map(i_clk_12M, counter_mclk_i, counter_mclk_o);
-
-    
+        port map(i_clk_122M, counter_mclk_i, counter_mclk_o);
     
     -- fs counter
     counter_fs_i.rst_n <= w_codec_rst_n;
-    u_fs_counter : counter 
+    counter_fs_i.clken <= i_rec.clken_12M;
+    u_fs_counter :  entity shared_lib.counter 
         generic map (FS_COUNTER_MAX)
-        port map(i_clk_12M, counter_fs_i, counter_fs_o);
+        port map(i_clk_122M, counter_fs_i, counter_fs_o);
 
     -- init tracking regs
     srff_first_xfr.i.r_n <= w_codec_rst_n;
-    u_srff_first_xfr : srff
-        port map(i_clk_12M, srff_first_xfr.i, srff_first_xfr.o);
+    u_srff_first_xfr : entity shared_lib.srff
+        port map(i_clk_122M, srff_first_xfr.i, srff_first_xfr.o);
         
     srff_word_a_init.i.r_n <= w_codec_rst_n;
-    u_srff_word_a_init: srff
-        port map(i_clk_12M, srff_word_a_init.i, srff_word_a_init.o);
+    u_srff_word_a_init : entity shared_lib.srff
+        port map(i_clk_122M, srff_word_a_init.i, srff_word_a_init.o);
         
     srff_word_c_init.i.r_n <= w_codec_rst_n;
-    u_srff_word_c_init : srff
-        port map(i_clk_12M, srff_word_c_init.i, srff_word_c_init.o);
+    u_srff_word_c_init : entity shared_lib.srff
+        port map(i_clk_122M, srff_word_c_init.i, srff_word_c_init.o);
         --------------
     srff_mode_24b.i.r_n <= w_codec_rst_n;
-    u_srff_mode_24b : srff
-        port map(i_clk_12M, srff_mode_24b.i, srff_mode_24b.o);
+    u_srff_mode_24b : entity shared_lib.srff
+        port map(i_clk_122M, srff_mode_24b.i, srff_mode_24b.o);
     -- datapath --
     --------------
 
     -- codec dout shift register
+    sreg_dout.i.clken       <= i_rec.clken_12M;
     sreg_dout.i.load_word   <= (others => '0');
     sreg_dout.i.load_en     <= '0';
     sreg_dout.i.shift_bit   <= i_rec.codec_dout;
     sreg_dout.i.rst_n       <= w_codec_rst_n;
-    u_sreg_dout : sreg port map (i_clk_12M, sreg_dout.i, sreg_dout.o);
+    u_sreg_dout : entity shared_lib.sreg
+        port map (i_clk_122M, sreg_dout.i, sreg_dout.o);
 
     -- din word mux
     with fsm_io.din_sreg_load_sel select sreg_din.i.load_word <= 
@@ -297,30 +314,40 @@ begin
         (others => '0')                     when others;
 
     -- codec din shift register
+    sreg_din.i.clken     <= i_rec.clken_12M;
     sreg_din.i.shift_bit <= '0';
     sreg_din.i.rst_n     <= w_codec_rst_n;
-    u_sreg_din : sreg
+    u_sreg_din :  entity shared_lib.sreg
         generic map ('1')
-        port map (i_clk_12M, sreg_din.i, sreg_din.o);
+        port map (i_clk_122M, sreg_din.i, sreg_din.o);
+    -- sreg_din_out <= sreg_din.o.word(15);
 
     -- loopback mux
-    proc_loopback_mux : process(all)
-    begin
-        if not fsm_io.din_output_en then
-            w_codec_din <=  'Z';
-        elsif fsm_io.din_loopback_en then 
-            w_codec_din <=  i_rec.codec_dout;
-        else
-            w_codec_din <= sreg_din.o.word(15);
-        end if;
-    end process;
-    
-    -- output assignment
+    w_codec_din <=  'Z' when not fsm_io.din_output_en else
+                    i_rec.codec_dout when fsm_io.din_loopback_en else
+                    sreg_din.o.word(15);
 
-    o_rec.codec_mclk    <= i_clk_12M;
-    o_rec.codec_rst_n   <= w_codec_rst_n;
-    o_rec.codec_dclk    <= w_codec_dclk;
-    o_rec.codec_dfs     <= w_codec_dfs;
-    o_rec.codec_din     <= w_codec_din;
+    -- proc_loopback_mux : process(all)
+    -- begin
+    --     if not fsm_io.din_output_en then
+    --         w_codec_din <=  'Z';
+    --     elsif fsm_io.din_loopback_en then 
+    --         w_codec_din <=  i_rec.codec_dout;
+    --     else
+    --         w_codec_din <= sreg_din_out;
+    --     end if;
+    -- end process;
+    
+    -- output assignment and registers
+    output_proc : process(i_clk_122M)
+    begin
+        if rising_edge(i_clk_122M) then 
+            o_rec.codec_mclk    <= counter_mclk_gen_o.count ?>2 and counter_mclk_gen_o.count ?<8;
+            o_rec.codec_rst_n   <= w_codec_rst_n;
+            o_rec.codec_dclk    <= w_codec_dclk;
+            o_rec.codec_dfs     <= w_codec_dfs;
+            o_rec.codec_din     <= w_codec_din;
+        end if;
+    end process output_proc;
     
 end architecture rtl;

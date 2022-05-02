@@ -1,0 +1,52 @@
+srcscan starts
+=============== Using vdb files for VHDL std libs ===========
+INFO: The vhdl library search path for library "std" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/std_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "synopsys" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/synopsys_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "ieee" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/ieee_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "unimacro" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/unimacro_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "unisim" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/unisim_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "vl" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/vl_2008" (VHDL-1505)
+INFO: The vhdl library search path for library "xpm" is now "/tools/Xilinx/Vivado/2021.2/data/precomp_hsv/vhdl/xpm_2008" (VHDL-1505)
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/clock_and_reset/clock_and_reset_pkg.vhd" into library speaker_sim_lib (VHDL-9003)
+INFO: analyzing package 'clock_and_reset_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/codec_driver/codec_driver_pkg.vhd" into library speaker_sim_lib (VHDL-9003)
+INFO: analyzing package 'codec_driver_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/shared_lib/counter_pkg.vhd" into library shared_lib (VHDL-9003)
+INFO: analyzing package 'counter_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/shared_lib/flip_flops_pkg.vhd" into library shared_lib (VHDL-9003)
+INFO: analyzing package 'flip_flops_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/tb/tb_library/func_gen_bfm_pkg.vhd" into library tb_library (VHDL-9003)
+INFO: analyzing package 'func_gen_bfm_pkg'
+
+INFO: analyzing package body 'func_gen_bfm_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/shared_lib/registers_pkg.vhd" into library shared_lib (VHDL-9003)
+INFO: analyzing package 'registers_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/speaker_sim_pkg.vhd" into library speaker_sim_lib (VHDL-9003)
+INFO: analyzing package 'speaker_sim_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/tb/tb_library/tb_utils_pkg.vhd" into library tb_library (VHDL-9003)
+INFO: analyzing package 'tb_utils_pkg'
+
+INFO: analyzing package body 'tb_utils_pkg'
+
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/tb/speaker_sim_tb_pkg.vhd" into library speaker_sim_tb_lib (VHDL-9003)
+INFO: analyzing package 'speaker_sim_tb_pkg'
+
+/home/peter/speaker-sim/fpga/tb/speaker_sim_tb_pkg.vhd(51): ERROR: 't_samples' is not declared (VHDL-1241)
+/home/peter/speaker-sim/fpga/tb/speaker_sim_tb_pkg.vhd(51): ERROR: 't_samples_arr' is not declared (VHDL-1241)
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/tb/speaker_sim_tb.vhd" into library speaker_sim_tb_lib (VHDL-9003)
+INFO: analyzing entity 'speaker_sim_tb' (VHDL-1012)
+INFO: analyzing architecture 'tb' of entity 'speaker_sim_tb' (VHDL-9006)
+-- Analyzing VHDL file "/home/peter/speaker-sim/fpga/src/shared_lib/utils_pkg.vhd" into library shared_lib (VHDL-9003)
+INFO: analyzing package 'utils_pkg'
+
+INFO: analyzing package body 'utils_pkg'
+
+/home/peter/speaker-sim/fpga/tb/tb_library/func_gen_bfm_pkg.vhd(8): ERROR: formal 't_samples' has no actual or default value (VHDL-1081)
+/home/peter/speaker-sim/fpga/tb/tb_library/func_gen_bfm_pkg.vhd(9): ERROR: formal 't_samples_arr' has no actual or default value (VHDL-1081)
