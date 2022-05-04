@@ -5,6 +5,7 @@ use IEEE.numeric_std.all;
 library shared_lib;
 use shared_lib.utils_pkg.all;
 use shared_lib.counter_pkg.all;
+use shared_lib.registers_pkg.all;
 
 library speaker_sim_lib;
 use speaker_sim_lib.clock_and_reset_pkg.all;
@@ -43,12 +44,16 @@ architecture rtl of speaker_sim is
 
     -- leds
     constant COUNT_MAX : integer := 49999;
-    signal r_led        :   std_logic := '0';
-    signal counter_led : t_counter_rec(o(count(num_bits(COUNT_MAX)-1 downto 0)));
+    signal r_leds      : std_ulogic_vector(3 downto 0) := X"0";
+    signal counter_led_i : t_counter_i_rec := (others => '0');
+    signal counter_led_o : t_counter_o_rec(count(num_bits(COUNT_MAX)-1 downto 0));
 
     -- audio codec
     constant DAC_ZEROS : std_ulogic_vector(23 downto 0) := (others => '0');
-    signal codec_driver_rec : t_codec_driver_rec;
+    signal codec_driver_i : t_codec_driver_i_rec := (dsp_dac_word => (others => '0'), others => '0');
+    signal codec_driver_o : t_codec_driver_o_rec;
+
+    -- fir filter
     
 begin
 
@@ -64,37 +69,59 @@ begin
     sys_rst_n_122M  <= clock_and_reset_o.sys_rst_n_122M;
 
     ----- status leds -----
-    counter_led.i.clken <= clken_100M_100k;
-    counter_led.i.en    <= '1';
-    counter_led.i.rst_n <= '1';
+    counter_led_i.clken <= clken_100M_100k;
+    counter_led_i.en    <= '1';
+    counter_led_i.rst_n <= '1';
     u_led_counter: entity shared_lib.counter
         generic map(COUNT_MAX)
-        port map(clk_100M, counter_led.i, counter_led.o);
+        port map(clk_100M, counter_led_i, counter_led_o);
 
     process(clk_100M)
     begin
         if rising_edge(clk_100M)  then
             if not sys_rst_n_100M  then
-                r_led <= '0';
-            elsif counter_led.o.done and clken_100M_100k then
-                r_led <= not r_led;
+                r_leds(0) <= '0';
+            elsif counter_led_o.done and clken_100M_100k then
+                r_leds(0) <= not r_leds(0);
             end if;
         end if;
     end process;
 
     ----- audio codec driver -----
-    codec_driver_rec.i.rst_n <= sys_rst_n_122M;
-    codec_driver_rec.i.clken_12M <= clken_122M_12M;
-    codec_driver_rec.i.codec_dout <= i_codec_dout;
+    codec_driver_i.rst_n <= sys_rst_n_122M;
+    codec_driver_i.clken_12M <= clken_122M_12M;
+    codec_driver_i.codec_dout <= i_codec_dout;
     u_codec_driver : entity codec_driver
-    port map(clk_122M, codec_driver_rec.i, codec_driver_rec.o);
+        port map(clk_122M, codec_driver_i, codec_driver_o);
+
+    ------ fir filter implementation ------
+    u_fir_proc : process(clk_122M)
+        constant DELAY : integer := 2566;
+
+        type t_sreg_bit is array (integer range 0 to DELAY-1) of std_ulogic;
+        variable v_sreg_valid : t_sreg_bit := (others => '0');
+
+        type t_sreg_word is array (integer range 0 to DELAY-1) of t_codec_data_word;
+        variable v_sreg_word : t_sreg_word := (others => (others => '0'));
+    begin
+        if rising_edge(clk_122M) then
+            codec_driver_i.dsp_dac_word <= v_sreg_word(DELAY-1);
+            codec_driver_i.dsp_dac_word_valid <= v_sreg_valid(DELAY-1);
+            for i in DELAY-1 downto 1 loop
+                v_sreg_word(i) := v_sreg_word(i-1);
+                v_sreg_valid(i)  := v_sreg_valid(i-1);
+            end loop;
+            v_sreg_word(0) := codec_driver_o.dsp_adc_word;
+            v_sreg_valid(0) := codec_driver_o.dsp_adc_word_valid;
+        end if;
+    end process u_fir_proc;
 
     -- output buffers
-    o_codec_mclk    <= codec_driver_rec.o.codec_mclk;
-    o_codec_rst_n   <= codec_driver_rec.o.codec_rst_n;
-    o_codec_dclk    <= codec_driver_rec.o.codec_dclk;
-    o_codec_dfs     <= codec_driver_rec.o.codec_dfs;
-    o_codec_din     <= codec_driver_rec.o.codec_din;
-    o_leds          <= (0 => r_led, others => '0');
+    o_codec_mclk    <= codec_driver_o.codec_mclk;
+    o_codec_rst_n   <= codec_driver_o.codec_rst_n;
+    o_codec_dclk    <= codec_driver_o.codec_dclk;
+    o_codec_dfs     <= codec_driver_o.codec_dfs;
+    o_codec_din     <= codec_driver_o.codec_din;
+    o_leds          <= r_leds;
     
 end architecture rtl;

@@ -15,14 +15,16 @@ package flip_flops_pkg is
         q : std_ulogic;
     end record t_dff_rec;
 
-    -- component dff is
-    -- port (
-    --     i_clk : in  std_ulogic; -- clock
-    --     i_d   : in  std_ulogic; -- input
-    --     o_q   : out std_ulogic  -- output
-    -- );
-    -- end component dff;
+    ------ dff_clken ------
+    type t_dff_clken_i_rec is record
+        clken : std_ulogic;
+        d     : std_ulogic;
+    end record t_dff_clken_i_rec;
     
+    type t_dff_clken_o_rec is record
+        q : std_ulogic;
+    end record t_dff_clken_o_rec;
+
     ----- sr_ff -----
     -- set/reset flip flop clocked on rising edge
     -- reset active low and has precedence
@@ -34,40 +36,5 @@ package flip_flops_pkg is
     type t_srff_o_rec is record
         q : std_ulogic; -- output
     end record t_srff_o_rec;
-
-    type t_srff_rec is record
-        i : t_srff_i_rec;
-        o : t_srff_o_rec;
-    end record;
-    
-    -- component srff is
-    -- port (
-    --     clk   : in  std_ulogic;   -- clock
-    --     i_rec : in  t_srff_i_rec; -- input record
-    --     o_rec : out t_srff_o_rec  -- output record
-    -- );
-    -- end component srff;
-        
-    ----- cdc -----
-    type t_cdcffs_i_rec is record
-        d   : std_ulogic; -- set input
-    end record t_cdcffs_i_rec;
-
-    type t_cdcffs_o_rec is record
-        q : std_ulogic; -- output
-    end record t_cdcffs_o_rec;
-
-    type t_cdcffs_rec is record
-        i : t_cdcffs_i_rec;
-        o : t_cdcffs_o_rec;
-    end record t_cdcffs_rec;
-
-    -- component cdcffs is
-    -- port (
-    --     i_clk : in  std_ulogic; -- clock
-    --     i_d   : in  std_ulogic; -- input
-    --     o_q   : out std_ulogic  -- output
-    -- );
-    -- end component cdcffs;
 
 end package flip_flops_pkg;

@@ -22,7 +22,7 @@ use speaker_sim_tb_lib.speaker_sim_tb_pkg.all;
 
 -- project design libraries
 library speaker_sim_lib;
-use speaker_sim_lib.speaker_sim;
+-- use speaker_sim_lib.speaker_sim;
 
 entity speaker_sim_tb is
 end entity speaker_sim_tb;
@@ -51,6 +51,24 @@ architecture tb of speaker_sim_tb is
     signal  codec_dout  : std_ulogic := 'Z';
     
     signal  leds : std_ulogic_vector(3 downto 0);
+
+    component speaker_sim is
+        port (
+            -- system clock input
+            i_clk_125M  : in    std_ulogic;
+    
+            -- audio codec
+            o_codec_mclk    :   out std_ulogic;  -- codec master clock
+            o_codec_rst_n   :   out std_ulogic;  -- codec reset signal
+            o_codec_dclk    :   out std_ulogic;  -- codec serial clock
+            o_codec_dfs     :   out std_ulogic;  -- codec dfs
+            o_codec_din     :   out std_ulogic;  -- serial data to codec
+            i_codec_dout    :   in  std_ulogic;  -- serial data from codec
+    
+            -- status leds
+            o_leds      : out   std_logic_vector(3 downto 0)
+        );
+    end component speaker_sim;
     
 begin
     -- clock
@@ -129,10 +147,9 @@ begin
 
     -- response checkers
 
-    -- codec driver bfm
     -- dut
-    dut : entity speaker_sim
-    port map(
+    dut : speaker_sim
+    port map (
         i_clk_125M    => clk_125M,
         o_codec_mclk  => codec_bfm_i_rec.codec_mclk,
         o_codec_rst_n => codec_bfm_i_rec.codec_rst_n,

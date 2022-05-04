@@ -30,39 +30,52 @@ architecture rtl of clock_and_reset is
 
     -- constant clk_gen_rstn : std_logic := '1';
     signal clk_gen_rst_n : std_ulogic := '1';
-    signal clk_100M, r_clk_100M_locked : std_ulogic;    -- 100MHz MMCM
-    signal clk_122M, r_clk_122M_locked : std_ulogic;    -- 122.88MHz MMCM
+    signal clk_100M, r_clk_100M_locked : std_ulogic := '0';    -- 100MHz MMCM
+    signal clk_122M, r_clk_122M_locked : std_ulogic := '0';    -- 122.88MHz MMCM
     
     -- clock enable counters
-    constant CLKEN_100K_COUNT_MAX : integer := 999;
-    signal clken_100k_counter     : t_counter_rec(o(count(num_bits(CLKEN_100K_COUNT_MAX)-1 downto 0)));
-    constant CLKEN_12M_COUNT_MAX  : integer := 9;
-    signal clken_12M_counter      : t_counter_rec(o(count(num_bits(CLKEN_12M_COUNT_MAX)-1  downto 0)));
+    constant CLKEN_100K_COUNT_MAX :  integer := 999;
+    signal clken_100k_counter_i : t_counter_i_rec
+        := ('0', '0', '0');
+    signal clken_100k_counter_o : t_counter_o_rec (count(num_bits(CLKEN_100K_COUNT_MAX)-1 downto 0))
+        := ((others => '0'), '0');
+        
+    constant CLKEN_12M_COUNT_MAX  :  integer := 9;
+    signal clken_12M_counter_i : t_counter_i_rec
+        := ('0', '0', '0');
+    signal clken_12M_counter_o : t_counter_o_rec (count(num_bits(CLKEN_12M_COUNT_MAX)-1 downto 0))
+        := ((others => '0'), '0');
 
     ----- clock ready -----
     constant READY_SREG_NUM_BITS : integer := 10;
     subtype t_sreg_word is std_ulogic_vector(READY_SREG_NUM_BITS-1 downto 0);
-    subtype t_sreg_ready_rec is t_sreg_rec(              -- CLK100M reset sreg
-        i( load_word(t_sreg_word'range) ), 
-        o( word(t_sreg_word'range) )
-    ); 
+    subtype t_sreg_ready_i_rec is t_sreg_i_rec( load_word(t_sreg_word'range) );
+    subtype t_sreg_ready_o_rec is t_sreg_o_rec( word(t_sreg_word'range) ); 
 
     -- 100MHz ready
-    signal sreg_clk_100M_rdy  : t_sreg_ready_rec;
-    signal dff_clk_100M_rdy_100M : std_ulogic;    -- CLK100M ready, system clock domain
+    signal sreg_clk_100M_rdy_i : t_sreg_ready_i_rec
+        := ( load_word => (others => '0'), others => '0' );
+    signal sreg_clk_100M_rdy_o : t_sreg_ready_o_rec
+        := ( word => (others => '0'));
+
+    signal dff_clk_100M_rdy_100M : t_dff_rec := (others => '0');    -- CLK100M ready, system clock domain
         
     -- 122MHz ready
-    signal sreg_clk_122M_rdy  : t_sreg_ready_rec; -- CLK122M reset sreg
-    signal dff_clk_122M_rdy_122M   : std_ulogic;    -- CLK12M ready, system clock domain
+    signal sreg_clk_122M_rdy_i : t_sreg_ready_i_rec
+        := ( load_word => (others => '0'), others => '0' );
+    signal sreg_clk_122M_rdy_o : t_sreg_ready_o_rec
+        := ( word => (others => '0'));
+
+    signal dff_clk_122M_rdy_122M : t_dff_rec := (others => '0');    -- CLK12M ready, system clock domain
     
     ----- system reset generation -----
     -- CLK100M domain
-    signal cdcff_clk_122M_rdy_100M    : std_ulogic; -- 12M ready signal clock domain crossing
-    signal dff_sys_rst_n_100M : std_ulogic;    -- system reset generation, 100M
+    signal cdcff_clk_122M_rdy_100M    : t_dff_rec := (others => '0'); -- 12M ready signal clock domain crossing
+    signal dff_sys_rst_n_100M : t_dff_rec := (others => '0');    -- system reset generation, 100M
     
     -- CLK12M domain
-    signal cdcff_clk_100M_rdy_122M  : std_ulogic; -- 12M ready signal clock domain crossing
-    signal dff_sys_rst_n_122M    : std_ulogic;    -- system reset generation, 100M
+    signal cdcff_clk_100M_rdy_122M  : t_dff_rec; -- 12M ready signal clock domain crossing
+    signal dff_sys_rst_n_122M : t_dff_rec := (others => '0');    -- system reset generation, 100M
     
 begin
     ----- clock and reset generation -----
@@ -92,74 +105,104 @@ begin
     -- ensures both clocks and reset input are stable
     
     -- 100M clock ready
-    sreg_clk_100M_rdy.i.clken        <= '1';
-    sreg_clk_100M_rdy.i.load_word    <= (others => '0');
-    sreg_clk_100M_rdy.i.load_en      <= '0';
-    sreg_clk_100M_rdy.i.shift_en     <= '1';
-    sreg_clk_100M_rdy.i.rst_n        <= '1';
-    sreg_clk_100M_rdy.i.shift_bit    <= r_clk_100M_locked;
+    sreg_clk_100M_rdy_i.clken        <= '1';
+    sreg_clk_100M_rdy_i.load_word    <= (others => '0');
+    sreg_clk_100M_rdy_i.load_en      <= '0';
+    sreg_clk_100M_rdy_i.shift_en     <= '1';
+    sreg_clk_100M_rdy_i.rst_n        <= '1';
+    sreg_clk_100M_rdy_i.shift_bit    <= r_clk_100M_locked;
     
     u_sreg_clk_100M_rdy : entity shared_lib.sreg
-    port map (clk_100M, sreg_clk_100M_rdy.i, sreg_clk_100M_rdy.o);
+    port map (
+        clk_100M,
+        sreg_clk_100M_rdy_i,
+        sreg_clk_100M_rdy_o
+    );
     
+    dff_clk_100M_rdy_100M.d <= is_ones(sreg_clk_100M_rdy_o.word);
     u_dff_clk_100M_rdy_100M : entity shared_lib.dff
-    port map (clk_100M, is_ones(sreg_clk_100M_rdy.o.word), dff_clk_100M_rdy_100M);
+    port map (
+        clk_100M,
+        dff_clk_100M_rdy_100M.d,
+        dff_clk_100M_rdy_100M.q
+    );
         
     -- 122M clock ready
-    sreg_clk_122M_rdy.i.clken        <= '1';
-    sreg_clk_122M_rdy.i.load_word     <= (others => '0');
-    sreg_clk_122M_rdy.i.load_en       <= '0';
-    sreg_clk_122M_rdy.i.shift_en      <= '1';
-    sreg_clk_122M_rdy.i.rst_n         <= '1';
-    sreg_clk_122M_rdy.i.shift_bit     <= r_clk_122M_locked;
+    sreg_clk_122M_rdy_i.clken        <= '1';
+    sreg_clk_122M_rdy_i.load_word     <= (others => '0');
+    sreg_clk_122M_rdy_i.load_en       <= '0';
+    sreg_clk_122M_rdy_i.shift_en      <= '1';
+    sreg_clk_122M_rdy_i.rst_n         <= '1';
+    sreg_clk_122M_rdy_i.shift_bit     <= r_clk_122M_locked;
     
     u_sreg_clk_122M_rdy : entity shared_lib.sreg
-    port map (clk_122M, sreg_clk_122M_rdy.i, sreg_clk_122M_rdy.o);
+    port map (
+        clk_122M,
+        sreg_clk_122M_rdy_i,
+        sreg_clk_122M_rdy_o
+    );
     
+    dff_clk_122M_rdy_122M.d <= is_ones(sreg_clk_122M_rdy_o.word);
     u_dff_clk_122M_rdy_122M : entity shared_lib.dff
-        port map (clk_122M, is_ones(sreg_clk_122M_rdy.o.word), dff_clk_122M_rdy_122M);
+    port map (
+        clk_122M,
+        dff_clk_122M_rdy_122M.d,
+        dff_clk_122M_rdy_122M.q
+    );
     
     ----- system resets -----
     -- 100M
+    cdcff_clk_122M_rdy_100M.d <= dff_clk_122M_rdy_122M.q;
     u_cdcffs_clk_122M_rdy_122to100M : entity shared_lib.cdcffs
-    port map (clk_100M, dff_clk_122M_rdy_122M, cdcff_clk_122M_rdy_100M);
+    port map (
+        clk_100M,
+        cdcff_clk_122M_rdy_100M.d,
+        cdcff_clk_122M_rdy_100M.q
+    );
 
     u_dff_sys_rst_n_100M : entity shared_lib.dff
     port map (
         clk_100M,
-        dff_clk_100M_rdy_100M and cdcff_clk_122M_rdy_100M,
-        dff_sys_rst_n_100M)
-    ;
+        dff_clk_100M_rdy_100M.q and cdcff_clk_122M_rdy_100M.q,
+        dff_sys_rst_n_100M.q
+    );
 
     -- 122M reset
+    cdcff_clk_100M_rdy_122M.d <= dff_clk_100M_rdy_100M.q;
     u_cdcffs_clk_100_rdy_100to12M : entity shared_lib.cdcffs
-        port map (clk_122M, dff_clk_100M_rdy_100M, cdcff_clk_100M_rdy_122M);
+    port map (
+        clk_122M,
+        cdcff_clk_100M_rdy_122M.d,
+        cdcff_clk_100M_rdy_122M.q
+    );
 
+    dff_sys_rst_n_122M.d <= dff_clk_122M_rdy_122M.q and cdcff_clk_100M_rdy_122M.q;
     u_dff_sys_rst_n_12M : entity shared_lib.dff
-        port map (
-            clk_122M,
-            dff_clk_122M_rdy_122M and cdcff_clk_100M_rdy_122M,
-            dff_sys_rst_n_122M);
+    port map (
+        clk_122M,
+        dff_sys_rst_n_122M.d,
+        dff_sys_rst_n_122M.q
+    );
 
     ----- clock enables -----
     -- counter for creating 100KHz clock enable in 100M domain
-    clken_100k_counter.i <= ('1', dff_sys_rst_n_100M, '1');
+    clken_100k_counter_i <= ('1', dff_sys_rst_n_100M.q, '1');
     u_clken_100k_counter : entity shared_lib.counter 
     generic map (CLKEN_100K_COUNT_MAX)
-    port map(clk_100M, clken_100k_counter.i, clken_100k_counter.o);
+    port map(clk_100M, clken_100k_counter_i, clken_100k_counter_o);
 
     -- counter for creating 12M clock enable in 122M domain
-    clken_12M_counter.i <= ('1', dff_sys_rst_n_122M, '1');
+    clken_12M_counter_i <= ('1', dff_sys_rst_n_122M.q, '1');
     u_clken_12M_counter : entity shared_lib.counter 
     generic map (CLKEN_12M_COUNT_MAX)
-    port map(clk_122M, clken_12M_counter.i, clken_12M_counter.o);
+    port map(clk_122M, clken_12M_counter_i, clken_12M_counter_o);
 
     -- ----- output drivers -----
     o_rec.clk_100M        <= clk_100M;
     o_rec.clk_122M        <= clk_122M;
-    o_rec.clken_100M_100k <= clken_100k_counter.o.done;
-    o_rec.clken_122M_12M  <= clken_12M_counter.o.done;
-    o_rec.sys_rst_n_100M  <= dff_sys_rst_n_100M;
-    o_rec.sys_rst_n_122M  <= dff_sys_rst_n_122M;
+    o_rec.clken_100M_100k <= clken_100k_counter_o.done;
+    o_rec.clken_122M_12M  <= clken_12M_counter_o.done;
+    o_rec.sys_rst_n_100M  <= dff_sys_rst_n_100M.q;
+    o_rec.sys_rst_n_122M  <= dff_sys_rst_n_122M.q;
     
 end architecture rtl;

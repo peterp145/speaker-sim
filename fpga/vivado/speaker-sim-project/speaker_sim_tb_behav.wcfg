@@ -20,13 +20,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="687,976.742 ns"></ZoomStartTime>
-      <ZoomEndTime time="688,572.743 ns"></ZoomEndTime>
-      <Cursor1Time time="688,473.409 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000000000 ms"></ZoomStartTime>
+      <ZoomEndTime time="598.000000001 ms"></ZoomEndTime>
+      <Cursor1Time time="10.611393341 ms"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="274"></NameColumnWidth>
-      <ValueColumnWidth column_width="101"></ValueColumnWidth>
+      <ValueColumnWidth column_width="97"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="4" />
    <wvobject type="group" fp_name="group698">
@@ -56,10 +56,12 @@
       <wvobject type="array" fp_name="/speaker_sim_tb/codec_bfm_i_rec">
          <obj_property name="ElementShortName">codec_bfm_i_rec</obj_property>
          <obj_property name="ObjectShortName">codec_bfm_i_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/speaker_sim_tb/codec_bfm_o_rec">
          <obj_property name="ElementShortName">codec_bfm_o_rec</obj_property>
          <obj_property name="ObjectShortName">codec_bfm_o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="logic" fp_name="/speaker_sim_tb/codec_dout">
          <obj_property name="ElementShortName">codec_dout</obj_property>
@@ -82,6 +84,46 @@
          <obj_property name="ElementShortName">o_rec</obj_property>
          <obj_property name="ObjectShortName">o_rec</obj_property>
          <obj_property name="isExpanded"></obj_property>
+         <wvobject type="logic" fp_name="/speaker_sim_tb/u_codec_bfm/o_rec.codec_dout">
+            <obj_property name="ElementShortName">.codec_dout</obj_property>
+            <obj_property name="ObjectShortName">.codec_dout</obj_property>
+         </wvobject>
+         <wvobject type="other" fp_name="/speaker_sim_tb/u_codec_bfm/o_rec.v_dac_out">
+            <obj_property name="ElementShortName">.v_dac_out</obj_property>
+            <obj_property name="ObjectShortName">.v_dac_out</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/o_rec.word_dac_out">
+            <obj_property name="ElementShortName">.word_dac_out[23:0]</obj_property>
+            <obj_property name="ObjectShortName">.word_dac_out[23:0]</obj_property>
+            <obj_property name="Radix">REALRADIX</obj_property>
+            <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+            <obj_property name="CellHeight">100</obj_property>
+            <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_FIXED</obj_property>
+            <obj_property name="AnalogYRangeMin">-1.000000</obj_property>
+            <obj_property name="AnalogYRRangeMax">1.000000</obj_property>
+            <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
+            <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
+            <obj_property name="AnalogHorizLine">0.000000</obj_property>
+            <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+            <obj_property name="radix_fractionWidth">23</obj_property>
+            <obj_property name="radix_otherWidth">0</obj_property>
+         </wvobject>
+         <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/o_rec.word_adc_out">
+            <obj_property name="ElementShortName">.word_adc_out[23:0]</obj_property>
+            <obj_property name="ObjectShortName">.word_adc_out[23:0]</obj_property>
+            <obj_property name="Radix">REALRADIX</obj_property>
+            <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+            <obj_property name="CellHeight">100</obj_property>
+            <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+            <obj_property name="radix_fractionWidth">23</obj_property>
+            <obj_property name="radix_otherWidth">0</obj_property>
+            <obj_property name="AnalogYRangeType">ANALOG_YRANGETYPE_FIXED</obj_property>
+            <obj_property name="AnalogYRangeMin">-1.000000</obj_property>
+            <obj_property name="AnalogYRRangeMax">1.000000</obj_property>
+            <obj_property name="AnalogInterpolation">ANALOG_INTERPOLATION_HOLD</obj_property>
+            <obj_property name="AnalogOffscale">ANALOG_OFFSCALE_HIDE</obj_property>
+            <obj_property name="AnalogHorizLine">0.000000</obj_property>
+         </wvobject>
       </wvobject>
       <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/ctrl_word">
          <obj_property name="ElementShortName">ctrl_word[15:0]</obj_property>
@@ -203,10 +245,12 @@
       <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_rec">
          <obj_property name="ElementShortName">i_rec</obj_property>
          <obj_property name="ObjectShortName">i_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_rec">
          <obj_property name="ElementShortName">o_rec</obj_property>
          <obj_property name="ObjectShortName">o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
       <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_mclk_gen_i">
          <obj_property name="ElementShortName">counter_mclk_gen_i</obj_property>
@@ -269,22 +313,6 @@
       <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_din">
          <obj_property name="ElementShortName">sreg_din</obj_property>
          <obj_property name="ObjectShortName">sreg_din</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_codec_rst_n">
-         <obj_property name="ElementShortName">w_codec_rst_n</obj_property>
-         <obj_property name="ObjectShortName">w_codec_rst_n</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_codec_dclk">
-         <obj_property name="ElementShortName">w_codec_dclk</obj_property>
-         <obj_property name="ObjectShortName">w_codec_dclk</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_codec_dfs">
-         <obj_property name="ElementShortName">w_codec_dfs</obj_property>
-         <obj_property name="ObjectShortName">w_codec_dfs</obj_property>
-      </wvobject>
-      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_codec_din">
-         <obj_property name="ElementShortName">w_codec_din</obj_property>
-         <obj_property name="ObjectShortName">w_codec_din</obj_property>
       </wvobject>
       <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/MCLK_GEN_COUNT_MAX">
          <obj_property name="ElementShortName">MCLK_GEN_COUNT_MAX</obj_property>

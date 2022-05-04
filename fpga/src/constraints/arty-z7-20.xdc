@@ -189,9 +189,4 @@ set_property ASYNC_REG false [get_cells u_clock_and_reset/u_cdcffs_clk_100_rdy_1
 
 set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_100M_rdy_100M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_100_rdy_100to12M/q_meta_reg/D]
 
-set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_dclk]/C}] -to [get_ports o_codec_dclk]
-set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_din]/C}] -to [get_ports o_codec_din]
-set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_dfs]/C}] -to [get_ports o_codec_dfs]
-set_false_path -from [get_pins {u_codec_driver/o_rec_reg[codec_rst_n]/C}] -to [get_ports o_codec_rst_n]
-
-set_false_path -from [get_clocks -of_objects [get_pins u_clock_and_reset/u_clk_wiz_1/inst/mmcm_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins u_clock_and_reset/u_clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0]]
+set_false_path -from [get_pins u_clock_and_reset/u_dff_clk_122M_rdy_122M/q_reg/C] -to [get_pins u_clock_and_reset/u_cdcffs_clk_122M_rdy_122to100M/q_meta_reg/D]

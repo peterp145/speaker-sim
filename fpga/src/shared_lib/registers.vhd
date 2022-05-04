@@ -15,7 +15,7 @@ entity reg is
 end entity reg;
 
 architecture rtl of reg is
-    signal r_reg : std_ulogic_vector;
+    signal r_reg : std_ulogic_vector(o_rec.word'range) := (others => '0');
 begin
     proc_name: process(clk)
     begin

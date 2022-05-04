@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="speaker_sim_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="clock_and_reset_pkg" />
+            <top_module name="codec_bfm_pkg" />
+            <top_module name="codec_driver_pkg" />
+            <top_module name="counter_pkg" />
+            <top_module name="flip_flops_pkg" />
+            <top_module name="glbl" />
+            <top_module name="registers_pkg" />
+            <top_module name="speaker_sim_tb" />
+            <top_module name="speaker_sim_tb_pkg" />
+            <top_module name="tb_utils_pkg" />
+            <top_module name="utils_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="1,916,960.183 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,917,564.684 ns"></ZoomEndTime>
+      <Cursor1Time time="1,921,748.179 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="274"></NameColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject type="group" fp_name="group77">
+      <obj_property name="label">speaker_sim_tb</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/clk_125M">
+         <obj_property name="ElementShortName">clk_125M</obj_property>
+         <obj_property name="ObjectShortName">clk_125M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/rst_n">
+         <obj_property name="ElementShortName">rst_n</obj_property>
+         <obj_property name="ObjectShortName">rst_n</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/adc_vin">
+         <obj_property name="ElementShortName">adc_vin</obj_property>
+         <obj_property name="ObjectShortName">adc_vin</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/func_gen_en">
+         <obj_property name="ElementShortName">func_gen_en</obj_property>
+         <obj_property name="ObjectShortName">func_gen_en</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/codec_en">
+         <obj_property name="ElementShortName">codec_en</obj_property>
+         <obj_property name="ObjectShortName">codec_en</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/codec_bfm_i_rec">
+         <obj_property name="ElementShortName">codec_bfm_i_rec</obj_property>
+         <obj_property name="ObjectShortName">codec_bfm_i_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/codec_bfm_o_rec">
+         <obj_property name="ElementShortName">codec_bfm_o_rec</obj_property>
+         <obj_property name="ObjectShortName">codec_bfm_o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/codec_dout">
+         <obj_property name="ElementShortName">codec_dout</obj_property>
+         <obj_property name="ObjectShortName">codec_dout</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/leds">
+         <obj_property name="ElementShortName">leds[3:0]</obj_property>
+         <obj_property name="ObjectShortName">leds[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group98">
+      <obj_property name="label">dut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/i_clk_125M">
+         <obj_property name="ElementShortName">i_clk_125M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_125M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_mclk">
+         <obj_property name="ElementShortName">o_codec_mclk</obj_property>
+         <obj_property name="ObjectShortName">o_codec_mclk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_rst_n">
+         <obj_property name="ElementShortName">o_codec_rst_n</obj_property>
+         <obj_property name="ObjectShortName">o_codec_rst_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_dclk">
+         <obj_property name="ElementShortName">o_codec_dclk</obj_property>
+         <obj_property name="ObjectShortName">o_codec_dclk</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_dfs">
+         <obj_property name="ElementShortName">o_codec_dfs</obj_property>
+         <obj_property name="ObjectShortName">o_codec_dfs</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/o_codec_din">
+         <obj_property name="ElementShortName">o_codec_din</obj_property>
+         <obj_property name="ObjectShortName">o_codec_din</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/i_codec_dout">
+         <obj_property name="ElementShortName">i_codec_dout</obj_property>
+         <obj_property name="ObjectShortName">i_codec_dout</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/o_leds">
+         <obj_property name="ElementShortName">o_leds[3:0]</obj_property>
+         <obj_property name="ObjectShortName">o_leds[3:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/clock_and_reset_o">
+         <obj_property name="ElementShortName">clock_and_reset_o</obj_property>
+         <obj_property name="ObjectShortName">clock_and_reset_o</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clk_100M">
+         <obj_property name="ElementShortName">clk_100M</obj_property>
+         <obj_property name="ObjectShortName">clk_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clken_100M_100k">
+         <obj_property name="ElementShortName">clken_100M_100k</obj_property>
+         <obj_property name="ObjectShortName">clken_100M_100k</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clk_122M">
+         <obj_property name="ElementShortName">clk_122M</obj_property>
+         <obj_property name="ObjectShortName">clk_122M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/clken_122M_12M">
+         <obj_property name="ElementShortName">clken_122M_12M</obj_property>
+         <obj_property name="ObjectShortName">clken_122M_12M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/sys_rst_n_100M">
+         <obj_property name="ElementShortName">sys_rst_n_100M</obj_property>
+         <obj_property name="ObjectShortName">sys_rst_n_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/sys_rst_n_122M">
+         <obj_property name="ElementShortName">sys_rst_n_122M</obj_property>
+         <obj_property name="ObjectShortName">sys_rst_n_122M</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/COUNT_MAX">
+         <obj_property name="ElementShortName">COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/DAC_ZEROS">
+         <obj_property name="ElementShortName">DAC_ZEROS[23:0]</obj_property>
+         <obj_property name="ObjectShortName">DAC_ZEROS[23:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group119">
+      <obj_property name="label">u_clock_and_reset</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/i_clk_125M">
+         <obj_property name="ElementShortName">i_clk_125M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_125M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/clk_gen_rst_n">
+         <obj_property name="ElementShortName">clk_gen_rst_n</obj_property>
+         <obj_property name="ObjectShortName">clk_gen_rst_n</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/clk_100M">
+         <obj_property name="ElementShortName">clk_100M</obj_property>
+         <obj_property name="ObjectShortName">clk_100M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_clk_100M_locked">
+         <obj_property name="ElementShortName">r_clk_100M_locked</obj_property>
+         <obj_property name="ObjectShortName">r_clk_100M_locked</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/clk_122M">
+         <obj_property name="ElementShortName">clk_122M</obj_property>
+         <obj_property name="ObjectShortName">clk_122M</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/r_clk_122M_locked">
+         <obj_property name="ElementShortName">r_clk_122M_locked</obj_property>
+         <obj_property name="ObjectShortName">r_clk_122M_locked</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/dff_clk_100M_rdy_100M">
+         <obj_property name="ElementShortName">dff_clk_100M_rdy_100M</obj_property>
+         <obj_property name="ObjectShortName">dff_clk_100M_rdy_100M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/dff_clk_122M_rdy_122M">
+         <obj_property name="ElementShortName">dff_clk_122M_rdy_122M</obj_property>
+         <obj_property name="ObjectShortName">dff_clk_122M_rdy_122M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/cdcff_clk_122M_rdy_100M">
+         <obj_property name="ElementShortName">cdcff_clk_122M_rdy_100M</obj_property>
+         <obj_property name="ObjectShortName">cdcff_clk_122M_rdy_100M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/dff_sys_rst_n_100M">
+         <obj_property name="ElementShortName">dff_sys_rst_n_100M</obj_property>
+         <obj_property name="ObjectShortName">dff_sys_rst_n_100M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/cdcff_clk_100M_rdy_122M">
+         <obj_property name="ElementShortName">cdcff_clk_100M_rdy_122M</obj_property>
+         <obj_property name="ObjectShortName">cdcff_clk_100M_rdy_122M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/dff_sys_rst_n_122M">
+         <obj_property name="ElementShortName">dff_sys_rst_n_122M</obj_property>
+         <obj_property name="ObjectShortName">dff_sys_rst_n_122M</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/CLKEN_100K_COUNT_MAX">
+         <obj_property name="ElementShortName">CLKEN_100K_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">CLKEN_100K_COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/CLKEN_12M_COUNT_MAX">
+         <obj_property name="ElementShortName">CLKEN_12M_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">CLKEN_12M_COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_clock_and_reset/READY_SREG_NUM_BITS">
+         <obj_property name="ElementShortName">READY_SREG_NUM_BITS</obj_property>
+         <obj_property name="ObjectShortName">READY_SREG_NUM_BITS</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group148">
+      <obj_property name="label">u_codec_driver</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_clk_122M">
+         <obj_property name="ElementShortName">i_clk_122M</obj_property>
+         <obj_property name="ObjectShortName">i_clk_122M</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_mclk_gen_i">
+         <obj_property name="ElementShortName">counter_mclk_gen_i</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_gen_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_mclk_gen_o">
+         <obj_property name="ElementShortName">counter_mclk_gen_o</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_gen_o</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/r_state">
+         <obj_property name="ElementShortName">r_state</obj_property>
+         <obj_property name="ObjectShortName">r_state</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/w_next_state">
+         <obj_property name="ElementShortName">w_next_state</obj_property>
+         <obj_property name="ObjectShortName">w_next_state</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/fsm_io">
+         <obj_property name="ElementShortName">fsm_io</obj_property>
+         <obj_property name="ObjectShortName">fsm_io</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_mclk_i">
+         <obj_property name="ElementShortName">counter_mclk_i</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_mclk_o">
+         <obj_property name="ElementShortName">counter_mclk_o</obj_property>
+         <obj_property name="ObjectShortName">counter_mclk_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_fs_i">
+         <obj_property name="ElementShortName">counter_fs_i</obj_property>
+         <obj_property name="ObjectShortName">counter_fs_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/counter_fs_o">
+         <obj_property name="ElementShortName">counter_fs_o</obj_property>
+         <obj_property name="ObjectShortName">counter_fs_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_first_xfr_i">
+         <obj_property name="ElementShortName">srff_first_xfr_i</obj_property>
+         <obj_property name="ObjectShortName">srff_first_xfr_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_first_xfr_o">
+         <obj_property name="ElementShortName">srff_first_xfr_o</obj_property>
+         <obj_property name="ObjectShortName">srff_first_xfr_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_word_a_init_i">
+         <obj_property name="ElementShortName">srff_word_a_init_i</obj_property>
+         <obj_property name="ObjectShortName">srff_word_a_init_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_word_a_init_o">
+         <obj_property name="ElementShortName">srff_word_a_init_o</obj_property>
+         <obj_property name="ObjectShortName">srff_word_a_init_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_word_c_init_i">
+         <obj_property name="ElementShortName">srff_word_c_init_i</obj_property>
+         <obj_property name="ObjectShortName">srff_word_c_init_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_word_c_init_o">
+         <obj_property name="ElementShortName">srff_word_c_init_o</obj_property>
+         <obj_property name="ObjectShortName">srff_word_c_init_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_mode_24b_i">
+         <obj_property name="ElementShortName">srff_mode_24b_i</obj_property>
+         <obj_property name="ObjectShortName">srff_mode_24b_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/srff_mode_24b_o">
+         <obj_property name="ElementShortName">srff_mode_24b_o</obj_property>
+         <obj_property name="ObjectShortName">srff_mode_24b_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_dout_i">
+         <obj_property name="ElementShortName">sreg_dout_i</obj_property>
+         <obj_property name="ObjectShortName">sreg_dout_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_dout_o">
+         <obj_property name="ElementShortName">sreg_dout_o</obj_property>
+         <obj_property name="ObjectShortName">sreg_dout_o</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_dout_o.word">
+            <obj_property name="ElementShortName">.word[23:0]</obj_property>
+            <obj_property name="ObjectShortName">.word[23:0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_din_i">
+         <obj_property name="ElementShortName">sreg_din_i</obj_property>
+         <obj_property name="ObjectShortName">sreg_din_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/sreg_din_o">
+         <obj_property name="ElementShortName">sreg_din_o</obj_property>
+         <obj_property name="ObjectShortName">sreg_din_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_mclk_i">
+         <obj_property name="ElementShortName">dff_clken_codec_mclk_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_mclk_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_mclk_o">
+         <obj_property name="ElementShortName">dff_clken_codec_mclk_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_mclk_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_rst_n_i">
+         <obj_property name="ElementShortName">dff_clken_codec_rst_n_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_rst_n_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_rst_n_o">
+         <obj_property name="ElementShortName">dff_clken_codec_rst_n_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_rst_n_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dclk_i">
+         <obj_property name="ElementShortName">dff_clken_codec_dclk_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dclk_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dclk_o">
+         <obj_property name="ElementShortName">dff_clken_codec_dclk_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dclk_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dfs_i">
+         <obj_property name="ElementShortName">dff_clken_codec_dfs_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dfs_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dfs_o">
+         <obj_property name="ElementShortName">dff_clken_codec_dfs_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dfs_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_din_i">
+         <obj_property name="ElementShortName">dff_clken_codec_din_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_din_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_din_o">
+         <obj_property name="ElementShortName">dff_clken_codec_din_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_din_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dout_i">
+         <obj_property name="ElementShortName">dff_clken_codec_dout_i</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dout_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_clken_codec_dout_o">
+         <obj_property name="ElementShortName">dff_clken_codec_dout_o</obj_property>
+         <obj_property name="ObjectShortName">dff_clken_codec_dout_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_ons_dsp_adc_word_valid_i">
+         <obj_property name="ElementShortName">dff_ons_dsp_adc_word_valid_i</obj_property>
+         <obj_property name="ObjectShortName">dff_ons_dsp_adc_word_valid_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_ons_dsp_adc_word_valid_o">
+         <obj_property name="ElementShortName">dff_ons_dsp_adc_word_valid_o</obj_property>
+         <obj_property name="ObjectShortName">dff_ons_dsp_adc_word_valid_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/reg_dsp_adc_word_i">
+         <obj_property name="ElementShortName">reg_dsp_adc_word_i</obj_property>
+         <obj_property name="ObjectShortName">reg_dsp_adc_word_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/reg_dsp_adc_word_o">
+         <obj_property name="ElementShortName">reg_dsp_adc_word_o</obj_property>
+         <obj_property name="ObjectShortName">reg_dsp_adc_word_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_ons_dsp_dac_word_valid_i">
+         <obj_property name="ElementShortName">dff_ons_dsp_dac_word_valid_i</obj_property>
+         <obj_property name="ObjectShortName">dff_ons_dsp_dac_word_valid_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/dff_ons_dsp_dac_word_valid_o">
+         <obj_property name="ElementShortName">dff_ons_dsp_dac_word_valid_o</obj_property>
+         <obj_property name="ObjectShortName">dff_ons_dsp_dac_word_valid_o</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/reg_dsp_dac_word_i">
+         <obj_property name="ElementShortName">reg_dsp_dac_word_i</obj_property>
+         <obj_property name="ObjectShortName">reg_dsp_dac_word_i</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/dut/u_codec_driver/reg_dsp_dac_word_o">
+         <obj_property name="ElementShortName">reg_dsp_dac_word_o</obj_property>
+         <obj_property name="ObjectShortName">reg_dsp_dac_word_o</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/MCLK_GEN_COUNT_MAX">
+         <obj_property name="ElementShortName">MCLK_GEN_COUNT_MAX</obj_property>
+         <obj_property name="ObjectShortName">MCLK_GEN_COUNT_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/MCLK_COUNTER_MAX">
+         <obj_property name="ElementShortName">MCLK_COUNTER_MAX</obj_property>
+         <obj_property name="ObjectShortName">MCLK_COUNTER_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/FS_COUNTER_MAX">
+         <obj_property name="ElementShortName">FS_COUNTER_MAX</obj_property>
+         <obj_property name="ObjectShortName">FS_COUNTER_MAX</obj_property>
+      </wvobject>
+      <wvobject type="other" fp_name="/speaker_sim_tb/dut/u_codec_driver/SREG_NUM_BITS">
+         <obj_property name="ElementShortName">SREG_NUM_BITS</obj_property>
+         <obj_property name="ObjectShortName">SREG_NUM_BITS</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject type="group" fp_name="group158">
+      <obj_property name="label">u_codec_bfm</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/i_rec">
+         <obj_property name="ElementShortName">i_rec</obj_property>
+         <obj_property name="ObjectShortName">i_rec</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/o_rec">
+         <obj_property name="ElementShortName">o_rec</obj_property>
+         <obj_property name="ObjectShortName">o_rec</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/ctrl_word">
+         <obj_property name="ElementShortName">ctrl_word[15:0]</obj_property>
+         <obj_property name="ObjectShortName">ctrl_word[15:0]</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/u_codec_bfm/adc_sample_flg">
+         <obj_property name="ElementShortName">adc_sample_flg</obj_property>
+         <obj_property name="ObjectShortName">adc_sample_flg</obj_property>
+      </wvobject>
+      <wvobject type="logic" fp_name="/speaker_sim_tb/u_codec_bfm/dac_sample_flg">
+         <obj_property name="ElementShortName">dac_sample_flg</obj_property>
+         <obj_property name="ObjectShortName">dac_sample_flg</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/adc_data_word">
+         <obj_property name="ElementShortName">adc_data_word[23:0]</obj_property>
+         <obj_property name="ObjectShortName">adc_data_word[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/adc_data_word_dly">
+         <obj_property name="ElementShortName">adc_data_word_dly[23:0]</obj_property>
+         <obj_property name="ObjectShortName">adc_data_word_dly[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/dac_data_word">
+         <obj_property name="ElementShortName">dac_data_word[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dac_data_word[23:0]</obj_property>
+      </wvobject>
+      <wvobject type="array" fp_name="/speaker_sim_tb/u_codec_bfm/dac_data_word_dly">
+         <obj_property name="ElementShortName">dac_data_word_dly[23:0]</obj_property>
+         <obj_property name="ObjectShortName">dac_data_word_dly[23:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
