@@ -85,7 +85,7 @@ begin
         wait for 1000 ms;
         func_gen_en <= false;
 
-        wait for 1500 ms;
+        wait for 2000 ms;
         assert false report "end of test" severity failure;
         wait;
     end process proc_tb_sequence;
@@ -97,7 +97,7 @@ begin
         variable v_idx : integer range v_samples_real'range := 0;
     begin
         -- initialize
-        read_into_array(RAMP_FNAME, v_samples_real);
+        read_into_array(IMPULSE_FNAME, v_samples_real);
         v_samples := to_T_SAMPLE_ARR(v_samples_real);
         wait until rst_n;
         wait for 10 us;

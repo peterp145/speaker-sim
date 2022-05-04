@@ -39,6 +39,7 @@ package speaker_sim_tb_pkg is
     constant FUNC_GEN_PER : time    := 1e9 ns / FUNC_GEN_FS; 
 
     -- sample file name and config
+    constant IMPULSE_FNAME : string := "impulse_1s_48khz.txt";
     constant RAMP_FNAME : string := "ess_1s_48khz.txt";
     constant FUNC_GEN_N_SAMPLES : integer := 48000;
     constant SAMP_V_MAX : real :=  1.0;

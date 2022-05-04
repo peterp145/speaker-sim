@@ -9,6 +9,7 @@ use shared_lib.registers_pkg.all;
 use shared_lib.counter_pkg.all;
 
 library speaker_sim_lib;
+use speaker_sim_lib.speaker_sim_pkg.all;
 use speaker_sim_lib.codec_driver_pkg.all;
 
 entity codec_driver is
@@ -72,7 +73,7 @@ architecture rtl of codec_driver is
     signal srff_mode_24b_o    : t_srff_o_rec;
 
     -- dout sreg
-    constant SREG_NUM_BITS : integer := CODEC_DATA_WORD_WIDTH;
+    constant SREG_NUM_BITS : integer := CODEC_WORD_WIDTH;
     subtype t_sreg_data_i_rec is t_sreg_i_rec(load_word(SREG_NUM_BITS-1 downto 0));
     subtype t_sreg_data_o_rec is t_sreg_o_rec(word(SREG_NUM_BITS-1 downto 0));
 
@@ -101,8 +102,8 @@ architecture rtl of codec_driver is
     signal dff_clken_codec_dout_o  : t_dff_clken_o_rec;
 
     -- dsp if
-    subtype t_reg_codec_data_i_rec is t_reg_i_rec(load_word(t_codec_data_word'range));
-    subtype t_reg_codec_data_o_rec is t_reg_o_rec(word(t_codec_data_word'range));
+    subtype t_reg_codec_data_i_rec is t_reg_i_rec(load_word(t_codec_word'range));
+    subtype t_reg_codec_data_o_rec is t_reg_o_rec(word(t_codec_word'range));
 
     -- adc
     signal dff_ons_dsp_adc_word_valid_i : t_dff_clken_i_rec := ('1', '0');
@@ -369,9 +370,9 @@ begin
 
     -- din word mux
     with fsm_io.din_sreg_load_sel select sreg_din_i.load_word <= 
-        X"000000"          when 0,
-        REG_A_WORD & X"00" when 1,
-        REG_C_WORD & X"00" when 2,
+        (others => '0') when 0,
+        std_ulogic_vector(REG_A_WORD)      when 1,
+        std_ulogic_vector(REG_C_WORD)      when 2,
         reg_dsp_dac_word_o.word when 3,
         -- i_rec.ctrl_dac_word(23 downto 8)        when 3,
         -- i_rec_i_ctrl_dac_word(7 downto 0) & X"00" when 4,
@@ -389,7 +390,7 @@ begin
         'Z'              when not fsm_io.din_output_en else
         '1'              when fsm_io.din_reset_en else
         -- dff_clken_codec_dout_o.q when fsm_io.din_loopback_en else
-        sreg_din_o.word(CODEC_DATA_WORD_WIDTH-1);
+        sreg_din_o.word(CODEC_WORD_WIDTH-1);
 
     -- input registers
     dff_clken_codec_dout_i.d  <= i_rec.codec_dout;
@@ -428,7 +429,7 @@ begin
         port map(i_clk_122M, reg_dsp_adc_word_i, reg_dsp_adc_word_o);
 
     o_rec.dsp_adc_word_valid <= dff_ons_dsp_adc_word_valid_o.q;
-    o_rec.dsp_adc_word <= t_codec_data_word(reg_dsp_adc_word_o.word);
+    o_rec.dsp_adc_word <= t_codec_word(reg_dsp_adc_word_o.word);
 
     -- dac
     dff_ons_dsp_dac_word_valid_i.d <= i_rec.dsp_dac_word_valid;

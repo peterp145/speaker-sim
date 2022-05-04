@@ -3,6 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 library speaker_sim_lib;
+use speaker_sim_lib.speaker_sim_pkg.all;
 use speaker_sim_lib.codec_driver_pkg.all;
 
 library tb_library;
@@ -23,17 +24,17 @@ architecture bfm of codec_bfm is
     ----- registers -----
 
     ----- adc -----
-    signal adc_data_word, adc_data_word_dly : t_codec_data_word := (others => '0');
+    signal adc_data_word, adc_data_word_dly : t_codec_word := (others => '0');
     
     ----- dac -----
-    signal dac_data_word, dac_data_word_dly : t_codec_data_word := (others => '0');
+    signal dac_data_word, dac_data_word_dly : t_codec_word := (others => '0');
     
 begin
     ----- serial port ------
     -- serial port timing
     proc_sport : process
         variable v_din_sreg, v_dout_sreg : t_sport_word := (others => '0');
-        variable v_adc_data_word, v_dac_data_word : t_codec_data_word := (others => '0');
+        variable v_adc_data_word, v_dac_data_word : t_codec_word := (others => '0');
 
         procedure shift_word is
         begin

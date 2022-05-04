@@ -8,6 +8,7 @@ use shared_lib.counter_pkg.all;
 use shared_lib.registers_pkg.all;
 
 library speaker_sim_lib;
+use speaker_sim_lib.speaker_sim_pkg.all;
 use speaker_sim_lib.clock_and_reset_pkg.all;
 use speaker_sim_lib.codec_driver_pkg.all;
 use speaker_sim_lib.codec_driver;
@@ -49,7 +50,6 @@ architecture rtl of speaker_sim is
     signal counter_led_o : t_counter_o_rec(count(num_bits(COUNT_MAX)-1 downto 0));
 
     -- audio codec
-    constant DAC_ZEROS : std_ulogic_vector(23 downto 0) := (others => '0');
     signal codec_driver_i : t_codec_driver_i_rec := (dsp_dac_word => (others => '0'), others => '0');
     signal codec_driver_o : t_codec_driver_o_rec;
 
@@ -96,13 +96,13 @@ begin
 
     ------ fir filter implementation ------
     u_fir_proc : process(clk_122M)
-        constant DELAY : integer := 2566;
+        constant DELAY : integer := 2417;
 
         type t_sreg_bit is array (integer range 0 to DELAY-1) of std_ulogic;
         variable v_sreg_valid : t_sreg_bit := (others => '0');
 
-        type t_sreg_word is array (integer range 0 to DELAY-1) of t_codec_data_word;
-        variable v_sreg_word : t_sreg_word := (others => (others => '0'));
+        type t_sreg_word_array is array (integer range 0 to DELAY-1) of t_codec_word;
+        variable v_sreg_word : t_sreg_word_array := (others => (others => '0'));
     begin
         if rising_edge(clk_122M) then
             codec_driver_i.dsp_dac_word <= v_sreg_word(DELAY-1);

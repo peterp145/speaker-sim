@@ -4,9 +4,7 @@ use ieee.numeric_std.all;
 use ieee.math_real.all;
 
 library speaker_sim_lib;
-use speaker_sim_lib.codec_driver_pkg.t_codec_data_word;
-use speaker_sim_lib.codec_driver_pkg.t_codec_ctrl_word;
-use speaker_sim_lib.codec_driver_pkg.CODEC_DATA_WORD_MAX;
+use speaker_sim_lib.speaker_sim_pkg.all;
 
 
 package codec_bfm_pkg is
@@ -19,12 +17,12 @@ package codec_bfm_pkg is
     constant SPORT_THD : time := 15 ns;
     constant SPORT_DLY : time := 30 ns;
 
-    subtype t_sport_word is std_ulogic_vector(t_codec_ctrl_word'range);
+    subtype t_sport_word is std_ulogic_vector(15 downto 0);
     function to_t_data_word(
         val : t_codec_voltage
-        ) return t_codec_data_word;
+        ) return t_codec_word;
     function to_t_codec_voltage(
-        val : t_codec_data_word
+        val : t_codec_word
         ) return t_codec_voltage;
 
     -- registers
@@ -48,8 +46,8 @@ package codec_bfm_pkg is
     type t_codec_bfm_o_rec is record
         codec_dout    : std_ulogic;
         v_dac_out     : t_codec_voltage;
-        word_dac_out  : t_codec_data_word;
-        word_adc_out  : t_codec_data_word;
+        word_dac_out  : t_codec_word;
+        word_adc_out  : t_codec_word;
     end record t_codec_bfm_o_rec;
 
     ------ helper functions/procedures ------
@@ -59,27 +57,27 @@ end package codec_bfm_pkg;
 package body codec_bfm_pkg is
     function to_t_data_word(
         val : t_codec_voltage
-        ) return t_codec_data_word is
+        ) return t_codec_word is
 
         variable real_max   : real
-            := real(to_integer(CODEC_DATA_WORD_MAX));
+            := real(to_integer(CODEC_WORD_MAX));
         variable val_real   : real
             := real_max * val;
         variable val_int    : integer
             := integer(round(val_real));
-        variable val_signed : signed(t_codec_data_word'range)
-            := to_signed(val_int, t_codec_data_word'length);
+        variable val_signed : signed(t_codec_word'range)
+            := to_signed(val_int, t_codec_word'length);
     begin
-        return t_codec_data_word(val_signed);
+        return t_codec_word(val_signed);
     end function to_t_data_word;
 
     function to_t_codec_voltage(
-        val : t_codec_data_word
+        val : t_codec_word
         ) return t_codec_voltage is
 
         variable real_max   : real
-            := real(to_integer(CODEC_DATA_WORD_MAX));
-        variable val_signed : signed(t_codec_data_word'range)
+            := real(to_integer(CODEC_WORD_MAX));
+        variable val_signed : signed(t_codec_word'range)
             := signed(val);
         variable val_int    : integer
             := to_integer(val_signed);
