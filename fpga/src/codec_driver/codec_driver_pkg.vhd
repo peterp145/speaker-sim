@@ -1,6 +1,6 @@
 ----------
 -- file:        codec_driver_pkg.vhd
--- description: package containinging counters for reuse
+-- description: package containinging codec_driver constants and records
 -- author:      peter phelan
 -- email:       peter@peterphelan.net
 ----------
@@ -13,14 +13,6 @@ library speaker_sim_lib;
 use speaker_sim_lib.speaker_sim_pkg.all;
 
 package codec_driver_pkg is
-    -- constants and types
-    -- constant CODEC_DATA_WORD_WIDTH : integer := 24;
-    -- subtype  t_codec_data_word is signed(CODEC_DATA_WORD_WIDTH-1 downto 0);
-    -- constant CODEC_DATA_WORD_MAX :  t_codec_data_word := (CODEC_DATA_WORD_WIDTH-1 => '0', others => '1');
-    -- constant CODEC_DATA_WORD_MIN :  t_codec_data_word := (CODEC_DATA_WORD_WIDTH-1 => '1', others => '0');
-
-    -- constant CODEC_CTRL_WORD_WIDTH : integer := 16;
-    -- subtype  t_codec_ctrl_word is std_ulogic_vector(CODEC_CTRL_WORD_WIDTH-1 downto 0);
     constant REG_A_WORD : t_codec_word := B"1000_0000_0111_1100_0000_0000";
     constant REG_C_WORD : t_codec_word := B"1001_0000_0011_0101_0000_0000";
 
@@ -41,13 +33,4 @@ package codec_driver_pkg is
         dsp_adc_word        : t_codec_word; -- word read from adc
         dsp_adc_word_valid  : std_ulogic;   -- adc word is ready
     end record t_codec_driver_o_rec;
-
-    
-    -- component codec_driver is
-    --     port (
-    --         i_clk_122M88 : in  std_ulogic; -- 122.88MHz clock for logic and codec mclk
-    --         i_rec        : in  t_codec_driver_i_rec; -- input record
-    --         o_rec        : out t_codec_driver_o_rec  -- output record
-    --     );
-    -- end component codec_driver;
 end package codec_driver_pkg;

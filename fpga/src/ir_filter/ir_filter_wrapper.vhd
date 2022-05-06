@@ -1,5 +1,5 @@
 ----------
--- file:        ir_filter_wrappe.vhd
+-- file:        ir_filter_wrapper.vhd
 -- description: wrapper for matlab generated impulse response fir filter
 -- author:      peter phelan
 -- email:       peter@peterphelan.net

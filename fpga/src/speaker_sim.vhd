@@ -107,27 +107,6 @@ begin
     u_ir_filter_wrapper : entity ir_filter_wrapper
         port map(clk_122M, filter_i, filter_o);
 
-    -- u_fir_proc : process(clk_122M)
-    --     constant DELAY : integer := 2417;
-
-    --     type t_sreg_bit is array (integer range 0 to DELAY-1) of std_ulogic;
-    --     variable v_sreg_valid : t_sreg_bit := (others => '0');
-
-    --     type t_sreg_word_array is array (integer range 0 to DELAY-1) of t_codec_word;
-    --     variable v_sreg_word : t_sreg_word_array := (others => (others => '0'));
-    -- begin
-    --     if rising_edge(clk_122M) then
-    --         codec_driver_i.dsp_dac_word <= v_sreg_word(DELAY-1);
-    --         codec_driver_i.dsp_dac_word_valid <= v_sreg_valid(DELAY-1);
-    --         for i in DELAY-1 downto 1 loop
-    --             v_sreg_word(i) := v_sreg_word(i-1);
-    --             v_sreg_valid(i)  := v_sreg_valid(i-1);
-    --         end loop;
-    --         v_sreg_word(0) := codec_driver_o.dsp_adc_word;
-    --         v_sreg_valid(0) := codec_driver_o.dsp_adc_word_valid;
-    --     end if;
-    -- end process u_fir_proc;
-
     -- output buffers
     o_codec_mclk    <= codec_driver_o.codec_mclk;
     o_codec_rst_n   <= codec_driver_o.codec_rst_n;

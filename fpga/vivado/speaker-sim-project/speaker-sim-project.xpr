@@ -1093,6 +1093,11 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../tb/tb_library/impulse_1s_48khz.txt"/>
+      <File Path="$PPRDIR/speaker_sim_tb_behav_ess.wcfg">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
         <Option Name="TopModule" Val="speaker_sim_tb"/>
@@ -1107,6 +1112,7 @@
         <Option Name="PamPseudoTop" Val="pseudo_tb"/>
         <Option Name="SrcSet" Val="sources_1"/>
         <Option Name="XSimWcfgFile" Val="$PPRDIR/speaker_sim_tb_behav1.wcfg"/>
+        <Option Name="XSimWcfgFile" Val="$PPRDIR/speaker_sim_tb_behav_ess.wcfg"/>
         <Option Name="NLNetlistMode" Val="funcsim"/>
       </Config>
     </FileSet>
