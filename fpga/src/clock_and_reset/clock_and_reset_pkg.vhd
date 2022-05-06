@@ -37,11 +37,11 @@ package clock_and_reset_pkg is
     );
     end component;
 
-    component clock_and_reset is
-    port (
-        i_clk_125M : in  std_ulogic; -- input record
-        o_rec      : out t_clock_and_reset_o_rec  -- output record
-    );
-    end component clock_and_reset;
+    -- component clock_and_reset is
+    -- port (
+    --     i_clk_125M : in  std_ulogic; -- input record
+    --     o_rec      : out t_clock_and_reset_o_rec  -- output record
+    -- );
+    -- end component clock_and_reset;
 
 end package clock_and_reset_pkg;

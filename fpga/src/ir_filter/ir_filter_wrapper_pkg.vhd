@@ -26,12 +26,12 @@ package ir_filter_wrapper_pkg is
     end record t_ir_filter_wrapper_o_rec;
 
     -- component
-    component ir_filter_wrapper
-        port (
-            i_clk_dsp_122M88    : in  std_ulogic; -- clock input
-            i_rec               : in  t_ir_filter_wrapper_i_rec; -- input port record
-            o_rec               : out t_ir_filter_wrapper_o_rec -- output port record
-        );
-    end component ir_filter_wrapper;
+    -- component ir_filter_wrapper
+    --     port (
+    --         i_clk_dsp_122M88    : in  std_ulogic; -- clock input
+    --         i_rec               : in  t_ir_filter_wrapper_i_rec; -- input port record
+    --         o_rec               : out t_ir_filter_wrapper_o_rec -- output port record
+    --     );
+    -- end component ir_filter_wrapper;
 
 end package ir_filter_wrapper_pkg;

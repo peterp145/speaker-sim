@@ -12,15 +12,16 @@ use IEEE.math_real.all;
 
 package utils_pkg is
     -- helper functions
-    function shift_l(
-        i_reg   : std_ulogic_vector;
-        i_bit   : std_ulogic
-    ) return std_ulogic_vector;
+    -- function shift_l(
+    --     i_reg   : std_ulogic_vector;
+    --     i_bit   : std_ulogic
+    -- ) return std_ulogic_vector;
 
     function eq (reg : unsigned;            val : integer) return std_ulogic;
     function eq (reg : std_ulogic_vector;   val : integer) return std_ulogic;
 
     function is_zeros( reg : std_ulogic_vector) return std_ulogic;
+    function is_zeros( reg : signed) return std_ulogic;
     function is_ones(  reg : std_ulogic_vector) return std_ulogic;
 
     function num_bits(val : integer) return integer;    -- number of bits needed to store an integer
@@ -31,10 +32,10 @@ end package utils_pkg;
 package body utils_pkg is
     
     -- helper functions
-    function shift_l(i_reg : std_ulogic_vector; i_bit : std_ulogic) return std_ulogic_vector is
-    begin
-        return std_ulogic_vector(i_reg(i_reg'LENGTH-2 downto 0) & i_bit);
-    end function shift_l;
+    -- function shift_l(i_reg : std_ulogic_vector; i_bit : std_ulogic) return std_ulogic_vector is
+    -- begin
+    --     return std_ulogic_vector(i_reg(i_reg'LENGTH-2 downto 0) & i_bit);
+    -- end function shift_l;
 
     function eq(reg : unsigned; val : integer) return std_ulogic is
         variable is_eq : std_ulogic;
@@ -51,6 +52,11 @@ package body utils_pkg is
     function is_zeros(reg : std_ulogic_vector) return std_ulogic is
     begin
         return eq(reg, 0);
+    end function is_zeros;
+
+    function is_zeros(reg : signed) return std_ulogic is
+    begin
+        return reg ?= to_signed(0, reg'length-1);
     end function is_zeros;
     
     function is_ones(reg : std_ulogic_vector) return std_ulogic is

@@ -22,7 +22,8 @@ use speaker_sim_tb_lib.speaker_sim_tb_pkg.all;
 
 -- project design libraries
 library speaker_sim_lib;
--- use speaker_sim_lib.speaker_sim;
+use speaker_sim_lib.speaker_sim_pkg.all;
+use speaker_sim_lib.speaker_sim;
 
 entity speaker_sim_tb is
 end entity speaker_sim_tb;
@@ -85,8 +86,7 @@ begin
         wait for 1000 ms;
         func_gen_en <= false;
 
-        wait for 2000 ms;
-        assert false report "end of test" severity failure;
+        -- assert false report "end of test" severity failure;
         wait;
     end process proc_tb_sequence;
 
@@ -97,7 +97,7 @@ begin
         variable v_idx : integer range v_samples_real'range := 0;
     begin
         -- initialize
-        read_into_array(IMPULSE_FNAME, v_samples_real);
+        read_into_array(CHIRP_FNAME, v_samples_real);
         v_samples := to_T_SAMPLE_ARR(v_samples_real);
         wait until rst_n;
         wait for 10 us;
@@ -133,6 +133,7 @@ begin
         write_from_array(REC_FNAME, v_samples);
         
         -- end test
+        wait for 1000 ms;
         assert false report "end of test (proc_recorder)" severity failure;
 
     end process proc_recorder;

@@ -10,8 +10,11 @@ use shared_lib.registers_pkg.all;
 library speaker_sim_lib;
 use speaker_sim_lib.speaker_sim_pkg.all;
 use speaker_sim_lib.clock_and_reset_pkg.all;
+use speaker_sim_lib.clock_and_reset;
 use speaker_sim_lib.codec_driver_pkg.all;
 use speaker_sim_lib.codec_driver;
+use speaker_sim_lib.ir_filter_wrapper_pkg.all;
+use speaker_sim_lib.ir_filter_wrapper;
 
 entity speaker_sim is
     port (
@@ -31,7 +34,7 @@ entity speaker_sim is
     );
 end entity speaker_sim;
 
-architecture rtl of speaker_sim is
+architecture rtl of speaker_sim is 
     ----- clock and reset -----
     signal clock_and_reset_o : t_clock_and_reset_o_rec;
 
@@ -54,11 +57,13 @@ architecture rtl of speaker_sim is
     signal codec_driver_o : t_codec_driver_o_rec;
 
     -- fir filter
+    signal filter_i : t_ir_filter_wrapper_i_rec := ('1', (others => '0'), '0');
+    signal filter_o : t_ir_filter_wrapper_o_rec;
     
 begin
 
     ----- clock and reset -----
-    u_clock_and_reset : clock_and_reset
+    u_clock_and_reset : entity clock_and_reset
     port map(i_clk_125M, clock_and_reset_o);
 
     clk_100M        <= clock_and_reset_o.clk_100M;
@@ -88,33 +93,40 @@ begin
     end process;
 
     ----- audio codec driver -----
-    codec_driver_i.rst_n <= sys_rst_n_122M;
-    codec_driver_i.clken_12M <= clken_122M_12M;
-    codec_driver_i.codec_dout <= i_codec_dout;
+    codec_driver_i.rst_n                <= sys_rst_n_122M;
+    codec_driver_i.clken_12M            <= clken_122M_12M;
+    codec_driver_i.codec_dout           <= i_codec_dout;
+    codec_driver_i.dsp_dac_word         <= filter_o.data_out;
+    codec_driver_i.dsp_dac_word_valid   <= filter_o.data_out_valid;
     u_codec_driver : entity codec_driver
         port map(clk_122M, codec_driver_i, codec_driver_o);
 
     ------ fir filter implementation ------
-    u_fir_proc : process(clk_122M)
-        constant DELAY : integer := 2417;
+    filter_i.data_in <= codec_driver_o.dsp_adc_word;
+    filter_i.data_in_valid <= codec_driver_o.dsp_adc_word_valid;
+    u_ir_filter_wrapper : entity ir_filter_wrapper
+        port map(clk_122M, filter_i, filter_o);
 
-        type t_sreg_bit is array (integer range 0 to DELAY-1) of std_ulogic;
-        variable v_sreg_valid : t_sreg_bit := (others => '0');
+    -- u_fir_proc : process(clk_122M)
+    --     constant DELAY : integer := 2417;
 
-        type t_sreg_word_array is array (integer range 0 to DELAY-1) of t_codec_word;
-        variable v_sreg_word : t_sreg_word_array := (others => (others => '0'));
-    begin
-        if rising_edge(clk_122M) then
-            codec_driver_i.dsp_dac_word <= v_sreg_word(DELAY-1);
-            codec_driver_i.dsp_dac_word_valid <= v_sreg_valid(DELAY-1);
-            for i in DELAY-1 downto 1 loop
-                v_sreg_word(i) := v_sreg_word(i-1);
-                v_sreg_valid(i)  := v_sreg_valid(i-1);
-            end loop;
-            v_sreg_word(0) := codec_driver_o.dsp_adc_word;
-            v_sreg_valid(0) := codec_driver_o.dsp_adc_word_valid;
-        end if;
-    end process u_fir_proc;
+    --     type t_sreg_bit is array (integer range 0 to DELAY-1) of std_ulogic;
+    --     variable v_sreg_valid : t_sreg_bit := (others => '0');
+
+    --     type t_sreg_word_array is array (integer range 0 to DELAY-1) of t_codec_word;
+    --     variable v_sreg_word : t_sreg_word_array := (others => (others => '0'));
+    -- begin
+    --     if rising_edge(clk_122M) then
+    --         codec_driver_i.dsp_dac_word <= v_sreg_word(DELAY-1);
+    --         codec_driver_i.dsp_dac_word_valid <= v_sreg_valid(DELAY-1);
+    --         for i in DELAY-1 downto 1 loop
+    --             v_sreg_word(i) := v_sreg_word(i-1);
+    --             v_sreg_valid(i)  := v_sreg_valid(i-1);
+    --         end loop;
+    --         v_sreg_word(0) := codec_driver_o.dsp_adc_word;
+    --         v_sreg_valid(0) := codec_driver_o.dsp_adc_word_valid;
+    --     end if;
+    -- end process u_fir_proc;
 
     -- output buffers
     o_codec_mclk    <= codec_driver_o.codec_mclk;

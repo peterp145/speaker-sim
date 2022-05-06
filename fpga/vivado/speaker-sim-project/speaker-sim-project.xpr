@@ -58,7 +58,7 @@
     <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="arty-z7-20"/>
-    <Option Name="WTXSimLaunchSim" Val="860"/>
+    <Option Name="WTXSimLaunchSim" Val="896"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -88,6 +88,41 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../src/ir_filter/SimpleDualPortRAM_generic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/Delay_Line_Memory_Wrapper_generic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/Addressable_Delay_Line.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/FilterTapSystolic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/FirRdyLogic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../../src/shared_lib/utils_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="shared_lib"/>
@@ -154,8 +189,8 @@
       <File Path="$PPRDIR/../../src/speaker_sim_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../src/codec_driver/codec_driver_pkg.vhd">
@@ -172,11 +207,53 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../src/speaker_sim.vhd">
+      <File Path="$PPRDIR/../../src/ir_filter/fir_filter_hdl.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/s_and_h.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/scale.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter_wrapper_pkg.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter_wrapper.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/speaker_sim.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../tb/tb_library/ramp_1s_48khz.txt"/>
@@ -546,8 +623,8 @@
       <File Path="$PPRDIR/../../src/speaker_sim_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../src/codec_driver/codec_driver_pkg.vhd">
@@ -581,8 +658,8 @@
       <File Path="$PPRDIR/../../src/speaker_sim.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../tb/tb_library/tb_utils_pkg.vhd">
@@ -704,8 +781,8 @@
       <File Path="$PPRDIR/../../src/speaker_sim_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../src/ir_filter/ir_filter_wrapper_pkg.vhd">
@@ -805,6 +882,41 @@
     </FileSet>
     <FileSet Name="top" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/top" RelGenDir="$PGENDIR/top">
       <Filter Type="Srcs"/>
+      <File Path="$PPRDIR/../../src/ir_filter/SimpleDualPortRAM_generic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/Delay_Line_Memory_Wrapper_generic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/Addressable_Delay_Line.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/FilterTapSystolic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/FirRdyLogic.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../../src/shared_lib/utils_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="shared_lib"/>
@@ -871,8 +983,8 @@
       <File Path="$PPRDIR/../../src/speaker_sim_pkg.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../src/codec_driver/codec_driver_pkg.vhd">
@@ -903,11 +1015,53 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PPRDIR/../../src/speaker_sim.vhd">
+      <File Path="$PPRDIR/../../src/ir_filter/fir_filter_hdl.vhd">
         <FileInfo SFType="VHDL2008">
           <Attr Name="Library" Val="speaker_sim_lib"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/s_and_h.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/scale.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter_wrapper_pkg.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/ir_filter/ir_filter_wrapper.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../../src/speaker_sim.vhd">
+        <FileInfo SFType="VHDL2008">
+          <Attr Name="Library" Val="speaker_sim_lib"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../../tb/tb_library/tb_utils_pkg.vhd">
